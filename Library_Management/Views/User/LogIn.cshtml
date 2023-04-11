@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn</title>
+
+    <!--Bootstrap/CSS-->
+    <link href="~/Content/LogIn.css" rel="stylesheet" />
+    <link href="~/Content/general.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="form">
+        <div class="layout">
+            <div class="img">
+                <img src="~/Images/background.png" alt="background" />
+            </div>
+            <div class="text">
+                <div>
+                    @using (Html.BeginForm("LogIn", "User"))
+                    {
+                        <h2 class="login-title" style="text-align:center;">ĐĂNG NHẬP</h2>
+                        <h3 class="warningMessage" style="text-align:center">@ViewBag.ThongBao</h3>
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <label for="login">Tài khoản: </label>
+                            @Html.TextBox("Username", null, new { @class = "form-control", @id = "login", required = "required" })
+                        </div>
+
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <label for="password">Mật khẩu: </label>
+                            @Html.Password("Password", null, new { @class = "form-control", @id = "password", required = "required" })
+                        </div>
+                        <button style="margin-top:80px;" type="submit" class="btn sub-btn btn-primary">ĐĂNG NHẬP</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
