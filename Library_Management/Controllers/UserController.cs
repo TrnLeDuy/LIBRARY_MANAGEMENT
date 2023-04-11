@@ -39,6 +39,10 @@ namespace Library_Management.Controllers
                         Session["Account"] = user;
                         if (user.Roles == "AD")
                             return View("~/Views/Home/Index.cshtml");
+                        else if (user.Roles == "TT")
+                            return View("~/Views/Home/Index.cshtml");
+                        else
+                            return View("~/Views/Home/Index.csthml");
                     }
                     else
                         ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng!";
