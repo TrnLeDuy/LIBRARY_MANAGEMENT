@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Library_Management.Models;
+
+namespace Library_Management.Controllers
+{
+    public class UserController : Controller
+    {
+        //DBContext
+        QLTVEntities db = new QLTVEntities();
+
+        /*ACTION ĐĂNG NHẬP (LOG IN)*/
+        [HttpGet]
+        public ActionResult LogIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LogIn (User users)
+        {
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(users.Username))
+                    ModelState.AddModelError(string.Empty, "Tên đăng nhập không được để trống");
+                if (string.IsNullOrEmpty(users.Password))
+                    ModelState.AddModelError(string.Empty, "Mật khẩu không được để trống");
+                if (ModelState.IsValid)
+                {
+                    //Tìm người dùng có tên đăng nhập và password hợp lệ trong CSDL
+                    var user = db.Users.FirstOrDefault(k => k.Username == users.Username && k.Password == users.Password);
+                    if (user != null)
+                    {
+                        //Lưu thông vào session
+                        Session["Account"] = user;
+                        if (user.Roles == "AD")
+                            return View("~/Views/Home/Index.cshtml");
+                        else if (user.Roles == "TT")
+                            return View("~/Views/Home/Index.cshtml");
+                        else
+                            return View("~/Views/Home/Index.csthml");
+                    }
+                    else
+                        ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng!";
+                }
+            }
+            return View();
+        }
+    }
+}
