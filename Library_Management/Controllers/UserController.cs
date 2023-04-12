@@ -38,17 +38,27 @@ namespace Library_Management.Controllers
                         //Lưu thông vào session
                         Session["Account"] = user;
                         if (user.Roles == "AD")
-                            return View("~/Views/Home/Index.cshtml");
+                            return View("~/Views/Management/Dashboard.cshtml");
                         else if (user.Roles == "TT")
-                            return View("~/Views/Home/Index.cshtml");
-                        else
-                            return View("~/Views/Home/Index.csthml");
+                            return View("~/Views/Librarian/Dashboard.cshtml");
+                        else 
+                            return View("~/Views/Employee/Readers.cshtml");
                     }
                     else
                         ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng!";
                 }
             }
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            //Perform any necessary cleanup or logging out of the user
+            //Remove any authentication cookies or session state information
+            //Redirect the user to the login page
+            Session["Account"] = null;
+            Session.Abandon();
+            return RedirectToAction("Login", "User");
         }
     }
 }

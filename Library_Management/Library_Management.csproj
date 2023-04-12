@@ -126,7 +126,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LibrarianController.cs" />
+    <Compile Include="Controllers\ManagementController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -173,6 +176,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\general.css" />
     <Content Include="Content\LogIn.css" />
+    <Content Include="Content\mngestyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -219,10 +223,22 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\LogIn.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Management\Dashboard.cshtml" />
+    <Content Include="Views\Management\Users.cshtml" />
+    <Content Include="Views\Management\Books.cshtml" />
+    <Content Include="Views\Management\Readers.cshtml" />
+    <Content Include="Views\Management\Borrows.cshtml" />
+    <Content Include="Views\Shared\_LayoutLibrarian.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
+    <Content Include="Views\Librarian\Dashboard.cshtml" />
+    <Content Include="Views\Librarian\Books.cshtml" />
+    <Content Include="Views\Librarian\Readers.cshtml" />
+    <Content Include="Views\Librarian\Borrows.cshtml" />
+    <Content Include="Views\Employee\Books.cshtml" />
+    <Content Include="Views\Employee\Borrows.cshtml" />
+    <Content Include="Views\Employee\Readers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
