@@ -128,27 +128,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CNPM_QLTV.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CNPM_QLTV.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CNPM_QLTV.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CNPM_QLTV.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,25 +143,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\background.png" />
-    <Content Include="Models\CNPM_QLTV.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
-      <LastGenOutput>CNPM_QLTV.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\CNPM_QLTV.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
-      <LastGenOutput>CNPM_QLTV.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\CNPM_QLTV.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CNPM_QLTV.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\CNPM_QLTV.edmx.diagram">
-      <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.6.4.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.4.js" />
     <Content Include="Scripts\jquery-3.6.4.min.js" />
@@ -224,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
