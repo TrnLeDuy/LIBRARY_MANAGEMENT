@@ -10,7 +10,7 @@ GO
 --------------Tạo bảng cho Cơ sở dữ liệu--------------
 ------------------------------------------------------
 CREATE TABLE BOOK(
-	[BookID] [int] NOT NULL,
+	[BookID] [int] IDENTITY(1,1) NOT NULL,
 	[CategoryID] [int] NOT NULL,
 	[BookName] [nvarchar](Max) NOT NULL,
 	[Author] [nvarchar](35) NULL,
