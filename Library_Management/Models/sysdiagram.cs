@@ -12,18 +12,12 @@ namespace Library_Management.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CATEGORY
+    public partial class sysdiagram
     {
-        public CATEGORY()
-        {
-            this.BOOKs = new HashSet<BOOK>();
-        }
-    
-        public int CategoryID { get; set; }
-        public string CategoryName { get; set; }
-        public string Note { get; set; }
-        public string Status { get; set; }
-    
-        public virtual ICollection<BOOK> BOOKs { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

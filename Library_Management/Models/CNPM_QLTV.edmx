@@ -8,8 +8,10 @@
         <EntityType Name="BOOK">
           <Key>
             <PropertyRef Name="BookID" />
+            <PropertyRef Name="CategoryID" />
           </Key>
-          <Property Name="BookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="BookName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Author" Type="nvarchar" MaxLength="35" />
           <Property Name="Describe" Type="nvarchar(max)" />
@@ -41,8 +43,8 @@
             <PropertyRef Name="CategoryID" />
           </Key>
           <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BookID" Type="int" Nullable="false" />
           <Property Name="CategoryName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="FINE">
@@ -76,6 +78,16 @@
           <Property Name="Addr" Type="nvarchar" MaxLength="100" />
           <Property Name="Gender" Type="char" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="USERS">
           <Key>
             <PropertyRef Name="UserID" />
@@ -91,6 +103,30 @@
           <Property Name="Phone" Type="varchar" MaxLength="10" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <Association Name="FK_BOOK_BORROW">
+          <End Role="BORROW" Type="Self.BORROW" Multiplicity="1" />
+          <End Role="BOOK" Type="Self.BOOK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BORROW">
+              <PropertyRef Name="BorrowID" />
+            </Principal>
+            <Dependent Role="BOOK">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOOK_CATEGORY">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="BOOK" Type="Self.BOOK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="BOOK">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BOOKRETURN_BORROW">
           <End Role="BORROW" Type="Self.BORROW" Multiplicity="1" />
           <End Role="BOOKRETURN" Type="Self.BOOKRETURN" Multiplicity="*" />
@@ -103,18 +139,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BORROW_BOOK">
-          <End Role="BOOK" Type="Self.BOOK" Multiplicity="0..1" />
-          <End Role="BORROW" Type="Self.BORROW" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BOOK">
-              <PropertyRef Name="BookID" />
-            </Principal>
-            <Dependent Role="BORROW">
-              <PropertyRef Name="BookID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_BORROW_LIBRARYCARD">
           <End Role="LIBRARYCARD" Type="Self.LIBRARYCARD" Multiplicity="1" />
           <End Role="BORROW" Type="Self.BORROW" Multiplicity="*" />
@@ -124,18 +148,6 @@
             </Principal>
             <Dependent Role="BORROW">
               <PropertyRef Name="CardID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CATEGORY_BOOK">
-          <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
-          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BOOK">
-              <PropertyRef Name="BookID" />
-            </Principal>
-            <Dependent Role="CATEGORY">
-              <PropertyRef Name="BookID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -175,6 +187,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CNPM_QLTVModelStoreContainer">
           <EntitySet Name="BOOK" EntityType="Self.BOOK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BOOKRETURN" EntityType="Self.BOOKRETURN" Schema="dbo" store:Type="Tables" />
@@ -183,22 +226,23 @@
           <EntitySet Name="FINE" EntityType="Self.FINE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LIBRARYCARD" EntityType="Self.LIBRARYCARD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BOOK_BORROW" Association="Self.FK_BOOK_BORROW">
+            <End Role="BORROW" EntitySet="BORROW" />
+            <End Role="BOOK" EntitySet="BOOK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOOK_CATEGORY" Association="Self.FK_BOOK_CATEGORY">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="BOOK" EntitySet="BOOK" />
+          </AssociationSet>
           <AssociationSet Name="FK_BOOKRETURN_BORROW" Association="Self.FK_BOOKRETURN_BORROW">
             <End Role="BORROW" EntitySet="BORROW" />
             <End Role="BOOKRETURN" EntitySet="BOOKRETURN" />
           </AssociationSet>
-          <AssociationSet Name="FK_BORROW_BOOK" Association="Self.FK_BORROW_BOOK">
-            <End Role="BOOK" EntitySet="BOOK" />
-            <End Role="BORROW" EntitySet="BORROW" />
-          </AssociationSet>
           <AssociationSet Name="FK_BORROW_LIBRARYCARD" Association="Self.FK_BORROW_LIBRARYCARD">
             <End Role="LIBRARYCARD" EntitySet="LIBRARYCARD" />
             <End Role="BORROW" EntitySet="BORROW" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CATEGORY_BOOK" Association="Self.FK_CATEGORY_BOOK">
-            <End Role="BOOK" EntitySet="BOOK" />
-            <End Role="CATEGORY" EntitySet="CATEGORY" />
           </AssociationSet>
           <AssociationSet Name="FK_FINE_BOOKRETURN" Association="Self.FK_FINE_BOOKRETURN">
             <End Role="BOOKRETURN" EntitySet="BOOKRETURN" />
@@ -225,14 +269,15 @@
           <EntitySet Name="FINEs" EntityType="CNPM_QLTVModel.FINE" />
           <EntitySet Name="LIBRARYCARDs" EntityType="CNPM_QLTVModel.LIBRARYCARD" />
           <EntitySet Name="STUDENTs" EntityType="CNPM_QLTVModel.STUDENT" />
+          <EntitySet Name="sysdiagrams" EntityType="CNPM_QLTVModel.sysdiagram" />
           <EntitySet Name="USERS" EntityType="CNPM_QLTVModel.USER" />
-          <AssociationSet Name="FK_BORROW_BOOK" Association="CNPM_QLTVModel.FK_BORROW_BOOK">
-            <End Role="BOOK" EntitySet="BOOKs" />
+          <AssociationSet Name="FK_BOOK_BORROW" Association="CNPM_QLTVModel.FK_BOOK_BORROW">
             <End Role="BORROW" EntitySet="BORROWs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CATEGORY_BOOK" Association="CNPM_QLTVModel.FK_CATEGORY_BOOK">
             <End Role="BOOK" EntitySet="BOOKs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOOK_CATEGORY" Association="CNPM_QLTVModel.FK_BOOK_CATEGORY">
             <End Role="CATEGORY" EntitySet="CATEGORies" />
+            <End Role="BOOK" EntitySet="BOOKs" />
           </AssociationSet>
           <AssociationSet Name="FK_BOOKRETURN_BORROW" Association="CNPM_QLTVModel.FK_BOOKRETURN_BORROW">
             <End Role="BORROW" EntitySet="BORROWs" />
@@ -254,12 +299,44 @@
             <End Role="STUDENT" EntitySet="STUDENTs" />
             <End Role="LIBRARYCARD" EntitySet="LIBRARYCARDs" />
           </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(CNPM_QLTVModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(CNPM_QLTVModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <EntityType Name="BOOK">
           <Key>
             <PropertyRef Name="BookID" />
+            <PropertyRef Name="CategoryID" />
           </Key>
-          <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
           <Property Name="BookName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Author" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
           <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -267,8 +344,8 @@
           <Property Name="Publisher" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="BookImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="BookStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BORROWs" Relationship="CNPM_QLTVModel.FK_BORROW_BOOK" FromRole="BOOK" ToRole="BORROW" />
-          <NavigationProperty Name="CATEGORies" Relationship="CNPM_QLTVModel.FK_CATEGORY_BOOK" FromRole="BOOK" ToRole="CATEGORY" />
+          <NavigationProperty Name="BORROW" Relationship="CNPM_QLTVModel.FK_BOOK_BORROW" FromRole="BOOK" ToRole="BORROW" />
+          <NavigationProperty Name="CATEGORY" Relationship="CNPM_QLTVModel.FK_BOOK_CATEGORY" FromRole="BOOK" ToRole="CATEGORY" />
         </EntityType>
         <EntityType Name="BOOKRETURN">
           <Key>
@@ -289,7 +366,7 @@
           <Property Name="BookID" Type="Int32" />
           <Property Name="TakenDate" Type="DateTime" Precision="3" />
           <Property Name="DueDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BOOK" Relationship="CNPM_QLTVModel.FK_BORROW_BOOK" FromRole="BORROW" ToRole="BOOK" />
+          <NavigationProperty Name="BOOKs" Relationship="CNPM_QLTVModel.FK_BOOK_BORROW" FromRole="BORROW" ToRole="BOOK" />
           <NavigationProperty Name="BOOKRETURNs" Relationship="CNPM_QLTVModel.FK_BOOKRETURN_BORROW" FromRole="BORROW" ToRole="BOOKRETURN" />
           <NavigationProperty Name="LIBRARYCARD" Relationship="CNPM_QLTVModel.FK_BORROW_LIBRARYCARD" FromRole="BORROW" ToRole="LIBRARYCARD" />
         </EntityType>
@@ -298,10 +375,10 @@
             <PropertyRef Name="CategoryID" />
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BookID" Type="Int32" Nullable="false" />
           <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BOOK" Relationship="CNPM_QLTVModel.FK_CATEGORY_BOOK" FromRole="CATEGORY" ToRole="BOOK" />
+          <NavigationProperty Name="BOOKs" Relationship="CNPM_QLTVModel.FK_BOOK_CATEGORY" FromRole="CATEGORY" ToRole="BOOK" />
         </EntityType>
         <EntityType Name="FINE">
           <Key>
@@ -339,6 +416,16 @@
           <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="LIBRARYCARDs" Relationship="CNPM_QLTVModel.FK_LIBRARYCARD_STUDENT" FromRole="STUDENT" ToRole="LIBRARYCARD" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="USER">
           <Key>
             <PropertyRef Name="UserID" />
@@ -355,27 +442,27 @@
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="FINEs" Relationship="CNPM_QLTVModel.FK_FINE_USERS" FromRole="USER" ToRole="FINE" />
         </EntityType>
-        <Association Name="FK_BORROW_BOOK">
-          <End Type="CNPM_QLTVModel.BOOK" Role="BOOK" Multiplicity="0..1" />
-          <End Type="CNPM_QLTVModel.BORROW" Role="BORROW" Multiplicity="*" />
+        <Association Name="FK_BOOK_BORROW">
+          <End Type="CNPM_QLTVModel.BORROW" Role="BORROW" Multiplicity="1" />
+          <End Type="CNPM_QLTVModel.BOOK" Role="BOOK" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BOOK">
-              <PropertyRef Name="BookID" />
+            <Principal Role="BORROW">
+              <PropertyRef Name="BorrowID" />
             </Principal>
-            <Dependent Role="BORROW">
+            <Dependent Role="BOOK">
               <PropertyRef Name="BookID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CATEGORY_BOOK">
-          <End Type="CNPM_QLTVModel.BOOK" Role="BOOK" Multiplicity="1" />
-          <End Type="CNPM_QLTVModel.CATEGORY" Role="CATEGORY" Multiplicity="*" />
+        <Association Name="FK_BOOK_CATEGORY">
+          <End Type="CNPM_QLTVModel.CATEGORY" Role="CATEGORY" Multiplicity="1" />
+          <End Type="CNPM_QLTVModel.BOOK" Role="BOOK" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BOOK">
-              <PropertyRef Name="BookID" />
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="CategoryID" />
             </Principal>
-            <Dependent Role="CATEGORY">
-              <PropertyRef Name="BookID" />
+            <Dependent Role="BOOK">
+              <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -439,7 +526,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -455,6 +553,7 @@
                 <ScalarProperty Name="Describe" ColumnName="Describe" />
                 <ScalarProperty Name="Author" ColumnName="Author" />
                 <ScalarProperty Name="BookName" ColumnName="BookName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="BookID" ColumnName="BookID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -483,8 +582,8 @@
             <EntityTypeMapping TypeName="CNPM_QLTVModel.CATEGORY">
               <MappingFragment StoreEntitySet="CATEGORY">
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="BookID" ColumnName="BookID" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -523,6 +622,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="USERS">
             <EntityTypeMapping TypeName="CNPM_QLTVModel.USER">
               <MappingFragment StoreEntitySet="USERS">
@@ -539,6 +649,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="CNPM_QLTVModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="CNPM_QLTVModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="CNPM_QLTVModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="CNPM_QLTVModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CNPM_QLTVModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="CNPM_QLTVModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CNPM_QLTVModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="CNPM_QLTVModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="CNPM_QLTVModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

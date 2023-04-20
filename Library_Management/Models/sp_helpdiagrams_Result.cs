@@ -10,20 +10,13 @@
 namespace Library_Management.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class CATEGORY
+    public partial class sp_helpdiagrams_Result
     {
-        public CATEGORY()
-        {
-            this.BOOKs = new HashSet<BOOK>();
-        }
-    
-        public int CategoryID { get; set; }
-        public string CategoryName { get; set; }
-        public string Note { get; set; }
-        public string Status { get; set; }
-    
-        public virtual ICollection<BOOK> BOOKs { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

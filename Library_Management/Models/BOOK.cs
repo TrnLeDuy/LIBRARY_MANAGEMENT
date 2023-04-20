@@ -14,13 +14,8 @@ namespace Library_Management.Models
     
     public partial class BOOK
     {
-        public BOOK()
-        {
-            this.BORROWs = new HashSet<BORROW>();
-            this.CATEGORies = new HashSet<CATEGORY>();
-        }
-    
         public int BookID { get; set; }
+        public int CategoryID { get; set; }
         public string BookName { get; set; }
         public string Author { get; set; }
         public string Describe { get; set; }
@@ -29,7 +24,7 @@ namespace Library_Management.Models
         public string BookImage { get; set; }
         public string BookStatus { get; set; }
     
-        public virtual ICollection<BORROW> BORROWs { get; set; }
-        public virtual ICollection<CATEGORY> CATEGORies { get; set; }
+        public virtual BORROW BORROW { get; set; }
+        public virtual CATEGORY CATEGORY { get; set; }
     }
 }
