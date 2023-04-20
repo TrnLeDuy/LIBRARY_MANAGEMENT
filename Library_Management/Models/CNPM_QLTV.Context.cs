@@ -25,11 +25,13 @@ namespace Library_Management.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<BookReturn> BookReturns { get; set; }
-        public DbSet<Borrow> Borrows { get; set; }
-        public DbSet<Fine> Fines { get; set; }
-        public DbSet<LibraryCard> LibraryCards { get; set; }
-        public DbSet<Student> Students { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<BOOK> BOOKs { get; set; }
+        public DbSet<BOOKRETURN> BOOKRETURNs { get; set; }
+        public DbSet<BORROW> BORROWs { get; set; }
+        public DbSet<CATEGORY> CATEGORies { get; set; }
+        public DbSet<FINE> FINEs { get; set; }
+        public DbSet<LIBRARYCARD> LIBRARYCARDs { get; set; }
+        public DbSet<STUDENT> STUDENTs { get; set; }
+        public DbSet<USER> USERS { get; set; }
     }
 }

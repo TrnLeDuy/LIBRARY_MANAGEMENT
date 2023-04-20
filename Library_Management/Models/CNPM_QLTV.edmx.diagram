@@ -4,16 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1ec06d660a4044c7ac0448f88004a760" Name="Diagram1">
-        <EntityTypeShape EntityType="CNPM_QLTVModel.BookReturn" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.Borrow" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.Fine" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.LibraryCard" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.Student" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.User" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="CNPM_QLTVModel.FK_Fine_BookReturn" ManuallyRouted="false" />
-        <AssociationConnector Association="CNPM_QLTVModel.FK_Borrow_Student" ManuallyRouted="false" />
-        <AssociationConnector Association="CNPM_QLTVModel.FK_Student_LibraryCard" ManuallyRouted="false" />
+      <Diagram DiagramId="1ec06d660a4044c7ac0448f88004a760" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="CNPM_QLTVModel.BOOK" Width="1.5" PointX="0.75" PointY="2.5" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.BOOKRETURN" Width="1.5" PointX="5.25" PointY="2.5" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.BORROW" Width="1.5" PointX="3" PointY="2.5" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.CATEGORY" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.FINE" Width="1.5" PointX="7.5" PointY="2.5" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.LIBRARYCARD" Width="1.5" PointX="3" PointY="6.25" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.STUDENT" Width="1.5" PointX="5.625" PointY="6.25" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.USER" Width="1.5" PointX="10.125" PointY="2.5" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_BORROW_BOOK" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_CATEGORY_BOOK" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_BOOKRETURN_BORROW" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_FINE_BOOKRETURN" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_BORROW_LIBRARYCARD" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_FINE_USERS" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_LIBRARYCARD_STUDENT" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

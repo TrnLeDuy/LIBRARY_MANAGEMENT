@@ -12,13 +12,13 @@ namespace Library_Management.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Fine
+    public partial class CATEGORY
     {
-        public int FineID { get; set; }
-        public Nullable<int> BorowID { get; set; }
-        public Nullable<int> ReturnID { get; set; }
-        public string FineAmount { get; set; }
+        public int CategoryID { get; set; }
+        public int BookID { get; set; }
+        public string CategoryName { get; set; }
+        public string Status { get; set; }
     
-        public virtual BookReturn BookReturn { get; set; }
+        public virtual BOOK BOOK { get; set; }
     }
 }
