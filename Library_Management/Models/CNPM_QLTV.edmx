@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CNPM_QLTVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BOOK">
+          <Key>
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="BookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Author" Type="nvarchar" MaxLength="35" />
+          <Property Name="Describe" Type="nvarchar(max)" />
+          <Property Name="Publish" Type="date" />
+          <Property Name="Publisher" Type="nvarchar" MaxLength="30" />
+          <Property Name="BookImage" Type="varchar" MaxLength="50" />
+          <Property Name="BookStatus" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="BOOKRETURN">
+          <Key>
+            <PropertyRef Name="ReturnID" />
+          </Key>
+          <Property Name="ReturnID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BorrowID" Type="int" Nullable="false" />
+          <Property Name="ReturnDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BORROW">
+          <Key>
+            <PropertyRef Name="BorrowID" />
+          </Key>
+          <Property Name="BorrowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardID" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="BookID" Type="int" />
+          <Property Name="TakenDate" Type="datetime" />
+          <Property Name="DueDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="FINE">
+          <Key>
+            <PropertyRef Name="FineID" />
+          </Key>
+          <Property Name="FineID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="5" />
+          <Property Name="ReturnID" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="FineAmount" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="LIBRARYCARD">
+          <Key>
+            <PropertyRef Name="CardID" />
+          </Key>
+          <Property Name="CardID" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="StudentID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DateExpires" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="STUDENT">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Birth" Type="date" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+          <Property Name="Addr" Type="nvarchar" MaxLength="100" />
+          <Property Name="Gender" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="15" />
+          <Property Name="Password" Type="nvarchar" MaxLength="30" />
+          <Property Name="Roles" Type="char" MaxLength="2" />
+          <Property Name="Birth" Type="date" />
+          <Property Name="Gender" Type="char" MaxLength="10" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_BOOKRETURN_BORROW">
+          <End Role="BORROW" Type="Self.BORROW" Multiplicity="1" />
+          <End Role="BOOKRETURN" Type="Self.BOOKRETURN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BORROW">
+              <PropertyRef Name="BorrowID" />
+            </Principal>
+            <Dependent Role="BOOKRETURN">
+              <PropertyRef Name="BorrowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BORROW_BOOK">
+          <End Role="BOOK" Type="Self.BOOK" Multiplicity="0..1" />
+          <End Role="BORROW" Type="Self.BORROW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="BORROW">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BORROW_LIBRARYCARD">
+          <End Role="LIBRARYCARD" Type="Self.LIBRARYCARD" Multiplicity="1" />
+          <End Role="BORROW" Type="Self.BORROW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRARYCARD">
+              <PropertyRef Name="CardID" />
+            </Principal>
+            <Dependent Role="BORROW">
+              <PropertyRef Name="CardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORY_BOOK">
+          <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="CATEGORY">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FINE_BOOKRETURN">
+          <End Role="BOOKRETURN" Type="Self.BOOKRETURN" Multiplicity="0..1" />
+          <End Role="FINE" Type="Self.FINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOKRETURN">
+              <PropertyRef Name="ReturnID" />
+            </Principal>
+            <Dependent Role="FINE">
+              <PropertyRef Name="ReturnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FINE_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="FINE" Type="Self.FINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="FINE">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIBRARYCARD_STUDENT">
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+          <End Role="LIBRARYCARD" Type="Self.LIBRARYCARD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="LIBRARYCARD">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CNPM_QLTVModelStoreContainer">
+          <EntitySet Name="BOOK" EntityType="Self.BOOK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BOOKRETURN" EntityType="Self.BOOKRETURN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BORROW" EntityType="Self.BORROW" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FINE" EntityType="Self.FINE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LIBRARYCARD" EntityType="Self.LIBRARYCARD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BOOKRETURN_BORROW" Association="Self.FK_BOOKRETURN_BORROW">
+            <End Role="BORROW" EntitySet="BORROW" />
+            <End Role="BOOKRETURN" EntitySet="BOOKRETURN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BORROW_BOOK" Association="Self.FK_BORROW_BOOK">
+            <End Role="BOOK" EntitySet="BOOK" />
+            <End Role="BORROW" EntitySet="BORROW" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BORROW_LIBRARYCARD" Association="Self.FK_BORROW_LIBRARYCARD">
+            <End Role="LIBRARYCARD" EntitySet="LIBRARYCARD" />
+            <End Role="BORROW" EntitySet="BORROW" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORY_BOOK" Association="Self.FK_CATEGORY_BOOK">
+            <End Role="BOOK" EntitySet="BOOK" />
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FINE_BOOKRETURN" Association="Self.FK_FINE_BOOKRETURN">
+            <End Role="BOOKRETURN" EntitySet="BOOKRETURN" />
+            <End Role="FINE" EntitySet="FINE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FINE_USERS" Association="Self.FK_FINE_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="FINE" EntitySet="FINE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIBRARYCARD_STUDENT" Association="Self.FK_LIBRARYCARD_STUDENT">
+            <End Role="STUDENT" EntitySet="STUDENT" />
+            <End Role="LIBRARYCARD" EntitySet="LIBRARYCARD" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CNPM_QLTVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="QLTVEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BOOKs" EntityType="CNPM_QLTVModel.BOOK" />
+          <EntitySet Name="BOOKRETURNs" EntityType="CNPM_QLTVModel.BOOKRETURN" />
+          <EntitySet Name="BORROWs" EntityType="CNPM_QLTVModel.BORROW" />
+          <EntitySet Name="CATEGORies" EntityType="CNPM_QLTVModel.CATEGORY" />
+          <EntitySet Name="FINEs" EntityType="CNPM_QLTVModel.FINE" />
+          <EntitySet Name="LIBRARYCARDs" EntityType="CNPM_QLTVModel.LIBRARYCARD" />
+          <EntitySet Name="STUDENTs" EntityType="CNPM_QLTVModel.STUDENT" />
+          <EntitySet Name="USERS" EntityType="CNPM_QLTVModel.USER" />
+          <AssociationSet Name="FK_BORROW_BOOK" Association="CNPM_QLTVModel.FK_BORROW_BOOK">
+            <End Role="BOOK" EntitySet="BOOKs" />
+            <End Role="BORROW" EntitySet="BORROWs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORY_BOOK" Association="CNPM_QLTVModel.FK_CATEGORY_BOOK">
+            <End Role="BOOK" EntitySet="BOOKs" />
+            <End Role="CATEGORY" EntitySet="CATEGORies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOOKRETURN_BORROW" Association="CNPM_QLTVModel.FK_BOOKRETURN_BORROW">
+            <End Role="BORROW" EntitySet="BORROWs" />
+            <End Role="BOOKRETURN" EntitySet="BOOKRETURNs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FINE_BOOKRETURN" Association="CNPM_QLTVModel.FK_FINE_BOOKRETURN">
+            <End Role="BOOKRETURN" EntitySet="BOOKRETURNs" />
+            <End Role="FINE" EntitySet="FINEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BORROW_LIBRARYCARD" Association="CNPM_QLTVModel.FK_BORROW_LIBRARYCARD">
+            <End Role="LIBRARYCARD" EntitySet="LIBRARYCARDs" />
+            <End Role="BORROW" EntitySet="BORROWs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FINE_USERS" Association="CNPM_QLTVModel.FK_FINE_USERS">
+            <End Role="USER" EntitySet="USERS" />
+            <End Role="FINE" EntitySet="FINEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIBRARYCARD_STUDENT" Association="CNPM_QLTVModel.FK_LIBRARYCARD_STUDENT">
+            <End Role="STUDENT" EntitySet="STUDENTs" />
+            <End Role="LIBRARYCARD" EntitySet="LIBRARYCARDs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BOOK">
+          <Key>
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Publish" Type="DateTime" Precision="0" />
+          <Property Name="Publisher" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="BookImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BookStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BORROWs" Relationship="CNPM_QLTVModel.FK_BORROW_BOOK" FromRole="BOOK" ToRole="BORROW" />
+          <NavigationProperty Name="CATEGORies" Relationship="CNPM_QLTVModel.FK_CATEGORY_BOOK" FromRole="BOOK" ToRole="CATEGORY" />
+        </EntityType>
+        <EntityType Name="BOOKRETURN">
+          <Key>
+            <PropertyRef Name="ReturnID" />
+          </Key>
+          <Property Name="ReturnID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BorrowID" Type="Int32" Nullable="false" />
+          <Property Name="ReturnDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BORROW" Relationship="CNPM_QLTVModel.FK_BOOKRETURN_BORROW" FromRole="BOOKRETURN" ToRole="BORROW" />
+          <NavigationProperty Name="FINEs" Relationship="CNPM_QLTVModel.FK_FINE_BOOKRETURN" FromRole="BOOKRETURN" ToRole="FINE" />
+        </EntityType>
+        <EntityType Name="BORROW">
+          <Key>
+            <PropertyRef Name="BorrowID" />
+          </Key>
+          <Property Name="BorrowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardID" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="BookID" Type="Int32" />
+          <Property Name="TakenDate" Type="DateTime" Precision="3" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BOOK" Relationship="CNPM_QLTVModel.FK_BORROW_BOOK" FromRole="BORROW" ToRole="BOOK" />
+          <NavigationProperty Name="BOOKRETURNs" Relationship="CNPM_QLTVModel.FK_BOOKRETURN_BORROW" FromRole="BORROW" ToRole="BOOKRETURN" />
+          <NavigationProperty Name="LIBRARYCARD" Relationship="CNPM_QLTVModel.FK_BORROW_LIBRARYCARD" FromRole="BORROW" ToRole="LIBRARYCARD" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BOOK" Relationship="CNPM_QLTVModel.FK_CATEGORY_BOOK" FromRole="CATEGORY" ToRole="BOOK" />
+        </EntityType>
+        <EntityType Name="FINE">
+          <Key>
+            <PropertyRef Name="FineID" />
+          </Key>
+          <Property Name="FineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ReturnID" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="FineAmount" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BOOKRETURN" Relationship="CNPM_QLTVModel.FK_FINE_BOOKRETURN" FromRole="FINE" ToRole="BOOKRETURN" />
+          <NavigationProperty Name="USER" Relationship="CNPM_QLTVModel.FK_FINE_USERS" FromRole="FINE" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="LIBRARYCARD">
+          <Key>
+            <PropertyRef Name="CardID" />
+          </Key>
+          <Property Name="CardID" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="StudentID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DateExpires" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BORROWs" Relationship="CNPM_QLTVModel.FK_BORROW_LIBRARYCARD" FromRole="LIBRARYCARD" ToRole="BORROW" />
+          <NavigationProperty Name="STUDENT" Relationship="CNPM_QLTVModel.FK_LIBRARYCARD_STUDENT" FromRole="LIBRARYCARD" ToRole="STUDENT" />
+        </EntityType>
+        <EntityType Name="STUDENT">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="StudentName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Birth" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Addr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="LIBRARYCARDs" Relationship="CNPM_QLTVModel.FK_LIBRARYCARD_STUDENT" FromRole="STUDENT" ToRole="LIBRARYCARD" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Roles" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Birth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FINEs" Relationship="CNPM_QLTVModel.FK_FINE_USERS" FromRole="USER" ToRole="FINE" />
+        </EntityType>
+        <Association Name="FK_BORROW_BOOK">
+          <End Type="CNPM_QLTVModel.BOOK" Role="BOOK" Multiplicity="0..1" />
+          <End Type="CNPM_QLTVModel.BORROW" Role="BORROW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="BORROW">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORY_BOOK">
+          <End Type="CNPM_QLTVModel.BOOK" Role="BOOK" Multiplicity="1" />
+          <End Type="CNPM_QLTVModel.CATEGORY" Role="CATEGORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK">
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="CATEGORY">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOOKRETURN_BORROW">
+          <End Type="CNPM_QLTVModel.BORROW" Role="BORROW" Multiplicity="1" />
+          <End Type="CNPM_QLTVModel.BOOKRETURN" Role="BOOKRETURN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BORROW">
+              <PropertyRef Name="BorrowID" />
+            </Principal>
+            <Dependent Role="BOOKRETURN">
+              <PropertyRef Name="BorrowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FINE_BOOKRETURN">
+          <End Type="CNPM_QLTVModel.BOOKRETURN" Role="BOOKRETURN" Multiplicity="0..1" />
+          <End Type="CNPM_QLTVModel.FINE" Role="FINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOKRETURN">
+              <PropertyRef Name="ReturnID" />
+            </Principal>
+            <Dependent Role="FINE">
+              <PropertyRef Name="ReturnID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BORROW_LIBRARYCARD">
+          <End Type="CNPM_QLTVModel.LIBRARYCARD" Role="LIBRARYCARD" Multiplicity="1" />
+          <End Type="CNPM_QLTVModel.BORROW" Role="BORROW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRARYCARD">
+              <PropertyRef Name="CardID" />
+            </Principal>
+            <Dependent Role="BORROW">
+              <PropertyRef Name="CardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FINE_USERS">
+          <End Type="CNPM_QLTVModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="CNPM_QLTVModel.FINE" Role="FINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="FINE">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIBRARYCARD_STUDENT">
+          <End Type="CNPM_QLTVModel.STUDENT" Role="STUDENT" Multiplicity="1" />
+          <End Type="CNPM_QLTVModel.LIBRARYCARD" Role="LIBRARYCARD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="LIBRARYCARD">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CNPM_QLTVModelStoreContainer" CdmEntityContainer="QLTVEntities">
+          <EntitySetMapping Name="BOOKs">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.BOOK">
+              <MappingFragment StoreEntitySet="BOOK">
+                <ScalarProperty Name="BookStatus" ColumnName="BookStatus" />
+                <ScalarProperty Name="BookImage" ColumnName="BookImage" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="Publish" ColumnName="Publish" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="BookName" ColumnName="BookName" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BOOKRETURNs">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.BOOKRETURN">
+              <MappingFragment StoreEntitySet="BOOKRETURN">
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="BorrowID" ColumnName="BorrowID" />
+                <ScalarProperty Name="ReturnID" ColumnName="ReturnID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BORROWs">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.BORROW">
+              <MappingFragment StoreEntitySet="BORROW">
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="TakenDate" ColumnName="TakenDate" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="CardID" ColumnName="CardID" />
+                <ScalarProperty Name="BorrowID" ColumnName="BorrowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORies">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.CATEGORY">
+              <MappingFragment StoreEntitySet="CATEGORY">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FINEs">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.FINE">
+              <MappingFragment StoreEntitySet="FINE">
+                <ScalarProperty Name="FineAmount" ColumnName="FineAmount" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ReturnID" ColumnName="ReturnID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FineID" ColumnName="FineID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LIBRARYCARDs">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.LIBRARYCARD">
+              <MappingFragment StoreEntitySet="LIBRARYCARD">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateExpires" ColumnName="DateExpires" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="CardID" ColumnName="CardID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STUDENTs">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.STUDENT">
+              <MappingFragment StoreEntitySet="STUDENT">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Addr" ColumnName="Addr" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birth" ColumnName="Birth" />
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

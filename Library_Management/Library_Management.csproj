@@ -45,10 +45,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -120,9 +126,46 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LibrarianController.cs" />
+    <Compile Include="Controllers\ManagementController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BookReturn.cs">
+      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Borrow.cs">
+      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CNPM_QLTV.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CNPM_QLTV.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CNPM_QLTV.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CNPM_QLTV.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fine.cs">
+      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LibraryCard.cs">
+      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Student.cs">
+      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -131,12 +174,33 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\general.css" />
+    <Content Include="Content\LogIn.css" />
+    <Content Include="Content\mngestyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\background.png" />
+    <Content Include="Models\CNPM_QLTV.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
+      <LastGenOutput>CNPM_QLTV.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CNPM_QLTV.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
+      <LastGenOutput>CNPM_QLTV.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\CNPM_QLTV.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CNPM_QLTV.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\CNPM_QLTV.edmx.diagram">
+      <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -159,13 +223,25 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\User\LogIn.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Management\Dashboard.cshtml" />
+    <Content Include="Views\Management\Users.cshtml" />
+    <Content Include="Views\Management\Books.cshtml" />
+    <Content Include="Views\Management\Readers.cshtml" />
+    <Content Include="Views\Management\Borrows.cshtml" />
+    <Content Include="Views\Shared\_LayoutLibrarian.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
+    <Content Include="Views\Librarian\Dashboard.cshtml" />
+    <Content Include="Views\Librarian\Books.cshtml" />
+    <Content Include="Views\Librarian\Readers.cshtml" />
+    <Content Include="Views\Librarian\Borrows.cshtml" />
+    <Content Include="Views\Employee\Books.cshtml" />
+    <Content Include="Views\Employee\Borrows.cshtml" />
+    <Content Include="Views\Employee\Readers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -179,6 +255,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
