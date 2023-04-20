@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1ec06d660a4044c7ac0448f88004a760" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="CNPM_QLTVModel.BOOK" Width="1.5" PointX="7.5" PointY="4.125" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.BOOKRETURN" Width="1.5" PointX="7.5" PointY="8.625" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.BORROW" Width="1.5" PointX="5.25" PointY="4.5" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.CATEGORY" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.FINE" Width="1.5" PointX="9.75" PointY="8.5" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.LIBRARYCARD" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.STUDENT" Width="1.5" PointX="0.75" PointY="4.5" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.25" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.USER" Width="1.5" PointX="7.5" PointY="12" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_BOOK_BORROW" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_BOOK_CATEGORY" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_BOOKRETURN_BORROW" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_FINE_BOOKRETURN" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_BORROW_LIBRARYCARD" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_FINE_USERS" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_LIBRARYCARD_STUDENT" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
