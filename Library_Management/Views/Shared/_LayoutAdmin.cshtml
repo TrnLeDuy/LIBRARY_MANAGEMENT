@@ -9,6 +9,8 @@
 
     <!--Boostrap/CSS-->
     <link href="~/Content/admini_general.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 
 </head>
 <body>
@@ -27,7 +29,15 @@
                 <aside class="menu-sidepanel">
                     <nav class="navbar-nav" role="navigation" aria-label="Sidepanel">
                         <div class="menu-sidepanel-header">
-                            <a class="menu-brand" href="#"></a> 
+                            <a class="menu-brand" href="#">
+                                <div id="logo" style="display: none">
+                                    <img alt="brand banner" src="~/Images/orange.png" />
+                                </div>
+                                <div class="" id="banner">
+                                    <img alt="brand banner" src="~/Images/orangehrm-logo.png" />
+                                </div>
+                            </a> 
+                            <i class="menu-icon bi-x menu-sidepanel-header-close"></i>
                         </div>
                     </nav>
                 </aside>
@@ -42,7 +52,7 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-
+    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

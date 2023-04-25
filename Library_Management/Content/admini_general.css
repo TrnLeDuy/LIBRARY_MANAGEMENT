@@ -3,6 +3,8 @@
     margin: 0
 }
 
+
+
 body, html {
     height: 100%;
     background-color: #f6f5fb;
@@ -36,15 +38,11 @@ body, html {
     height:inherit;
 }
 
-div, aside, nav{
-    display: block;
-}
-
 .layout {
     position: relative;
 }
 .menu-sidepanel {
-        top: 0;
+    top: 0;
     height: 100%;
     position: fixed;
     background-color: #fff;
@@ -58,6 +56,7 @@ div, aside, nav{
     -moz-transition: width .3s ease-in-out;
     transition: width .3s ease-in-out
 }
+
 
 @media(min-width: 0px) {
     .menu-sidepanel {
@@ -83,6 +82,47 @@ div, aside, nav{
     }
 }
 
+.menu-sidepanel-header {
+    -webkit-box-flex: 0;
+    -webkit-flex: none;
+    -moz-box-flex: 0;
+    flex: none;
+}
+
+.menu-sidepanel-header-close {
+    font-size: 1.5rem;
+    right: 20px;
+    top: 38px;
+    position: absolute;
+    cursor: pointer
+}
+
+@media(min-width: 0px){
+    .menu-sidepanel-header-close{
+        display: block;
+    }
+}
+
+@media(min-width: 800px){
+    .menu-sidepanel-header-close{
+        display: none;
+    }
+}
+
+.menu-icon {
+    color: #64728c;
+}
+
+.menu-icon .--disabled{
+    color: #e8eaef;
+}
+
+[class*="bi-"]:before,[class^="bi-"]:before{
+    line-height: inherit;
+}
+
+
+
 .navbar-nav {
     display: -webkit-box;
     display: -webkit-flex;
@@ -99,4 +139,68 @@ div, aside, nav{
     margin: 0;
     height: inherit;
     overflow: hidden;
+}
+
+.menu-brand{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 1.5rem 1rem;
+    z-index: 1;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    align-items: center;
+}
+
+.menu-brand #logo{
+    display: none;
+    border-style: none;
+}
+
+.menu-brand #logo img{
+    height: 50px;
+    width: 50px;
+}
+
+@media(min-width: 800px){
+    .menu-brand #logo{
+        display: block;
+    }
+}
+
+.menu-brand #banner img{
+    height: 50px;
+    width: 182px;
+}
+
+@media(min-width: 800px){
+    .menu-brand #banner.toggled{
+        display: none
+    }
+}
+
+
+.bi:before, [class*=" bi-"]:before, [class^=bi-]:before {
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: 400 !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+/*Lỗi icon cần fix*/
+.bi-x:before {
+    content: "\e644"; /* set the content to "\e644" which corresponds to the window close icon in Bootstrap 5 */
+    font-family: "Bootstrap-icons"; /* set the font family to "Bootstrap-icons" to use the correct icon font */
+    font-weight: 600; /* set the font weight to ensure the icon is displayed correctly */
 }
