@@ -12,12 +12,13 @@ namespace Library_Management.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class TaiKhoan
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int MaNV { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string LoaiTK { get; set; }
+    
+        public virtual NhanVien NhanVien { get; set; }
     }
 }

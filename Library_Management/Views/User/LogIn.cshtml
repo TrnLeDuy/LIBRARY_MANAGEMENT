@@ -14,6 +14,18 @@
     <link href="~/Content/general.css" rel="stylesheet" />
 </head>
 <body>
+    @using (Html.BeginForm("LogIn", "User"))
+    {
+        if (!string.IsNullOrEmpty(ViewBag.ThongBao))
+        {
+            <div id="message-box">
+                <h3 class="warningMessage" style="text-align:center">@ViewBag.ThongBao</h3>
+                <form method="post" action="~/Views/Account/LogIn.cshtml">
+                    <input type="submit" name="closeMessage" value="ĐÓNG" />
+                </form>
+            </div>
+        }
+    }
     <div class="form">
         <div class="layout">
             <div class="img">
@@ -24,14 +36,11 @@
                     @using (Html.BeginForm("LogIn", "User"))
                     {
                         <h2 class="login-title" style="text-align:center;">ĐĂNG NHẬP</h2>
-                        <h3 class="warningMessage" style="text-align:center">@ViewBag.ThongBao</h3>
-                        @Html.ValidationSummary(true)
                         <div class="form-group" style="text-align: left;">
                             <label for="login">Tài khoản: </label>
                             @Html.TextBox("Username", null, new { @class = "form-control", @id = "login", required = "required" })
                         </div>
 
-                        @Html.ValidationSummary(true)
                         <div class="form-group" style="text-align: left;">
                             <label for="password">Mật khẩu: </label>
                             @Html.Password("Password", null, new { @class = "form-control", @id = "password", required = "required" })
