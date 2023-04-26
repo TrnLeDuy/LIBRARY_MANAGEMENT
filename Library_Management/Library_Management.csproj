@@ -286,19 +286,9 @@
     <Content Include="Views\User\LogIn.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Management\Dashboard.cshtml" />
-    <Content Include="Views\Management\Users.cshtml" />
-    <Content Include="Views\Management\Books.cshtml" />
-    <Content Include="Views\Management\Readers.cshtml" />
-    <Content Include="Views\Management\Borrows.cshtml" />
     <Content Include="Views\Shared\_LayoutLibrarian.cshtml" />
     <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
     <Content Include="Views\Librarian\Dashboard.cshtml" />
-    <Content Include="Views\Librarian\Books.cshtml" />
-    <Content Include="Views\Librarian\Readers.cshtml" />
-    <Content Include="Views\Librarian\Borrows.cshtml" />
-    <Content Include="Views\Employee\Books.cshtml" />
-    <Content Include="Views\Employee\Borrows.cshtml" />
-    <Content Include="Views\Employee\Readers.cshtml" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
@@ -314,6 +304,7 @@
     <Content Include="webfonts\fa-brands-400.woff" />
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
+    <Content Include="Views\Employee\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
