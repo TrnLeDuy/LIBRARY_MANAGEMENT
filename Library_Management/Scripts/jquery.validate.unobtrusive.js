@@ -1,4 +1,7 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 /**
  * @license
  * Unobtrusive validation support library for jQuery and jQuery Validate
@@ -745,6 +748,7 @@
 // SIG // 6ne+GsUpKe3S40OxEo+i/fAo2CiQdjNV3dV/d36AjFx3
 // SIG // 1xc5mmXuD4FQz5kJEs10aA==
 // SIG // End signature block
+<<<<<<< Updated upstream
 =======
 /**
  * @license
@@ -1492,4 +1496,6 @@
 // SIG // 6ne+GsUpKe3S40OxEo+i/fAo2CiQdjNV3dV/d36AjFx3
 // SIG // 1xc5mmXuD4FQz5kJEs10aA==
 // SIG // End signature block
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes

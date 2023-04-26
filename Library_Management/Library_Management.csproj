@@ -242,6 +242,7 @@
       <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
     </Content>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -262,6 +263,9 @@
     <Content Include="Scripts\fontawesome\solid.min.js" />
     <Content Include="Scripts\fontawesome\v4-shims.js" />
     <Content Include="Scripts\fontawesome\v4-shims.min.js" />
+=======
+    <None Include="Scripts\jquery-3.6.4.intellisense.js" />
+>>>>>>> Stashed changes
 =======
     <None Include="Scripts\jquery-3.6.4.intellisense.js" />
 >>>>>>> Stashed changes

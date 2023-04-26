@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 /*!
  * jQuery Validation Plugin v1.19.5
  *
@@ -1660,6 +1661,8 @@ if ( $.ajaxPrefilter ) {
 }
 return $;
 =======
+=======
+>>>>>>> Stashed changes
 /*!
  * jQuery Validation Plugin v1.19.5
  *
