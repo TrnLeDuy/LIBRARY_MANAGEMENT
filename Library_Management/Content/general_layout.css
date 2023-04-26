@@ -34,13 +34,14 @@ body, html {
 }
 
 
-#app, #root{
-    height:inherit;
+#app, #root {
+    height: inherit;
 }
 
 .layout {
     position: relative;
 }
+
 .menu-sidepanel {
     top: 0;
     height: 100%;
@@ -97,14 +98,14 @@ body, html {
     cursor: pointer
 }
 
-@media(min-width: 0px){
-    .menu-sidepanel-header-close{
+@media(min-width: 0px) {
+    .menu-sidepanel-header-close {
         display: block;
     }
 }
 
-@media(min-width: 800px){
-    .menu-sidepanel-header-close{
+@media(min-width: 800px) {
+    .menu-sidepanel-header-close {
         display: none;
     }
 }
@@ -121,14 +122,14 @@ body, html {
     }
 }
 
-@media(min-width: 800px){
+@media(min-width: 800px) {
     input.menu-input.menu-input--active.toggled {
         display: none;
     }
 }
 
-@media(min-width: 0px){
-    .main-menu-search .toggled{
+@media(min-width: 0px) {
+    .main-menu-search .toggled {
         display: inline;
     }
 }
@@ -136,7 +137,6 @@ body, html {
 @media (min-width: 800px) {
     .main-menu-button {
         display: -webkit-inline-box;
-        display: -webkit-inline-flex;
         display: -moz-inline-box;
         display: inline-flex;
     }
@@ -146,9 +146,9 @@ body, html {
     color: #64728c;
 }
 
-.menu-icon .--disabled{
-    color: #e8eaef;
-}
+    .menu-icon .--disabled {
+        color: #e8eaef;
+    }
 
 .navbar-nav {
     display: -webkit-box;
@@ -168,7 +168,7 @@ body, html {
     overflow: hidden;
 }
 
-.menu-brand{
+.menu-brand {
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -184,20 +184,20 @@ body, html {
     align-items: center;
 }
 
-.menu-brand #logo{
-    display: none;
-    border-style: none;
-}
+    .menu-brand #logo {
+        display: none;
+        border-style: none;
+    }
 
-.menu-brand #logo img{
-    height: 50px;
-    width: 50px;
-}
+        .menu-brand #logo img {
+            height: 50px;
+            width: 50px;
+        }
 
-.menu-brand #banner img{
-    height: 50px;
-    width: 182px;
-}
+    .menu-brand #banner img {
+        height: 50px;
+        width: 182px;
+    }
 
 .menu-sidepanel-body {
     -webkit-box-flex: 1;
@@ -224,6 +224,7 @@ body, html {
     -moz-box-flex: 0;
     flex: none;
 }
+
 .main-menu {
     margin: 0;
     padding: 0;
@@ -241,7 +242,7 @@ body, html {
     padding-right: 10px;
 }
 
-.search-menu-icon{
+.search-menu-icon {
     height: 22px;
     width: 22px;
     background-repeat: no-repeat;
@@ -251,7 +252,7 @@ body, html {
 }
 
 
-.main-menu-search{
+.main-menu-search {
     width: 100%;
     display: block;
     text-align: left;
@@ -259,17 +260,17 @@ body, html {
     padding: 8px 16px 8px 24px;
 }
 
-.main-menu-search .menu-input{
-    border-radius: unset;
-    border: unset;
-    min-height: unset;
-    height: auto;
-    width: auto;
-    padding: unset;
-    display: inline;
-    font-size: .85rem;
-    padding-left: 15px;
-}
+    .main-menu-search .menu-input {
+        border-radius: unset;
+        border: unset;
+        min-height: unset;
+        height: auto;
+        width: auto;
+        padding: unset;
+        display: inline;
+        font-size: .85rem;
+        padding-left: 15px;
+    }
 
 .menu-input {
     -webkit-box-sizing: border-box;
@@ -286,18 +287,18 @@ body, html {
     min-height: 45px;
 }
 
-.main-menu-search .menu-input--active{
+.main-menu-search .menu-input--active {
     border: unset;
 }
 
-.main-menu-search .menu-input--focus{
+.main-menu-search .menu-input--focus {
     border: unset;
     -webkit-box-shadow: unset;
     box-shadow: unset;
     outline: 0;
 }
 
-.menu-input--active{
+.menu-input--active {
     border: 1px solid #e8eaef;
 }
 
@@ -305,7 +306,7 @@ body, html {
     border: 1px solid #929baa;
     -webkit-box-shadow: 1px 1px 6px rgba(35,35,36,.12);
     box-shadow: 1px 1px 6px rgba(35,35,36,.12);
-    outline: 0; 
+    outline: 0;
 }
 
 .main-menu-button {
@@ -317,7 +318,7 @@ body, html {
     min-width: 25px;
     min-height: 25px;
     position: absolute;
-    background-color: var(--library-primary-one-color)!important;
+    background-color: var(--library-primary-one-color) !important;
 }
 
 .menu-icon-button {
@@ -351,3 +352,11 @@ body, html {
     background-color: rgba(100,114,140,.1);
 }
 
+.main-menu hr{
+    border: 0;
+}
+
+.main-menu-divider{
+    border-top: 1px solid hsla(0,0%,56.1%,.15)!important;
+    margin: 5px 1rem;
+}
