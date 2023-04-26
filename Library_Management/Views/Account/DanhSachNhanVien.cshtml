@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Library_Management.Models.NhanVien>
+
+@{
+    ViewBag.Title = "Danh sách Nhân viên";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<p>
+    @Html.ActionLink("Thêm mới", "Create")
+    @Html.ActionLink("Danh sách Tài khoản", "DanhSachTaiKhoan")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Họ tên
+        </th>
+        <th>
+            Ngày Sinh
+        </th>
+        <th>
+            Giới tính
+        </th>
+        <th>
+            Địa chỉ Email
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+        <th>
+            Địa chỉ
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hoten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgaySinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gioitinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SDT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Diachi)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaNV })
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaNV })
+        </td>
+    </tr>
+}
+
+</table>
