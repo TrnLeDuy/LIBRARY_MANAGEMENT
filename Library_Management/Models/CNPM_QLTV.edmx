@@ -4,79 +4,92 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CNPM_QLTVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="BOOK">
+      <Schema Namespace="CNPM_QLTVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CuonSach">
           <Key>
-            <PropertyRef Name="BookID" />
-            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="ma_cuonsach" />
           </Key>
-          <Property Name="BookID" Type="int" Nullable="false" />
-          <Property Name="CategoryID" Type="int" Nullable="false" />
-          <Property Name="BookName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Author" Type="nvarchar" MaxLength="35" />
-          <Property Name="Describe" Type="nvarchar(max)" />
-          <Property Name="Publish" Type="date" />
-          <Property Name="Publisher" Type="nvarchar" MaxLength="30" />
-          <Property Name="BookImage" Type="varchar" MaxLength="50" />
-          <Property Name="BookStatus" Type="varchar" MaxLength="1" />
+          <Property Name="isbn" Type="int" Nullable="false" />
+          <Property Name="ma_cuonsach" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TinhTrang" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <EntityType Name="BOOKRETURN">
+        <EntityType Name="DangKy">
           <Key>
-            <PropertyRef Name="ReturnID" />
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="ma_sinhvien" />
           </Key>
-          <Property Name="ReturnID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BorrowID" Type="int" Nullable="false" />
-          <Property Name="ReturnDate" Type="datetime" />
+          <Property Name="isbn" Type="int" Nullable="false" />
+          <Property Name="ma_sinhvien" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ngaygio_dk" Type="smalldatetime" />
+          <Property Name="ghichu" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="BORROW">
+        <EntityType Name="DauSach">
           <Key>
-            <PropertyRef Name="BorrowID" />
+            <PropertyRef Name="isbn" />
           </Key>
-          <Property Name="BorrowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CardID" Type="varchar" MaxLength="7" Nullable="false" />
-          <Property Name="BookID" Type="int" />
-          <Property Name="TakenDate" Type="datetime" />
-          <Property Name="DueDate" Type="datetime" />
+          <Property Name="isbn" Type="int" Nullable="false" />
+          <Property Name="ma_tuasach" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ngonngu" Type="nvarchar" MaxLength="15" />
+          <Property Name="bia" Type="char" MaxLength="15" />
+          <Property Name="trangthai" Type="nvarchar" MaxLength="1" Nullable="false" />
         </EntityType>
-        <EntityType Name="CATEGORY">
+        <EntityType Name="LoaiSach">
           <Key>
-            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="ma_loaisach" />
           </Key>
-          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CategoryName" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="Note" Type="nvarchar" MaxLength="50" />
-          <Property Name="Status" Type="varchar" MaxLength="1" />
+          <Property Name="ma_loaisach" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ten_loaisach" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="FINE">
+        <EntityType Name="Muon">
           <Key>
-            <PropertyRef Name="FineID" />
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="ma_cuonsach" />
           </Key>
-          <Property Name="FineID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="varchar" MaxLength="5" />
-          <Property Name="ReturnID" Type="int" />
-          <Property Name="CreateDate" Type="datetime" />
-          <Property Name="FineAmount" Type="varchar" MaxLength="1" />
+          <Property Name="isbn" Type="int" Nullable="false" />
+          <Property Name="ma_cuonsach" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ma_sinhvien" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ngayGio_muon" Type="smalldatetime" Nullable="false" />
+          <Property Name="ngay_hethan" Type="smalldatetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="LIBRARYCARD">
+        <EntityType Name="NhanVien">
           <Key>
-            <PropertyRef Name="CardID" />
+            <PropertyRef Name="MaNV" />
           </Key>
-          <Property Name="CardID" Type="varchar" MaxLength="7" Nullable="false" />
-          <Property Name="StudentID" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="DateExpires" Type="datetime" />
-          <Property Name="Status" Type="nvarchar" MaxLength="25" />
+          <Property Name="MaNV" Type="int" Nullable="false" />
+          <Property Name="Hoten" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgaySinh" Type="smalldatetime" />
+          <Property Name="Gioitinh" Type="nvarchar" MaxLength="10" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="SDT" Type="char" MaxLength="11" />
+          <Property Name="Diachi" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="STUDENT">
+        <EntityType Name="QuaTrinhMuon">
           <Key>
-            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="ma_cuonsach" />
+            <PropertyRef Name="ngayGio_muon" />
           </Key>
-          <Property Name="StudentID" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="StudentName" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="Birth" Type="date" />
-          <Property Name="Email" Type="nvarchar" MaxLength="30" />
-          <Property Name="Phone" Type="varchar" MaxLength="10" />
-          <Property Name="Addr" Type="nvarchar" MaxLength="100" />
-          <Property Name="Gender" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="isbn" Type="int" Nullable="false" />
+          <Property Name="ma_cuonsach" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ngayGio_muon" Type="smalldatetime" Nullable="false" />
+          <Property Name="ma_sinhvien" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ngay_hethan" Type="smalldatetime" />
+          <Property Name="ngayGio_tra" Type="smalldatetime" />
+          <Property Name="tien_muon" Type="money" />
+          <Property Name="tien_datra" Type="money" />
+          <Property Name="tien_datcoc" Type="money" />
+          <Property Name="ghichu" Type="nvarchar" MaxLength="255" />
+          <Property Name="MaNV" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SinhVien">
+          <Key>
+            <PropertyRef Name="ma_sinhvien" />
+          </Key>
+          <Property Name="ma_sinhvien" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="diachi" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="dienthoai" Type="nvarchar" MaxLength="10" />
+          <Property Name="han_sd" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -88,102 +101,180 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="USERS">
+        <EntityType Name="TaiKhoan">
           <Key>
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="MaNV" />
           </Key>
-          <Property Name="UserID" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="Fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Username" Type="nvarchar" MaxLength="15" />
-          <Property Name="Password" Type="nvarchar" MaxLength="30" />
-          <Property Name="Roles" Type="char" MaxLength="2" />
-          <Property Name="Birth" Type="date" />
-          <Property Name="Gender" Type="char" MaxLength="10" />
-          <Property Name="Email" Type="varchar" MaxLength="50" />
-          <Property Name="Phone" Type="varchar" MaxLength="10" />
-          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaNV" Type="int" Nullable="false" />
+          <Property Name="Username" Type="char" MaxLength="20" />
+          <Property Name="Password" Type="char" MaxLength="20" />
+          <Property Name="LoaiTK" Type="nvarchar" MaxLength="10" />
         </EntityType>
-        <Association Name="FK_BOOK_BORROW">
-          <End Role="BORROW" Type="Self.BORROW" Multiplicity="1" />
-          <End Role="BOOK" Type="Self.BOOK" Multiplicity="*" />
+        <EntityType Name="TheThuVien">
+          <Key>
+            <PropertyRef Name="ma_sinhvien" />
+          </Key>
+          <Property Name="ma_sinhvien" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Hoten" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NgaySinh" Type="smalldatetime" />
+          <Property Name="Tinhtrangthe" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TuaSach">
+          <Key>
+            <PropertyRef Name="ma_tuasach" />
+          </Key>
+          <Property Name="ma_tuasach" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ma_loaisach" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TuaSach" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="tacgia" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="tomtat" Type="nvarchar" MaxLength="1000" />
+          <Property Name="namxuatban" Type="smalldatetime" />
+        </EntityType>
+        <Association Name="FK_cuonsach_dausach">
+          <End Role="DauSach" Type="Self.DauSach" Multiplicity="1" />
+          <End Role="CuonSach" Type="Self.CuonSach" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BORROW">
-              <PropertyRef Name="BorrowID" />
+            <Principal Role="DauSach">
+              <PropertyRef Name="isbn" />
             </Principal>
-            <Dependent Role="BOOK">
-              <PropertyRef Name="BookID" />
+            <Dependent Role="CuonSach">
+              <PropertyRef Name="isbn" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BOOK_CATEGORY">
-          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
-          <End Role="BOOK" Type="Self.BOOK" Multiplicity="*" />
+        <Association Name="FK_dangky_dausach">
+          <End Role="DauSach" Type="Self.DauSach" Multiplicity="1" />
+          <End Role="DangKy" Type="Self.DangKy" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CATEGORY">
-              <PropertyRef Name="CategoryID" />
+            <Principal Role="DauSach">
+              <PropertyRef Name="isbn" />
             </Principal>
-            <Dependent Role="BOOK">
-              <PropertyRef Name="CategoryID" />
+            <Dependent Role="DangKy">
+              <PropertyRef Name="isbn" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BOOKRETURN_BORROW">
-          <End Role="BORROW" Type="Self.BORROW" Multiplicity="1" />
-          <End Role="BOOKRETURN" Type="Self.BOOKRETURN" Multiplicity="*" />
+        <Association Name="FK_dangky_sinhvien">
+          <End Role="TheThuVien" Type="Self.TheThuVien" Multiplicity="1" />
+          <End Role="DangKy" Type="Self.DangKy" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BORROW">
-              <PropertyRef Name="BorrowID" />
+            <Principal Role="TheThuVien">
+              <PropertyRef Name="ma_sinhvien" />
             </Principal>
-            <Dependent Role="BOOKRETURN">
-              <PropertyRef Name="BorrowID" />
+            <Dependent Role="DangKy">
+              <PropertyRef Name="ma_sinhvien" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BORROW_LIBRARYCARD">
-          <End Role="LIBRARYCARD" Type="Self.LIBRARYCARD" Multiplicity="1" />
-          <End Role="BORROW" Type="Self.BORROW" Multiplicity="*" />
+        <Association Name="FK_dausach_tuasach">
+          <End Role="TuaSach" Type="Self.TuaSach" Multiplicity="1" />
+          <End Role="DauSach" Type="Self.DauSach" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LIBRARYCARD">
-              <PropertyRef Name="CardID" />
+            <Principal Role="TuaSach">
+              <PropertyRef Name="ma_tuasach" />
             </Principal>
-            <Dependent Role="BORROW">
-              <PropertyRef Name="CardID" />
+            <Dependent Role="DauSach">
+              <PropertyRef Name="ma_tuasach" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FINE_BOOKRETURN">
-          <End Role="BOOKRETURN" Type="Self.BOOKRETURN" Multiplicity="0..1" />
-          <End Role="FINE" Type="Self.FINE" Multiplicity="*" />
+        <Association Name="FK_muon_cuonsach">
+          <End Role="CuonSach" Type="Self.CuonSach" Multiplicity="1" />
+          <End Role="Muon" Type="Self.Muon" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="BOOKRETURN">
-              <PropertyRef Name="ReturnID" />
+            <Principal Role="CuonSach">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="ma_cuonsach" />
             </Principal>
-            <Dependent Role="FINE">
-              <PropertyRef Name="ReturnID" />
+            <Dependent Role="Muon">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="ma_cuonsach" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FINE_USERS">
-          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
-          <End Role="FINE" Type="Self.FINE" Multiplicity="*" />
+        <Association Name="FK_QuaTrinhMuon_cuonsach">
+          <End Role="CuonSach" Type="Self.CuonSach" Multiplicity="1" />
+          <End Role="QuaTrinhMuon" Type="Self.QuaTrinhMuon" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="USERS">
-              <PropertyRef Name="UserID" />
+            <Principal Role="CuonSach">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="ma_cuonsach" />
             </Principal>
-            <Dependent Role="FINE">
-              <PropertyRef Name="UserID" />
+            <Dependent Role="QuaTrinhMuon">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="ma_cuonsach" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LIBRARYCARD_STUDENT">
-          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
-          <End Role="LIBRARYCARD" Type="Self.LIBRARYCARD" Multiplicity="*" />
+        <Association Name="FK_QuaTrinhMuon_nhanvien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="QuaTrinhMuon" Type="Self.QuaTrinhMuon" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="STUDENT">
-              <PropertyRef Name="StudentID" />
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
             </Principal>
-            <Dependent Role="LIBRARYCARD">
-              <PropertyRef Name="StudentID" />
+            <Dependent Role="QuaTrinhMuon">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sinhvien_TheThuVien">
+          <End Role="TheThuVien" Type="Self.TheThuVien" Multiplicity="1" />
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TheThuVien">
+              <PropertyRef Name="ma_sinhvien" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="ma_sinhvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_taikhoan_nhanvien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="TaiKhoan">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuasach_loaisach">
+          <End Role="LoaiSach" Type="Self.LoaiSach" Multiplicity="1" />
+          <End Role="TuaSach" Type="Self.TuaSach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiSach">
+              <PropertyRef Name="ma_loaisach" />
+            </Principal>
+            <Dependent Role="TuaSach">
+              <PropertyRef Name="ma_loaisach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkMuon_SinhVien">
+          <End Role="TheThuVien" Type="Self.TheThuVien" Multiplicity="1" />
+          <End Role="Muon" Type="Self.Muon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheThuVien">
+              <PropertyRef Name="ma_sinhvien" />
+            </Principal>
+            <Dependent Role="Muon">
+              <PropertyRef Name="ma_sinhvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkQuaTrinhMuon_SinhVien">
+          <End Role="TheThuVien" Type="Self.TheThuVien" Multiplicity="1" />
+          <End Role="QuaTrinhMuon" Type="Self.QuaTrinhMuon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheThuVien">
+              <PropertyRef Name="ma_sinhvien" />
+            </Principal>
+            <Dependent Role="QuaTrinhMuon">
+              <PropertyRef Name="ma_sinhvien" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -219,85 +310,429 @@
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CNPM_QLTVModelStoreContainer">
-          <EntitySet Name="BOOK" EntityType="Self.BOOK" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BOOKRETURN" EntityType="Self.BOOKRETURN" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BORROW" EntityType="Self.BORROW" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FINE" EntityType="Self.FINE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LIBRARYCARD" EntityType="Self.LIBRARYCARD" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CuonSach" EntityType="Self.CuonSach" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DangKy" EntityType="Self.DangKy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DauSach" EntityType="Self.DauSach" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiSach" EntityType="Self.LoaiSach" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Muon" EntityType="Self.Muon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuaTrinhMuon" EntityType="Self.QuaTrinhMuon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SinhVien" EntityType="Self.SinhVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_BOOK_BORROW" Association="Self.FK_BOOK_BORROW">
-            <End Role="BORROW" EntitySet="BORROW" />
-            <End Role="BOOK" EntitySet="BOOK" />
+          <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TheThuVien" EntityType="Self.TheThuVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TuaSach" EntityType="Self.TuaSach" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_cuonsach_dausach" Association="Self.FK_cuonsach_dausach">
+            <End Role="DauSach" EntitySet="DauSach" />
+            <End Role="CuonSach" EntitySet="CuonSach" />
           </AssociationSet>
-          <AssociationSet Name="FK_BOOK_CATEGORY" Association="Self.FK_BOOK_CATEGORY">
-            <End Role="CATEGORY" EntitySet="CATEGORY" />
-            <End Role="BOOK" EntitySet="BOOK" />
+          <AssociationSet Name="FK_dangky_dausach" Association="Self.FK_dangky_dausach">
+            <End Role="DauSach" EntitySet="DauSach" />
+            <End Role="DangKy" EntitySet="DangKy" />
           </AssociationSet>
-          <AssociationSet Name="FK_BOOKRETURN_BORROW" Association="Self.FK_BOOKRETURN_BORROW">
-            <End Role="BORROW" EntitySet="BORROW" />
-            <End Role="BOOKRETURN" EntitySet="BOOKRETURN" />
+          <AssociationSet Name="FK_dangky_sinhvien" Association="Self.FK_dangky_sinhvien">
+            <End Role="TheThuVien" EntitySet="TheThuVien" />
+            <End Role="DangKy" EntitySet="DangKy" />
           </AssociationSet>
-          <AssociationSet Name="FK_BORROW_LIBRARYCARD" Association="Self.FK_BORROW_LIBRARYCARD">
-            <End Role="LIBRARYCARD" EntitySet="LIBRARYCARD" />
-            <End Role="BORROW" EntitySet="BORROW" />
+          <AssociationSet Name="FK_dausach_tuasach" Association="Self.FK_dausach_tuasach">
+            <End Role="TuaSach" EntitySet="TuaSach" />
+            <End Role="DauSach" EntitySet="DauSach" />
           </AssociationSet>
-          <AssociationSet Name="FK_FINE_BOOKRETURN" Association="Self.FK_FINE_BOOKRETURN">
-            <End Role="BOOKRETURN" EntitySet="BOOKRETURN" />
-            <End Role="FINE" EntitySet="FINE" />
+          <AssociationSet Name="FK_muon_cuonsach" Association="Self.FK_muon_cuonsach">
+            <End Role="CuonSach" EntitySet="CuonSach" />
+            <End Role="Muon" EntitySet="Muon" />
           </AssociationSet>
-          <AssociationSet Name="FK_FINE_USERS" Association="Self.FK_FINE_USERS">
-            <End Role="USERS" EntitySet="USERS" />
-            <End Role="FINE" EntitySet="FINE" />
+          <AssociationSet Name="FK_QuaTrinhMuon_cuonsach" Association="Self.FK_QuaTrinhMuon_cuonsach">
+            <End Role="CuonSach" EntitySet="CuonSach" />
+            <End Role="QuaTrinhMuon" EntitySet="QuaTrinhMuon" />
           </AssociationSet>
-          <AssociationSet Name="FK_LIBRARYCARD_STUDENT" Association="Self.FK_LIBRARYCARD_STUDENT">
-            <End Role="STUDENT" EntitySet="STUDENT" />
-            <End Role="LIBRARYCARD" EntitySet="LIBRARYCARD" />
+          <AssociationSet Name="FK_QuaTrinhMuon_nhanvien" Association="Self.FK_QuaTrinhMuon_nhanvien">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="QuaTrinhMuon" EntitySet="QuaTrinhMuon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sinhvien_TheThuVien" Association="Self.FK_sinhvien_TheThuVien">
+            <End Role="TheThuVien" EntitySet="TheThuVien" />
+            <End Role="SinhVien" EntitySet="SinhVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_taikhoan_nhanvien" Association="Self.FK_taikhoan_nhanvien">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tuasach_loaisach" Association="Self.FK_Tuasach_loaisach">
+            <End Role="LoaiSach" EntitySet="LoaiSach" />
+            <End Role="TuaSach" EntitySet="TuaSach" />
+          </AssociationSet>
+          <AssociationSet Name="fkMuon_SinhVien" Association="Self.fkMuon_SinhVien">
+            <End Role="TheThuVien" EntitySet="TheThuVien" />
+            <End Role="Muon" EntitySet="Muon" />
+          </AssociationSet>
+          <AssociationSet Name="fkQuaTrinhMuon_SinhVien" Association="Self.fkQuaTrinhMuon_SinhVien">
+            <End Role="TheThuVien" EntitySet="TheThuVien" />
+            <End Role="QuaTrinhMuon" EntitySet="QuaTrinhMuon" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CNPM_QLTVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="QLTVEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BOOKs" EntityType="CNPM_QLTVModel.BOOK" />
-          <EntitySet Name="BOOKRETURNs" EntityType="CNPM_QLTVModel.BOOKRETURN" />
-          <EntitySet Name="BORROWs" EntityType="CNPM_QLTVModel.BORROW" />
-          <EntitySet Name="CATEGORies" EntityType="CNPM_QLTVModel.CATEGORY" />
-          <EntitySet Name="FINEs" EntityType="CNPM_QLTVModel.FINE" />
-          <EntitySet Name="LIBRARYCARDs" EntityType="CNPM_QLTVModel.LIBRARYCARD" />
-          <EntitySet Name="STUDENTs" EntityType="CNPM_QLTVModel.STUDENT" />
-          <EntitySet Name="sysdiagrams" EntityType="CNPM_QLTVModel.sysdiagram" />
-          <EntitySet Name="USERS" EntityType="CNPM_QLTVModel.USER" />
-          <AssociationSet Name="FK_BOOK_BORROW" Association="CNPM_QLTVModel.FK_BOOK_BORROW">
-            <End Role="BORROW" EntitySet="BORROWs" />
-            <End Role="BOOK" EntitySet="BOOKs" />
+        <EntityType Name="CuonSach">
+          <Key>
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="ma_cuonsach" />
+          </Key>
+          <Property Name="isbn" Type="Int32" Nullable="false" />
+          <Property Name="ma_cuonsach" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TinhTrang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DauSach" Relationship="Self.FK_cuonsach_dausach" FromRole="CuonSach" ToRole="DauSach" />
+          <NavigationProperty Name="Muon" Relationship="Self.FK_muon_cuonsach" FromRole="CuonSach" ToRole="Muon" />
+          <NavigationProperty Name="QuaTrinhMuons" Relationship="Self.FK_QuaTrinhMuon_cuonsach" FromRole="CuonSach" ToRole="QuaTrinhMuon" />
+        </EntityType>
+        <EntityType Name="DangKy">
+          <Key>
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="ma_sinhvien" />
+          </Key>
+          <Property Name="isbn" Type="Int32" Nullable="false" />
+          <Property Name="ma_sinhvien" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ngaygio_dk" Type="DateTime" Precision="0" />
+          <Property Name="ghichu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DauSach" Relationship="Self.FK_dangky_dausach" FromRole="DangKy" ToRole="DauSach" />
+          <NavigationProperty Name="TheThuVien" Relationship="Self.FK_dangky_sinhvien" FromRole="DangKy" ToRole="TheThuVien" />
+        </EntityType>
+        <EntityType Name="DauSach">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="Int32" Nullable="false" />
+          <Property Name="ma_tuasach" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ngonngu" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="bia" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="trangthai" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CuonSaches" Relationship="Self.FK_cuonsach_dausach" FromRole="DauSach" ToRole="CuonSach" />
+          <NavigationProperty Name="DangKies" Relationship="Self.FK_dangky_dausach" FromRole="DauSach" ToRole="DangKy" />
+          <NavigationProperty Name="TuaSach" Relationship="Self.FK_dausach_tuasach" FromRole="DauSach" ToRole="TuaSach" />
+        </EntityType>
+        <EntityType Name="LoaiSach">
+          <Key>
+            <PropertyRef Name="ma_loaisach" />
+          </Key>
+          <Property Name="ma_loaisach" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ten_loaisach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TuaSaches" Relationship="Self.FK_Tuasach_loaisach" FromRole="LoaiSach" ToRole="TuaSach" />
+        </EntityType>
+        <EntityType Name="Muon">
+          <Key>
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="ma_cuonsach" />
+          </Key>
+          <Property Name="isbn" Type="Int32" Nullable="false" />
+          <Property Name="ma_cuonsach" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ma_sinhvien" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ngayGio_muon" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ngay_hethan" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="CuonSach" Relationship="Self.FK_muon_cuonsach" FromRole="Muon" ToRole="CuonSach" />
+          <NavigationProperty Name="TheThuVien" Relationship="Self.fkMuon_SinhVien" FromRole="Muon" ToRole="TheThuVien" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="Int32" Nullable="false" />
+          <Property Name="Hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="Gioitinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="Diachi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="QuaTrinhMuons" Relationship="Self.FK_QuaTrinhMuon_nhanvien" FromRole="NhanVien" ToRole="QuaTrinhMuon" />
+          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK_taikhoan_nhanvien" FromRole="NhanVien" ToRole="TaiKhoan" />
+        </EntityType>
+        <EntityType Name="QuaTrinhMuon">
+          <Key>
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="ma_cuonsach" />
+            <PropertyRef Name="ngayGio_muon" />
+          </Key>
+          <Property Name="isbn" Type="Int32" Nullable="false" />
+          <Property Name="ma_cuonsach" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ngayGio_muon" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ma_sinhvien" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ngay_hethan" Type="DateTime" Precision="0" />
+          <Property Name="ngayGio_tra" Type="DateTime" Precision="0" />
+          <Property Name="tien_muon" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="tien_datra" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="tien_datcoc" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ghichu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MaNV" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CuonSach" Relationship="Self.FK_QuaTrinhMuon_cuonsach" FromRole="QuaTrinhMuon" ToRole="CuonSach" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK_QuaTrinhMuon_nhanvien" FromRole="QuaTrinhMuon" ToRole="NhanVien" />
+          <NavigationProperty Name="TheThuVien" Relationship="Self.fkQuaTrinhMuon_SinhVien" FromRole="QuaTrinhMuon" ToRole="TheThuVien" />
+        </EntityType>
+        <EntityType Name="SinhVien">
+          <Key>
+            <PropertyRef Name="ma_sinhvien" />
+          </Key>
+          <Property Name="ma_sinhvien" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="diachi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dienthoai" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="han_sd" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="TheThuVien" Relationship="Self.FK_sinhvien_TheThuVien" FromRole="SinhVien" ToRole="TheThuVien" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TaiKhoan">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="LoaiTK" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK_taikhoan_nhanvien" FromRole="TaiKhoan" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="TheThuVien">
+          <Key>
+            <PropertyRef Name="ma_sinhvien" />
+          </Key>
+          <Property Name="ma_sinhvien" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Hoten" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="Tinhtrangthe" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DangKies" Relationship="Self.FK_dangky_sinhvien" FromRole="TheThuVien" ToRole="DangKy" />
+          <NavigationProperty Name="Muons" Relationship="Self.fkMuon_SinhVien" FromRole="TheThuVien" ToRole="Muon" />
+          <NavigationProperty Name="QuaTrinhMuons" Relationship="Self.fkQuaTrinhMuon_SinhVien" FromRole="TheThuVien" ToRole="QuaTrinhMuon" />
+          <NavigationProperty Name="SinhVien" Relationship="Self.FK_sinhvien_TheThuVien" FromRole="TheThuVien" ToRole="SinhVien" />
+        </EntityType>
+        <EntityType Name="TuaSach">
+          <Key>
+            <PropertyRef Name="ma_tuasach" />
+          </Key>
+          <Property Name="ma_tuasach" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ma_loaisach" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TuaSach1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tacgia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tomtat" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="namxuatban" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="DauSaches" Relationship="Self.FK_dausach_tuasach" FromRole="TuaSach" ToRole="DauSach" />
+          <NavigationProperty Name="LoaiSach" Relationship="Self.FK_Tuasach_loaisach" FromRole="TuaSach" ToRole="LoaiSach" />
+        </EntityType>
+        <Association Name="FK_cuonsach_dausach">
+          <End Role="DauSach" Type="Self.DauSach" Multiplicity="1" />
+          <End Role="CuonSach" Type="Self.CuonSach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DauSach">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="CuonSach">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_muon_cuonsach">
+          <End Role="CuonSach" Type="Self.CuonSach" Multiplicity="1" />
+          <End Role="Muon" Type="Self.Muon" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CuonSach">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="ma_cuonsach" />
+            </Principal>
+            <Dependent Role="Muon">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="ma_cuonsach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuaTrinhMuon_cuonsach">
+          <End Role="CuonSach" Type="Self.CuonSach" Multiplicity="1" />
+          <End Role="QuaTrinhMuon" Type="Self.QuaTrinhMuon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuonSach">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="ma_cuonsach" />
+            </Principal>
+            <Dependent Role="QuaTrinhMuon">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="ma_cuonsach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dangky_dausach">
+          <End Role="DauSach" Type="Self.DauSach" Multiplicity="1" />
+          <End Role="DangKy" Type="Self.DangKy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DauSach">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="DangKy">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dangky_sinhvien">
+          <End Role="TheThuVien" Type="Self.TheThuVien" Multiplicity="1" />
+          <End Role="DangKy" Type="Self.DangKy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheThuVien">
+              <PropertyRef Name="ma_sinhvien" />
+            </Principal>
+            <Dependent Role="DangKy">
+              <PropertyRef Name="ma_sinhvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dausach_tuasach">
+          <End Role="TuaSach" Type="Self.TuaSach" Multiplicity="1" />
+          <End Role="DauSach" Type="Self.DauSach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TuaSach">
+              <PropertyRef Name="ma_tuasach" />
+            </Principal>
+            <Dependent Role="DauSach">
+              <PropertyRef Name="ma_tuasach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tuasach_loaisach">
+          <End Role="LoaiSach" Type="Self.LoaiSach" Multiplicity="1" />
+          <End Role="TuaSach" Type="Self.TuaSach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiSach">
+              <PropertyRef Name="ma_loaisach" />
+            </Principal>
+            <Dependent Role="TuaSach">
+              <PropertyRef Name="ma_loaisach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkMuon_SinhVien">
+          <End Role="TheThuVien" Type="Self.TheThuVien" Multiplicity="1" />
+          <End Role="Muon" Type="Self.Muon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheThuVien">
+              <PropertyRef Name="ma_sinhvien" />
+            </Principal>
+            <Dependent Role="Muon">
+              <PropertyRef Name="ma_sinhvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuaTrinhMuon_nhanvien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="QuaTrinhMuon" Type="Self.QuaTrinhMuon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="QuaTrinhMuon">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_taikhoan_nhanvien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="TaiKhoan">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkQuaTrinhMuon_SinhVien">
+          <End Role="TheThuVien" Type="Self.TheThuVien" Multiplicity="1" />
+          <End Role="QuaTrinhMuon" Type="Self.QuaTrinhMuon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheThuVien">
+              <PropertyRef Name="ma_sinhvien" />
+            </Principal>
+            <Dependent Role="QuaTrinhMuon">
+              <PropertyRef Name="ma_sinhvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sinhvien_TheThuVien">
+          <End Role="TheThuVien" Type="Self.TheThuVien" Multiplicity="1" />
+          <End Role="SinhVien" Type="Self.SinhVien" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TheThuVien">
+              <PropertyRef Name="ma_sinhvien" />
+            </Principal>
+            <Dependent Role="SinhVien">
+              <PropertyRef Name="ma_sinhvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CNPM_QLTVEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CuonSaches" EntityType="Self.CuonSach" />
+          <EntitySet Name="DangKies" EntityType="Self.DangKy" />
+          <EntitySet Name="DauSaches" EntityType="Self.DauSach" />
+          <EntitySet Name="LoaiSaches" EntityType="Self.LoaiSach" />
+          <EntitySet Name="Muons" EntityType="Self.Muon" />
+          <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+          <EntitySet Name="QuaTrinhMuons" EntityType="Self.QuaTrinhMuon" />
+          <EntitySet Name="SinhViens" EntityType="Self.SinhVien" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
+          <EntitySet Name="TheThuViens" EntityType="Self.TheThuVien" />
+          <EntitySet Name="TuaSaches" EntityType="Self.TuaSach" />
+          <AssociationSet Name="FK_cuonsach_dausach" Association="Self.FK_cuonsach_dausach">
+            <End Role="DauSach" EntitySet="DauSaches" />
+            <End Role="CuonSach" EntitySet="CuonSaches" />
           </AssociationSet>
-          <AssociationSet Name="FK_BOOK_CATEGORY" Association="CNPM_QLTVModel.FK_BOOK_CATEGORY">
-            <End Role="CATEGORY" EntitySet="CATEGORies" />
-            <End Role="BOOK" EntitySet="BOOKs" />
+          <AssociationSet Name="FK_muon_cuonsach" Association="Self.FK_muon_cuonsach">
+            <End Role="CuonSach" EntitySet="CuonSaches" />
+            <End Role="Muon" EntitySet="Muons" />
           </AssociationSet>
-          <AssociationSet Name="FK_BOOKRETURN_BORROW" Association="CNPM_QLTVModel.FK_BOOKRETURN_BORROW">
-            <End Role="BORROW" EntitySet="BORROWs" />
-            <End Role="BOOKRETURN" EntitySet="BOOKRETURNs" />
+          <AssociationSet Name="FK_QuaTrinhMuon_cuonsach" Association="Self.FK_QuaTrinhMuon_cuonsach">
+            <End Role="CuonSach" EntitySet="CuonSaches" />
+            <End Role="QuaTrinhMuon" EntitySet="QuaTrinhMuons" />
           </AssociationSet>
-          <AssociationSet Name="FK_FINE_BOOKRETURN" Association="CNPM_QLTVModel.FK_FINE_BOOKRETURN">
-            <End Role="BOOKRETURN" EntitySet="BOOKRETURNs" />
-            <End Role="FINE" EntitySet="FINEs" />
+          <AssociationSet Name="FK_dangky_dausach" Association="Self.FK_dangky_dausach">
+            <End Role="DauSach" EntitySet="DauSaches" />
+            <End Role="DangKy" EntitySet="DangKies" />
           </AssociationSet>
-          <AssociationSet Name="FK_BORROW_LIBRARYCARD" Association="CNPM_QLTVModel.FK_BORROW_LIBRARYCARD">
-            <End Role="LIBRARYCARD" EntitySet="LIBRARYCARDs" />
-            <End Role="BORROW" EntitySet="BORROWs" />
+          <AssociationSet Name="FK_dangky_sinhvien" Association="Self.FK_dangky_sinhvien">
+            <End Role="TheThuVien" EntitySet="TheThuViens" />
+            <End Role="DangKy" EntitySet="DangKies" />
           </AssociationSet>
-          <AssociationSet Name="FK_FINE_USERS" Association="CNPM_QLTVModel.FK_FINE_USERS">
-            <End Role="USER" EntitySet="USERS" />
-            <End Role="FINE" EntitySet="FINEs" />
+          <AssociationSet Name="FK_dausach_tuasach" Association="Self.FK_dausach_tuasach">
+            <End Role="TuaSach" EntitySet="TuaSaches" />
+            <End Role="DauSach" EntitySet="DauSaches" />
           </AssociationSet>
-          <AssociationSet Name="FK_LIBRARYCARD_STUDENT" Association="CNPM_QLTVModel.FK_LIBRARYCARD_STUDENT">
-            <End Role="STUDENT" EntitySet="STUDENTs" />
-            <End Role="LIBRARYCARD" EntitySet="LIBRARYCARDs" />
+          <AssociationSet Name="FK_Tuasach_loaisach" Association="Self.FK_Tuasach_loaisach">
+            <End Role="LoaiSach" EntitySet="LoaiSaches" />
+            <End Role="TuaSach" EntitySet="TuaSaches" />
+          </AssociationSet>
+          <AssociationSet Name="fkMuon_SinhVien" Association="Self.fkMuon_SinhVien">
+            <End Role="TheThuVien" EntitySet="TheThuViens" />
+            <End Role="Muon" EntitySet="Muons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuaTrinhMuon_nhanvien" Association="Self.FK_QuaTrinhMuon_nhanvien">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="QuaTrinhMuon" EntitySet="QuaTrinhMuons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_taikhoan_nhanvien" Association="Self.FK_taikhoan_nhanvien">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+          </AssociationSet>
+          <AssociationSet Name="fkQuaTrinhMuon_SinhVien" Association="Self.fkQuaTrinhMuon_SinhVien">
+            <End Role="TheThuVien" EntitySet="TheThuViens" />
+            <End Role="QuaTrinhMuon" EntitySet="QuaTrinhMuons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sinhvien_TheThuVien" Association="Self.FK_sinhvien_TheThuVien">
+            <End Role="TheThuVien" EntitySet="TheThuViens" />
+            <End Role="SinhVien" EntitySet="SinhViens" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -330,202 +765,6 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <EntityType Name="BOOK">
-          <Key>
-            <PropertyRef Name="BookID" />
-            <PropertyRef Name="CategoryID" />
-          </Key>
-          <Property Name="BookID" Type="Int32" Nullable="false" />
-          <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="BookName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Author" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
-          <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Publish" Type="DateTime" Precision="0" />
-          <Property Name="Publisher" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="BookImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BookStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BORROW" Relationship="CNPM_QLTVModel.FK_BOOK_BORROW" FromRole="BOOK" ToRole="BORROW" />
-          <NavigationProperty Name="CATEGORY" Relationship="CNPM_QLTVModel.FK_BOOK_CATEGORY" FromRole="BOOK" ToRole="CATEGORY" />
-        </EntityType>
-        <EntityType Name="BOOKRETURN">
-          <Key>
-            <PropertyRef Name="ReturnID" />
-          </Key>
-          <Property Name="ReturnID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BorrowID" Type="Int32" Nullable="false" />
-          <Property Name="ReturnDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BORROW" Relationship="CNPM_QLTVModel.FK_BOOKRETURN_BORROW" FromRole="BOOKRETURN" ToRole="BORROW" />
-          <NavigationProperty Name="FINEs" Relationship="CNPM_QLTVModel.FK_FINE_BOOKRETURN" FromRole="BOOKRETURN" ToRole="FINE" />
-        </EntityType>
-        <EntityType Name="BORROW">
-          <Key>
-            <PropertyRef Name="BorrowID" />
-          </Key>
-          <Property Name="BorrowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CardID" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
-          <Property Name="BookID" Type="Int32" />
-          <Property Name="TakenDate" Type="DateTime" Precision="3" />
-          <Property Name="DueDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BOOKs" Relationship="CNPM_QLTVModel.FK_BOOK_BORROW" FromRole="BORROW" ToRole="BOOK" />
-          <NavigationProperty Name="BOOKRETURNs" Relationship="CNPM_QLTVModel.FK_BOOKRETURN_BORROW" FromRole="BORROW" ToRole="BOOKRETURN" />
-          <NavigationProperty Name="LIBRARYCARD" Relationship="CNPM_QLTVModel.FK_BORROW_LIBRARYCARD" FromRole="BORROW" ToRole="LIBRARYCARD" />
-        </EntityType>
-        <EntityType Name="CATEGORY">
-          <Key>
-            <PropertyRef Name="CategoryID" />
-          </Key>
-          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BOOKs" Relationship="CNPM_QLTVModel.FK_BOOK_CATEGORY" FromRole="CATEGORY" ToRole="BOOK" />
-        </EntityType>
-        <EntityType Name="FINE">
-          <Key>
-            <PropertyRef Name="FineID" />
-          </Key>
-          <Property Name="FineID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="ReturnID" Type="Int32" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="FineAmount" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BOOKRETURN" Relationship="CNPM_QLTVModel.FK_FINE_BOOKRETURN" FromRole="FINE" ToRole="BOOKRETURN" />
-          <NavigationProperty Name="USER" Relationship="CNPM_QLTVModel.FK_FINE_USERS" FromRole="FINE" ToRole="USER" />
-        </EntityType>
-        <EntityType Name="LIBRARYCARD">
-          <Key>
-            <PropertyRef Name="CardID" />
-          </Key>
-          <Property Name="CardID" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
-          <Property Name="StudentID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="DateExpires" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BORROWs" Relationship="CNPM_QLTVModel.FK_BORROW_LIBRARYCARD" FromRole="LIBRARYCARD" ToRole="BORROW" />
-          <NavigationProperty Name="STUDENT" Relationship="CNPM_QLTVModel.FK_LIBRARYCARD_STUDENT" FromRole="LIBRARYCARD" ToRole="STUDENT" />
-        </EntityType>
-        <EntityType Name="STUDENT">
-          <Key>
-            <PropertyRef Name="StudentID" />
-          </Key>
-          <Property Name="StudentID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="StudentName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="Birth" Type="DateTime" Precision="0" />
-          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Addr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="LIBRARYCARDs" Relationship="CNPM_QLTVModel.FK_LIBRARYCARD_STUDENT" FromRole="STUDENT" ToRole="LIBRARYCARD" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="USER">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Username" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Roles" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-          <Property Name="Birth" Type="DateTime" Precision="0" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="FINEs" Relationship="CNPM_QLTVModel.FK_FINE_USERS" FromRole="USER" ToRole="FINE" />
-        </EntityType>
-        <Association Name="FK_BOOK_BORROW">
-          <End Type="CNPM_QLTVModel.BORROW" Role="BORROW" Multiplicity="1" />
-          <End Type="CNPM_QLTVModel.BOOK" Role="BOOK" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BORROW">
-              <PropertyRef Name="BorrowID" />
-            </Principal>
-            <Dependent Role="BOOK">
-              <PropertyRef Name="BookID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BOOK_CATEGORY">
-          <End Type="CNPM_QLTVModel.CATEGORY" Role="CATEGORY" Multiplicity="1" />
-          <End Type="CNPM_QLTVModel.BOOK" Role="BOOK" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CATEGORY">
-              <PropertyRef Name="CategoryID" />
-            </Principal>
-            <Dependent Role="BOOK">
-              <PropertyRef Name="CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BOOKRETURN_BORROW">
-          <End Type="CNPM_QLTVModel.BORROW" Role="BORROW" Multiplicity="1" />
-          <End Type="CNPM_QLTVModel.BOOKRETURN" Role="BOOKRETURN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BORROW">
-              <PropertyRef Name="BorrowID" />
-            </Principal>
-            <Dependent Role="BOOKRETURN">
-              <PropertyRef Name="BorrowID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FINE_BOOKRETURN">
-          <End Type="CNPM_QLTVModel.BOOKRETURN" Role="BOOKRETURN" Multiplicity="0..1" />
-          <End Type="CNPM_QLTVModel.FINE" Role="FINE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BOOKRETURN">
-              <PropertyRef Name="ReturnID" />
-            </Principal>
-            <Dependent Role="FINE">
-              <PropertyRef Name="ReturnID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BORROW_LIBRARYCARD">
-          <End Type="CNPM_QLTVModel.LIBRARYCARD" Role="LIBRARYCARD" Multiplicity="1" />
-          <End Type="CNPM_QLTVModel.BORROW" Role="BORROW" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LIBRARYCARD">
-              <PropertyRef Name="CardID" />
-            </Principal>
-            <Dependent Role="BORROW">
-              <PropertyRef Name="CardID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FINE_USERS">
-          <End Type="CNPM_QLTVModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="CNPM_QLTVModel.FINE" Role="FINE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USER">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="FINE">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LIBRARYCARD_STUDENT">
-          <End Type="CNPM_QLTVModel.STUDENT" Role="STUDENT" Multiplicity="1" />
-          <End Type="CNPM_QLTVModel.LIBRARYCARD" Role="LIBRARYCARD" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STUDENT">
-              <PropertyRef Name="StudentID" />
-            </Principal>
-            <Dependent Role="LIBRARYCARD">
-              <PropertyRef Name="StudentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -537,115 +776,141 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CNPM_QLTVModelStoreContainer" CdmEntityContainer="QLTVEntities">
-          <EntitySetMapping Name="BOOKs">
-            <EntityTypeMapping TypeName="CNPM_QLTVModel.BOOK">
-              <MappingFragment StoreEntitySet="BOOK">
-                <ScalarProperty Name="BookStatus" ColumnName="BookStatus" />
-                <ScalarProperty Name="BookImage" ColumnName="BookImage" />
-                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
-                <ScalarProperty Name="Publish" ColumnName="Publish" />
-                <ScalarProperty Name="Describe" ColumnName="Describe" />
-                <ScalarProperty Name="Author" ColumnName="Author" />
-                <ScalarProperty Name="BookName" ColumnName="BookName" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="BookID" ColumnName="BookID" />
+        <EntityContainerMapping StorageEntityContainer="CNPM_QLTVModelStoreContainer" CdmEntityContainer="CNPM_QLTVEntities">
+          <EntitySetMapping Name="CuonSaches">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.CuonSach">
+              <MappingFragment StoreEntitySet="CuonSach">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="ma_cuonsach" ColumnName="ma_cuonsach" />
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BOOKRETURNs">
-            <EntityTypeMapping TypeName="CNPM_QLTVModel.BOOKRETURN">
-              <MappingFragment StoreEntitySet="BOOKRETURN">
-                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
-                <ScalarProperty Name="BorrowID" ColumnName="BorrowID" />
-                <ScalarProperty Name="ReturnID" ColumnName="ReturnID" />
+          <EntitySetMapping Name="DangKies">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.DangKy">
+              <MappingFragment StoreEntitySet="DangKy">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="ma_sinhvien" ColumnName="ma_sinhvien" />
+                <ScalarProperty Name="ngaygio_dk" ColumnName="ngaygio_dk" />
+                <ScalarProperty Name="ghichu" ColumnName="ghichu" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BORROWs">
-            <EntityTypeMapping TypeName="CNPM_QLTVModel.BORROW">
-              <MappingFragment StoreEntitySet="BORROW">
-                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
-                <ScalarProperty Name="TakenDate" ColumnName="TakenDate" />
-                <ScalarProperty Name="BookID" ColumnName="BookID" />
-                <ScalarProperty Name="CardID" ColumnName="CardID" />
-                <ScalarProperty Name="BorrowID" ColumnName="BorrowID" />
+          <EntitySetMapping Name="DauSaches">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.DauSach">
+              <MappingFragment StoreEntitySet="DauSach">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="ma_tuasach" ColumnName="ma_tuasach" />
+                <ScalarProperty Name="ngonngu" ColumnName="ngonngu" />
+                <ScalarProperty Name="bia" ColumnName="bia" />
+                <ScalarProperty Name="trangthai" ColumnName="trangthai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CATEGORies">
-            <EntityTypeMapping TypeName="CNPM_QLTVModel.CATEGORY">
-              <MappingFragment StoreEntitySet="CATEGORY">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <EntitySetMapping Name="LoaiSaches">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.LoaiSach">
+              <MappingFragment StoreEntitySet="LoaiSach">
+                <ScalarProperty Name="ma_loaisach" ColumnName="ma_loaisach" />
+                <ScalarProperty Name="ten_loaisach" ColumnName="ten_loaisach" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FINEs">
-            <EntityTypeMapping TypeName="CNPM_QLTVModel.FINE">
-              <MappingFragment StoreEntitySet="FINE">
-                <ScalarProperty Name="FineAmount" ColumnName="FineAmount" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="ReturnID" ColumnName="ReturnID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="FineID" ColumnName="FineID" />
+          <EntitySetMapping Name="Muons">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.Muon">
+              <MappingFragment StoreEntitySet="Muon">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="ma_cuonsach" ColumnName="ma_cuonsach" />
+                <ScalarProperty Name="ma_sinhvien" ColumnName="ma_sinhvien" />
+                <ScalarProperty Name="ngayGio_muon" ColumnName="ngayGio_muon" />
+                <ScalarProperty Name="ngay_hethan" ColumnName="ngay_hethan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LIBRARYCARDs">
-            <EntityTypeMapping TypeName="CNPM_QLTVModel.LIBRARYCARD">
-              <MappingFragment StoreEntitySet="LIBRARYCARD">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="DateExpires" ColumnName="DateExpires" />
-                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="CardID" ColumnName="CardID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="STUDENTs">
-            <EntityTypeMapping TypeName="CNPM_QLTVModel.STUDENT">
-              <MappingFragment StoreEntitySet="STUDENT">
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Addr" ColumnName="Addr" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <EntitySetMapping Name="NhanViens">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="Hoten" ColumnName="Hoten" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Gioitinh" ColumnName="Gioitinh" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Birth" ColumnName="Birth" />
-                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
-                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuaTrinhMuons">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.QuaTrinhMuon">
+              <MappingFragment StoreEntitySet="QuaTrinhMuon">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="ma_cuonsach" ColumnName="ma_cuonsach" />
+                <ScalarProperty Name="ngayGio_muon" ColumnName="ngayGio_muon" />
+                <ScalarProperty Name="ma_sinhvien" ColumnName="ma_sinhvien" />
+                <ScalarProperty Name="ngay_hethan" ColumnName="ngay_hethan" />
+                <ScalarProperty Name="ngayGio_tra" ColumnName="ngayGio_tra" />
+                <ScalarProperty Name="tien_muon" ColumnName="tien_muon" />
+                <ScalarProperty Name="tien_datra" ColumnName="tien_datra" />
+                <ScalarProperty Name="tien_datcoc" ColumnName="tien_datcoc" />
+                <ScalarProperty Name="ghichu" ColumnName="ghichu" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SinhViens">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.SinhVien">
+              <MappingFragment StoreEntitySet="SinhVien">
+                <ScalarProperty Name="ma_sinhvien" ColumnName="ma_sinhvien" />
+                <ScalarProperty Name="diachi" ColumnName="diachi" />
+                <ScalarProperty Name="dienthoai" ColumnName="dienthoai" />
+                <ScalarProperty Name="han_sd" ColumnName="han_sd" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="CNPM_QLTVModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="USERS">
-            <EntityTypeMapping TypeName="CNPM_QLTVModel.USER">
-              <MappingFragment StoreEntitySet="USERS">
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Birth" ColumnName="Birth" />
-                <ScalarProperty Name="Roles" ColumnName="Roles" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
+          <EntitySetMapping Name="TaiKhoans">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.TaiKhoan">
+              <MappingFragment StoreEntitySet="TaiKhoan">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoaiTK" ColumnName="LoaiTK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TheThuViens">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.TheThuVien">
+              <MappingFragment StoreEntitySet="TheThuVien">
+                <ScalarProperty Name="ma_sinhvien" ColumnName="ma_sinhvien" />
+                <ScalarProperty Name="Hoten" ColumnName="Hoten" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Tinhtrangthe" ColumnName="Tinhtrangthe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TuaSaches">
+            <EntityTypeMapping TypeName="CNPM_QLTVModel.TuaSach">
+              <MappingFragment StoreEntitySet="TuaSach">
+                <ScalarProperty Name="ma_tuasach" ColumnName="ma_tuasach" />
+                <ScalarProperty Name="ma_loaisach" ColumnName="ma_loaisach" />
+                <ScalarProperty Name="TuaSach1" ColumnName="TuaSach" />
+                <ScalarProperty Name="tacgia" ColumnName="tacgia" />
+                <ScalarProperty Name="tomtat" ColumnName="tomtat" />
+                <ScalarProperty Name="namxuatban" ColumnName="namxuatban" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -689,7 +954,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
