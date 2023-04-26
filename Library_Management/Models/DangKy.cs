@@ -12,12 +12,14 @@ namespace Library_Management.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class DangKy
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int isbn { get; set; }
+        public string ma_sinhvien { get; set; }
+        public Nullable<System.DateTime> ngaygio_dk { get; set; }
+        public string ghichu { get; set; }
+    
+        public virtual DauSach DauSach { get; set; }
+        public virtual TheThuVien TheThuVien { get; set; }
     }
 }

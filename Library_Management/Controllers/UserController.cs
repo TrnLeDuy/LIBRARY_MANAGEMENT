@@ -11,7 +11,9 @@ namespace Library_Management.Controllers
     public class UserController : Controller
     {
         //DBContext
-        QLTVEntities db = new QLTVEntities();
+        //QLTVEntities db = new QLTVEntities();
+        CNPM_QLTVEntities db = new CNPM_QLTVEntities();
+
 
         /*ACTION ĐĂNG NHẬP (LOG IN)*/
         [HttpGet]
@@ -21,7 +23,7 @@ namespace Library_Management.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogIn (User users)
+        public ActionResult LogIn (TaiKhoan users)
         {
             if (ModelState.IsValid)
             {
@@ -32,14 +34,14 @@ namespace Library_Management.Controllers
                 if (ModelState.IsValid)
                 {
                     //Tìm người dùng có tên đăng nhập và password hợp lệ trong CSDL
-                    var user = db.Users.FirstOrDefault(k => k.Username == users.Username && k.Password == users.Password);
+                    var user = db.TaiKhoans.FirstOrDefault(k => k.Username == users.Username && k.Password == users.Password);
                     if (user != null)
                     {
                         //Lưu thông vào session
                         Session["Account"] = user;
-                        if (user.Roles == "AD")
+                        if (user.LoaiTK == "AD")
                             return View("~/Views/Management/Dashboard.cshtml");
-                        else if (user.Roles == "TT")
+                        else if (user.LoaiTK == "TT")
                             return View("~/Views/Librarian/Dashboard.cshtml");
                         else 
                             return View("~/Views/Employee/Readers.cshtml");
