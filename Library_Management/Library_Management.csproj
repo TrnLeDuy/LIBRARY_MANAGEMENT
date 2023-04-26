@@ -190,7 +190,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\ad_general.css" />
     <Content Include="Content\all.css" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -204,6 +203,7 @@
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\general.css" />
+    <Content Include="Content\general_layout.css" />
     <Content Include="Content\LogIn.css" />
     <Content Include="Content\mngestyle.css" />
     <Content Include="Content\regular.css" />
