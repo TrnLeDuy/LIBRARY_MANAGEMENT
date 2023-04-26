@@ -4,19 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="47757bf12eb743a2a27f3a6addc8011e" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="CNPM_QLTVModel.CuonSach" Width="1.5" PointX="1.5" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.DangKy" Width="1.5" PointX="10.25" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.DauSach" Width="1.5" PointX="1.375" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.LoaiSach" Width="1.5" PointX="1.25" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.Muon" Width="1.5" PointX="10.125" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.NhanVien" Width="1.5" PointX="17.375" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.QuaTrinhMuon" Width="1.5" PointX="14.125" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.SinhVien" Width="1.5" PointX="12.375" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.TaiKhoan" Width="1.5" PointX="15" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.TheThuVien" Width="1.5" PointX="4.875" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CNPM_QLTVModel.TuaSach" Width="1.5" PointX="1.25" PointY="10.5" IsExpanded="true" />
+      <Diagram DiagramId="bfd359dfc011421ba6de4f4a368d5d4a" Name="Diagram1">
+        <EntityTypeShape EntityType="CNPM_QLTVModel.CuonSach" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.DangKy" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.DauSach" Width="1.5" PointX="1.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.LoaiSach" Width="1.5" PointX="1.5" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.Muon" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.NhanVien" Width="1.5" PointX="3.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.QuaTrinhMuon" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.SinhVien" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.TaiKhoan" Width="1.5" PointX="6" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.TheThuVien" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_QLTVModel.TuaSach" Width="1.5" PointX="1.5" PointY="20.375" IsExpanded="true" />
         <AssociationConnector Association="CNPM_QLTVModel.FK_cuonsach_dausach" ManuallyRouted="false" />
         <AssociationConnector Association="CNPM_QLTVModel.FK_muon_cuonsach" ManuallyRouted="false" />
         <AssociationConnector Association="CNPM_QLTVModel.FK_QuaTrinhMuon_cuonsach" ManuallyRouted="false" />
