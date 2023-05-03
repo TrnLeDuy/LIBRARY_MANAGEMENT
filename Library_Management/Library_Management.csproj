@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
-  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -48,10 +47,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -71,7 +70,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -133,60 +131,25 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibrarianController.cs" />
     <Compile Include="Controllers\ManagementController.cs" />
+    <Compile Include="Controllers\NhanViensController.cs" />
+    <Compile Include="Controllers\TaiKhoansController.cs" />
     <Compile Include="Controllers\TuaSachesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CNPM_QLTV.Context.cs">
+    <Compile Include="Models\QLTV.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CNPM_QLTV.Context.tt</DependentUpon>
+      <DependentUpon>QLTV.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CNPM_QLTV.cs">
+    <Compile Include="Models\QLTV.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CNPM_QLTV.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CuonSach.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DangKy.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DauSach.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LoaiSach.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Muon.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NhanVien.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\QuaTrinhMuon.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SinhVien.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TaiKhoan.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TheThuVien.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TuaSach.cs">
-      <DependentUpon>CNPM_QLTV.tt</DependentUpon>
+      <DependentUpon>QLTV.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\DetailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\all.css" />
@@ -238,15 +201,9 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="Models\CNPM_QLTV.Context.tt">
+    <Content Include="Models\QLTV.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
-      <LastGenOutput>CNPM_QLTV.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\CNPM_QLTV.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
-      <LastGenOutput>CNPM_QLTV.cs</LastGenOutput>
+      <LastGenOutput>QLTV.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -276,12 +233,12 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="Models\CNPM_QLTV.edmx">
+    <EntityDeploy Include="Models\QLTV.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CNPM_QLTV.Designer.cs</LastGenOutput>
+      <LastGenOutput>QLTV.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\CNPM_QLTV.edmx.diagram">
-      <DependentUpon>CNPM_QLTV.edmx</DependentUpon>
+    <Content Include="Models\QLTV.edmx.diagram">
+      <DependentUpon>QLTV.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.6.4.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />
@@ -326,12 +283,6 @@
     <Content Include="Views\Shared\_LayoutLibrarian.cshtml" />
     <Content Include="Views\Shared\_LayoutEmployee.cshtml" />
     <Content Include="Views\Librarian\Dashboard.cshtml" />
-    <Content Include="Views\Librarian\Books.cshtml" />
-    <Content Include="Views\Librarian\Readers.cshtml" />
-    <Content Include="Views\Librarian\Borrows.cshtml" />
-    <Content Include="Views\Employee\Books.cshtml" />
-    <Content Include="Views\Employee\Borrows.cshtml" />
-    <Content Include="Views\Employee\Readers.cshtml" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
@@ -347,6 +298,17 @@
     <Content Include="webfonts\fa-brands-400.woff" />
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
+    <Content Include="Views\Employee\Dashboard.cshtml" />
+    <Content Include="Views\TaiKhoans\Create.cshtml" />
+    <Content Include="Views\TaiKhoans\Delete.cshtml" />
+    <Content Include="Views\TaiKhoans\Details.cshtml" />
+    <Content Include="Views\TaiKhoans\Edit.cshtml" />
+    <Content Include="Views\TaiKhoans\Index.cshtml" />
+    <Content Include="Views\NhanViens\Create.cshtml" />
+    <Content Include="Views\NhanViens\Delete.cshtml" />
+    <Content Include="Views\NhanViens\Details.cshtml" />
+    <Content Include="Views\NhanViens\Edit.cshtml" />
+    <Content Include="Views\NhanViens\Index.cshtml" />
     <Content Include="Views\TuaSaches\Create.cshtml" />
     <Content Include="Views\TuaSaches\Delete.cshtml" />
     <Content Include="Views\TuaSaches\Details.cshtml" />
@@ -403,11 +365,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
-  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

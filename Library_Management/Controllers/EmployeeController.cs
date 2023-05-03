@@ -9,17 +9,7 @@ namespace Library_Management.Controllers
     public class EmployeeController : Controller
     {
         // GET: Employee
-        public ActionResult Books()
-        {
-            return View();
-        }
-
-        public ActionResult Readers()
-        {
-            return View();
-        }
-
-        public ActionResult Borrows()
+        public ActionResult Dashboard()
         {
             return View();
         }
