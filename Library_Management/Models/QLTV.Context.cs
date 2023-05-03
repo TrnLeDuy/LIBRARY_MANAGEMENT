@@ -25,16 +25,16 @@ namespace Library_Management.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ChiTietMuonTra> ChiTietMuonTras { get; set; }
         public virtual DbSet<CuonSach> CuonSaches { get; set; }
-        public virtual DbSet<DangKy> DangKies { get; set; }
         public virtual DbSet<DauSach> DauSaches { get; set; }
         public virtual DbSet<LoaiSach> LoaiSaches { get; set; }
-        public virtual DbSet<Muon> Muons { get; set; }
+        public virtual DbSet<MuonTra> MuonTras { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
-        public virtual DbSet<QuaTrinhMuon> QuaTrinhMuons { get; set; }
+        public virtual DbSet<PhieuPhat> PhieuPhats { get; set; }
         public virtual DbSet<SinhVien> SinhViens { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
         public virtual DbSet<TheThuVien> TheThuViens { get; set; }
-        public virtual DbSet<TuaSach> TuaSaches { get; set; }
     }
 }
