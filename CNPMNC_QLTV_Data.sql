@@ -2899,7 +2899,7 @@ INSERT INTO SinhVien (ma_sinhvien, diachi, dienthoai, han_sd) VALUES ('77DH10037
 
 ------Loai Sach------
 INSERT INTO LoaiSach VALUES ('NB',N'Ngoại ngữ học');
-INSERT INTO LoaiSach VALUES ('OX',N'Từ điển');
+INSERT INTO LoaiSach VALUES ('DICT',N'Từ điển');
 INSERT INTO LoaiSach VALUES ('CNTT',N'Công nghệ thông tin');
 INSERT INTO LoaiSach VALUES ('PL',N'Pháp luật');
 INSERT INTO LoaiSach VALUES ('KT',N'Kinh tế');
@@ -2917,7 +2917,6 @@ INSERT INTO CuonSach VALUES (1,'NB10000001',N'1800 Câu Đàm Thoại Tiếng Nh
 	(1,'NB10000003',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-03 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.'),
 	(1,'NB10000004',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-04 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.'),
 	(1,'NB10000005',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-05 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.');
-
 
 
 	
