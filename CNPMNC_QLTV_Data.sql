@@ -15,7 +15,6 @@ INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUE
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('77083', 'Shawna Dunnett', '1/10/2023', 'Female', 'sdunnetta@mozilla.com', '1464019027', 'Suite 95');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('94835', 'Cale Rawet', '11/2/2022', 'Male', 'crawetb@aol.com', '9159612104', 'Suite 92');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('23706', 'Warde Bignal', '1/30/2023', 'Male', 'wbignalc@mediafire.com', '9967651923', 'Suite 37');
-INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('00773', 'Ferdinande McGaraghan', '4/3/2023', 'Female', 'fmcgaraghand@usnews.com', '4673210117', '18th Floor');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('98744', 'Shandee Trevaskis', '1/5/2023', 'Female', 'strevaskisf@edublogs.org', '4802948303', 'PO Box 74275');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('74470', 'Troy Tregidgo', '3/22/2023', 'Male', 'ttregidgog@bing.com', '5372602268', '8th Floor');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('27871', 'Joanne Seabon', '9/10/2022', 'Female', 'jseabonh@php.net', '3456813604', 'Room 713');
@@ -29,7 +28,6 @@ INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUE
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('75821', 'Letta Fibbens', '1/16/2023', 'Female', 'lfibbensp@google.ca', '7427031132', 'Apt 495');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('27211', 'Helaina Carreyette', '6/20/2022', 'Female', 'hcarreyetteq@ca.gov', '3896811749', 'Room 454');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('04195', 'Harriott Domenico', '9/5/2022', 'Female', 'hdomenicor@is.gd', '6572713349', 'Room 595');
-INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('87783', 'Sybil Hallyburton', '3/21/2023', 'Female', 'shallyburtons@clickbank.net', '7676510650', 'Room 1474');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('54249', 'Blondell Gerardin', '2/25/2023', 'Female', 'bgerardinu@elegantthemes.com', '2361504754', 'Room 1822');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('49253', 'Dodi Collman', '5/7/2022', 'Female', 'dcollmanv@dropbox.com', '8132624810', '4th Floor');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('33511', 'Dodie Farnhill', '6/12/2022', 'Female', 'dfarnhillw@wisc.edu', '1236934226', '14th Floor');
@@ -62,7 +60,6 @@ INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUE
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('94561', 'Bertina Amsden', '1/1/2023', 'Female', 'bamsden1n@chronoengine.com', '5357520672', '18th Floor');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('05471', 'Edik Mohammed', '4/6/2023', 'Male', 'emohammed1o@macromedia.com', '2023580613', 'Suite 19');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('12696', 'Adella Sandeman', '6/7/2022', 'Female', 'asandeman1p@cisco.com', '3967055307', 'Apt 296');
-INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('38479', 'Cari Burehill', '12/14/2022', 'Female', 'cburehill1q@webs.com', '4519543657', 'Apt 1000');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('87803', 'Osgood Georghiou', '4/21/2023', 'Male', 'ogeorghiou1s@rediff.com', '2387247184', 'PO Box 50531');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('67672', 'Devin Bearman', '3/28/2023', 'Female', 'dbearman1t@wsj.com', '4037734791', '5th Floor');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('43431', 'Rhys Sey', '6/25/2022', 'Male', 'rsey1u@is.gd', '2834714528', '1st Floor');
@@ -79,7 +76,6 @@ INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUE
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('03435', 'Mile Celiz', '2/15/2023', 'Male', 'mceliz26@irs.gov', '4879497312', '3rd Floor');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('53019', 'Lanny Fibbitts', '6/15/2022', 'Male', 'lfibbitts27@reddit.com', '2588218900', 'Room 1790');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('33373', 'Kass Geldard', '3/6/2023', 'Female', 'kgeldard28@slate.com', '6018444616', '8th Floor');
-INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('92299', 'Latrena Oxborough', '1/21/2023', 'Female', 'loxborough29@delicious.com', '7069514289', 'PO Box 94669');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('25501', 'Jacquie Sidebottom', '10/5/2022', 'Female', 'jsidebottom2a@free.fr', '1965263503', 'Apt 222');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('29169', 'Ignaz Brownlie', '12/3/2022', 'Male', 'ibrownlie2c@elegantthemes.com', '7067696998', 'Apt 1810');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('63813', 'Vivian Summerly', '11/17/2022', 'Female', 'vsummerly2d@marriott.com', '6023918287', 'PO Box 68396');
@@ -116,7 +112,6 @@ INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUE
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('76048', 'Jefferey Sextone', '10/26/2022', 'Male', 'jsextone38@networkadvertising.org', '9209850805', 'Suite 35');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('87321', 'Rozina Mozzini', '4/8/2023', 'Female', 'rmozzini39@sohu.com', '2816196208', 'Apt 1971');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('55443', 'Debee Bartley', '7/7/2022', 'Female', 'dbartley3a@java.com', '1428727885', 'Room 192');
-INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('42400', 'Gustavus Higford', '4/5/2023', 'Male', 'ghigford3b@elegantthemes.com', '9947803625', 'Suite 28');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('87322', 'Andeee Sivyour', '7/12/2022', 'Female', 'asivyour3c@time.com', '6849224369', 'Suite 40');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('98476', 'Antonietta McDell', '5/4/2022', 'Female', 'amcdell3e@ox.ac.uk', '7354568427', 'Room 236');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('49048', 'Dore Edwin', '7/23/2022', 'Female', 'dedwin3f@va.gov', '3677773166', '5th Floor');
@@ -128,7 +123,6 @@ INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUE
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('10857', 'Hilliary Lyddyard', '10/28/2022', 'Female', 'hlyddyard3l@wix.com', '1153196535', 'Room 1368');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('58688', 'Clotilda Gamlin', '9/17/2022', 'Female', 'cgamlin3m@youtube.com', '4957110579', 'PO Box 9022');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('58711', 'Joby Tillett', '11/1/2022', 'Female', 'jtillett3n@wisc.edu', '3111687752', 'Suite 60');
-INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('46332', 'Jasper Killeen', '9/24/2022', 'Male', 'jkilleen3o@goo.gl', '9626964380', 'Suite 13');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('18315', 'Even Fullick', '1/30/2023', 'Male', 'efullick3p@aol.com', '4128095044', 'Suite 28');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('09472', 'Vernon Emett', '8/6/2022', 'Male', 'vemett3r@sciencedirect.com', '4838233506', '20th Floor');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('89595', 'Van Broadist', '5/6/2022', 'Male', 'vbroadist3s@mayoclinic.com', '6274631980', 'Suite 54');
@@ -136,7 +130,6 @@ INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUE
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('31426', 'Web Kelsell', '1/9/2023', 'Male', 'wkelsell3u@chronoengine.com', '8238217338', 'Apt 1765');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('67101', 'Orelee Cawthorne', '12/7/2022', 'Female', 'ocawthorne3v@free.fr', '4932068993', 'Apt 424');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('70303', 'Stanly Weafer', '8/11/2022', 'Male', 'sweafer3w@google.fr', '2538533462', 'Suite 67');
-INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('44458', 'Ozzy Maker', '8/20/2022', 'Male', 'omaker3x@webs.com', '9475101890', 'Room 345');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('20669', 'Deni Wilman', '3/31/2023', 'Female', 'dwilman3y@google.co.uk', '6114256335', 'PO Box 64752');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('67016', 'Aleksandr Kuhndel', '9/2/2022', 'Male', 'akuhndel40@yahoo.co.jp', '5452131187', 'Apt 1210');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('73765', 'Lev Meffen', '9/1/2022', 'Male', 'lmeffen41@sohu.com', '8337022904', '19th Floor');
@@ -2905,42 +2898,25 @@ INSERT INTO SinhVien (ma_sinhvien, diachi, dienthoai, han_sd) VALUES ('77DH10037
 
 
 ------Loai Sach------
-INSERT INTO LoaiSach VALUES ('NB',N'Ngôn ngữ Nhật');
-INSERT INTO LoaiSach VALUES ('OX','Oxford');
-INSERT INTO LoaiSach VALUES ('EN',N'Ngôn ngữ Anh');
-INSERT INTO LoaiSach VALUES ('CAMB','Cambridge');
-INSERT INTO LoaiSach VALUES ('CN ',N'Ngôn ngữ Trung');
-INSERT INTO LoaiSach VALUES ('HQ',N'Ngôn ngữ Hàn');
+INSERT INTO LoaiSach VALUES ('NB',N'Ngoại ngữ học');
+INSERT INTO LoaiSach VALUES ('DICT',N'Từ điển');
 INSERT INTO LoaiSach VALUES ('CNTT',N'Công nghệ thông tin');
 INSERT INTO LoaiSach VALUES ('PL',N'Pháp luật');
 INSERT INTO LoaiSach VALUES ('KT',N'Kinh tế');
 INSERT INTO LoaiSach VALUES ('KNM',N'Kỹ năng mềm');
 
 
-
---------TuaSach------------
-INSERT INTO TuaSach VALUES ('NB00000001','NB',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.','2020-01-07');
-INSERT INTO TuaSach VALUES ('NB00000002','NB',N'7000 Từ vựng Tiếng Nhật Theo chủ đề',N'Huy Khang',N'Quyển sách “7000 từ vựng tiếng Nhật theo chủ đề” phân loại từ vựng theo 145 chủ đề, giới thiệu các bài học được nghiên cứu cẩn thận nhằm phát triển vốn từ vựng của học viên qua các chủ đề khác nhau. Bắt đầu qua các chủ đề thông dụng rồi dần dần mở rộng qua các chủ đề rộng lớn, bao quát thế giới xung quanh. Các bài học đầu tiên về gia đình, nhà ở, các hoạt động về cộng đồng, trường học, nơi làm việc, mua sắm, giải trí và các chủ đề thông dụng khác. Mỗi bài học trong sách độc lập với nhau, nên nó có thể được dùng theo hoặc không theo trình tự nào. Để thuận tiện cho độc giả, các bài học được liệt kê trong mục lục giúp bạn đọc có thể dễ dàng định hướng vị trí của các chủ đề trong sách này.','2020-01-12');
-INSERT INTO TuaSach VALUES ('NB00000003','NB',N'Keep It Up - Tiếng Nhật Cấp Tốc Cho Người Mới Bắt Đầu',' Jeong Eui Sang',N'4 Ý TƯỞNG ĐẶC BIỆT CỦA CUỐN SÁCH Keep it up – Tiếng Nhật cấp tốc cho người mới bắt đầu
-- Sử dụng phương pháp liên tưởng các chữ cái Hiragana với những hình ảnh sinh động giúp người học học thuộc dễ dàng trong thời gian ngắn
-- Nhiều tranh minh họa phù hợp nhất với từng chữ viết để người học có thể phân biệt và ghi nhớ được các chữ cái Hiragana và Katakana
-- Nội dung bài học (từ vựng, câu, ngữ pháp) được xây dựng phù hợp với năng lực theo cấp độ khó tăng dần và lượng kiến thức đáp ứng được việc người học có thể học liên tục
-- Bài thi JPLT N5 dưới dạng ôn tập được biên soạn, tổng hợp rất sát với thực tế, giúp người học tự định hướng mục tiêu và phương pháp học tập sau này','2021-01-04');
-INSERT INTO TuaSach VALUES ('NB00000004','NB',N'MARUGOTO - Ngôn ngữ và Văn hóa Nhật Bản B1',' Japan Foundation',N'“Marugoto - Ngôn ngữ và Văn hóa Nhật Bản” chính là bộ giáo trình đáp ứng hoàn hảo nhu cầu trên. Tựa đề Marugoto trong tiếng Nhật có nghĩa là “trọn vẹn”, chứa đựng thông điệp mà những người thực hiện muốn gửi gắm: Một bộ giáo trình học tiếng Nhật toàn diện, kết hợp giữa yếu tố ngôn ngữ và văn hóa, giữa kiến thức và thực hành thực tế. Với Marugoto, người học hướng đến việc sử dụng tiếng Nhật một cách “trọn vẹn”: Trọn vẹn trong giao tiếp chân thực giữa người với người, trọn vẹn trong trải nghiệm ngôn ngữ cùng đời sống và văn hóa.
-Bộ giáo trình được dày công biên soạn bởi Quỹ Giao lưu Quốc tế Nhật Bản (Japan Foundation). Bộ sách được triển khai theo chuẩn Giáo dục tiếng Nhật JF, gồm 6 cấp độ: A1, A2 (sử dụng ngôn ngữ ở mức độ cơ bản); B1, B2 (sử dụng ngôn ngữ ở mức độ độc lập); C1, C2 (sử dụng ngôn ngữ ở mức độ thành thạo).','2021/03/15');
-
-
-
-
 -----Dau Sach-----------
-INSERT INTO DauSach VALUES (1,'NB00000001',N'Nhật','NB00000001.jpg','Y');
-INSERT INTO DauSach VALUES (2,'NB00000002',N'Nhật','NB00000002.jpg','Y');
-INSERT INTO DauSach VALUES (3,'NB00000003',N'Nhật','NB00000003.jpg','Y');
-INSERT INTO DauSach VALUES (4,'NB00000004',N'Nhật','NB00000004.jpg','Y');
-
+INSERT INTO DauSach VALUES (1,N'Ngoại ngữ', null,N'Còn sách'),
+(2,N'Văn học Việt Nam', null,N'Còn sách'),
+(3,N'Khoa học tự nhiên', null,N'Còn sách')
 
 --------------CuonSach---------------
-INSERT INTO CuonSach VALUES (1,'NB10000001',N'Còn');
-INSERT INTO CuonSach VALUES (1,'NB10000002',N'Còn');
-INSERT INTO CuonSach VALUES (1,'NB10000003',N'Còn');
-INSERT INTO CuonSach VALUES (1,'NB10000004',N'Còn');
+INSERT INTO CuonSach VALUES (1,'NB10000001',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-01 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.'),
+	(1,'NB10000002',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-02 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.'),
+	(1,'NB10000003',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-03 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.'),
+	(1,'NB10000004',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-04 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.'),
+	(1,'NB10000005',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-05 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.');
+
+
+	

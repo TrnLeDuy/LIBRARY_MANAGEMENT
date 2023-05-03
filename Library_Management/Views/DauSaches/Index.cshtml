@@ -1,0 +1,87 @@
+﻿@using Library_Management.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<DauSach>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>QUẢN LÝ ĐẦU SÁCH</h2>
+
+<p>
+    @Html.ActionLink("THÊM MỚI", "Create", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ISBN
+        </th>
+        <th>
+            Tựa sách
+        </th>
+        <th>
+            Ngôn ngữ
+        </th>
+        <th>
+            Ảnh bìa
+        </th>
+        <th>
+            Trạng thái
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.isbn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TuaSach.ma_tuasach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngonngu)
+            </td>
+            <td>
+                <img src="~/Images/@item.bia" style="width: 75%; height: 50%" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.isbn }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.isbn }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.isbn }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<!-- Thêm mã phân trang -->
+<br />
+<p style="text-align:center;">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+</p>
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+
+    .MenuTrang {
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+        align-content: center;
+        text-align: center;
+        justify-content: center;
+    }
+
+    td, th {
+        text-align: center;
+    }
+</style>
+<!-- Kết thúc -->
