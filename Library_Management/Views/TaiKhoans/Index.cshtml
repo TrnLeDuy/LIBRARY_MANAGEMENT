@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Library_Management.Models.TaiKhoan>
+
+@{
+    ViewBag.Title = "Danh Sách Tài Khoản";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<!--Boostrap/CSS-->
+<style>
+    body {
+        overflow-x: hidden;
+        font-size: larger
+    }
+
+    table {
+        border-collapse: collapse;
+        border-radius: 50px;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    .detail-button {
+        background-color: lightblue;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
+
+    .delete-button {
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
+
+    .edit-button {
+        background-color: green;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
+</style>
+<body>
+    <p>
+        @Html.ActionLink("Thêm mới", "Create")<!--BUG-->
+        @Html.ActionLink("Danh sách Nhân Viên", "Index", "NhanViens")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Tài Khoản
+            </th>
+            <th>
+                Vai trò
+            </th>
+            <th>
+                Họ và tên
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td style="text-align: center">
+                    @Html.DisplayFor(modelItem => item.LoaiTK)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NhanVien.Hoten)
+                </td>
+                <td>
+                    <button class="edit-button">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MaNV })
+                    </button>
+                    <button class="delete-button">
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MaNV })
+                    </button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
