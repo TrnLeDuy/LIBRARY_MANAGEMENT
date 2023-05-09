@@ -21,7 +21,7 @@ namespace QuanLyThuVien.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogIn(TaiKhoan users)
+        public ActionResult LogIn([Bind(Include = "Username,Password")] TaiKhoan users)
         {
             if (ModelState.IsValid)
             {
