@@ -68,7 +68,7 @@ namespace QuanLyThuVien.Controllers
         public int GetNextCateID()
         {
             int dsID = 1;
-            if (db.DauSaches.Any())
+            if (db.DauSaches.Any(s => s.isbn == dsID))
             {
                 dsID = db.DauSaches.Max(id => id.isbn) + 1;
             }

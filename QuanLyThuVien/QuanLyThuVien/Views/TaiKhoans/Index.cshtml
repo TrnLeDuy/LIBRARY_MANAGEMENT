@@ -38,7 +38,7 @@
     <div class="col-6">
         <form style="width: 100%; padding-left: 250px;" action="/TaiKhoans/Index" method="get">
             <div class="form-group">
-                <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm nhân viên" value="" />
+                <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm tài khoản" value="" />
             </div>
         </form>
     </div>
@@ -68,11 +68,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.LoaiTK)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MaNV }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.MaNV }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.MaNV })
-                </td>
+                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                {
+                    <td>
+                        <a class="edit-button fa fa-pencil" href="~/TaiKhoans/Edit?id=@item.MaNV"></a>
+                        <a class="delete-button fa fa-trash" href="~/TaiKhoans/Delete?id=@item.MaNV"></a>
+                    </td>
+                }
             </tr>
         }
 

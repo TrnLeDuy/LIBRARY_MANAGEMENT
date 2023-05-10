@@ -37,7 +37,7 @@ namespace QuanLyThuVien.Controllers
                            select l;
             if (!String.IsNullOrEmpty(s))
             {
-                danhSach = danhSach.Where(mcs => mcs.ten_cuonsach.Contains(s) || mcs.DauSach.ten_dausach.Contains(s) || mcs.LoaiSach.ten_loaisach.Contains(s));
+                danhSach = danhSach.Where(mcs => mcs.ten_cuonsach.Contains(s) || mcs.DauSach.ten_dausach.Contains(s) || mcs.LoaiSach.ten_loaisach.Contains(s) || mcs.ma_cuonsach.Contains(s));
             }
 
             danhSach = danhSach.OrderBy(id => id.ma_cuonsach);
@@ -71,7 +71,7 @@ namespace QuanLyThuVien.Controllers
         public string GetNextBookID()
         {
             int id = 1;
-            if (db.NhanViens.Any())
+            if (db.NhanViens.Any(nv => nv.MaNV == id))
             {
                 id = db.NhanViens.Max(nv => nv.MaNV) + 1;
             }
