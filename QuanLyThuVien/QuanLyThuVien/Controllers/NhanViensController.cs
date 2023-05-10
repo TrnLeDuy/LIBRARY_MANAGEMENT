@@ -15,10 +15,19 @@ namespace QuanLyThuVien.Controllers
         private CNPM_QLTVEntities db = new CNPM_QLTVEntities();
 
         // GET: NhanViens
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
-            var nhanViens = db.NhanViens.Include(n => n.TaiKhoan);
-            return View(nhanViens.ToList());
+            if (search != null)
+            {
+                var employees = db.NhanViens.Where((
+                        nhanvien => nhanvien.MaNV.ToString().Contains(search) || 
+                        nhanvien.Hoten.Contains(search) ||
+                        nhanvien.SDT.Contains(search) ||
+                        nhanvien.Email.Contains(search)))
+                    .ToList();
+                return View(employees);
+            }
+            return View(db.NhanViens.ToList());
         }
 
         // GET: NhanViens/Details/5
