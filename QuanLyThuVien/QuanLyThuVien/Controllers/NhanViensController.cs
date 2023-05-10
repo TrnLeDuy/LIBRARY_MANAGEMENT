@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using QuanLyThuVien.Models;
+using PagedList;
 
 namespace QuanLyThuVien.Controllers
 {
@@ -15,19 +16,35 @@ namespace QuanLyThuVien.Controllers
         private CNPM_QLTVEntities db = new CNPM_QLTVEntities();
 
         // GET: NhanViens
-        public ActionResult Index(string search)
+        public ActionResult Index(string currentFilter, string search, int? page)
         {
+            int pageSize = 7;
+            int pageNum = (page ?? 1);
+
             if (search != null)
             {
-                var employees = db.NhanViens.Where((
-                        nhanvien => nhanvien.MaNV.ToString().Contains(search) || 
+                page = 1;
+            }
+            else
+            {
+                search = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = search;
+
+            var employees = from l in db.NhanViens
+                            select l;
+            if (!String.IsNullOrEmpty(search))
+            {
+                employees = db.NhanViens.Where((
+                        nhanvien => nhanvien.MaNV.ToString().Contains(search) ||
                         nhanvien.Hoten.Contains(search) ||
                         nhanvien.SDT.Contains(search) ||
-                        nhanvien.Email.Contains(search)))
-                    .ToList();
-                return View(employees);
+                        nhanvien.Email.Contains(search)));
             }
-            return View(db.NhanViens.ToList());
+            employees = employees.OrderBy(id => id.MaNV);
+
+            return View(employees.ToPagedList(pageNum, pageSize));
         }
 
         // GET: NhanViens/Details/5
@@ -124,6 +141,8 @@ namespace QuanLyThuVien.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             NhanVien nhanVien = db.NhanViens.Find(id);
+            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
+            db.TaiKhoans.Remove(taiKhoan);
             db.NhanViens.Remove(nhanVien);
             db.SaveChanges();
             return RedirectToAction("Index");

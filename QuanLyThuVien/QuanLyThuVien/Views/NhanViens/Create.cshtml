@@ -5,16 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container" style="background-image: url('../../Images/fashion-background.png');">
+<div class="container" style="background-image: url('../../Images/library-background-form.jpg');">
     <div class="inner">
 
         @using (Html.BeginForm("Create", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
-            <h3>Tạo mới khách hàng</h3>
+            <h3>Thêm Nhân viên Thư viện</h3>
             <div class="form-group">
                 <div class="form-wrapper">
-                    Họ và tên
+                    Họ và tên: 
                     @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control1" } })
                     @Html.ValidationMessageFor(model => model.Hoten, "", new { @class = "text-danger" })
                 </div>
@@ -52,7 +52,7 @@
 
             <button class="btn btn-success button1">Xác nhận</button>
         }
-        <div style="margin-left:45px;color:#ccc">
+        <div style="margin-left:238px;color:#ccc">
             @Html.ActionLink("Quay lại danh sách", "Index")
         </div>
     </div>
