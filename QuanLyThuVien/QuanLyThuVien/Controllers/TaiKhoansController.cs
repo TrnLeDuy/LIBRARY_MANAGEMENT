@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using QuanLyThuVien.Models;
 
 namespace QuanLyThuVien.Controllers
@@ -15,14 +16,32 @@ namespace QuanLyThuVien.Controllers
         private CNPM_QLTVEntities db = new CNPM_QLTVEntities();
 
         // GET: TaiKhoans
-        public ActionResult Index(string s)
+        public ActionResult Index(string currentFilter, string s, int? page)
         {
-            var taiKhoans = from l in db.TaiKhoans select l;
-            if (!string.IsNullOrEmpty(s))
+            int pageSize = 7;
+            int pageNum = (page ?? 1);
+
+            if (s != null)
             {
-                taiKhoans = taiKhoans.Where(id => id.Username.Contains(s));
+                page = 1;
             }
-            return View(taiKhoans);
+            else
+            {
+                s = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = s;
+
+            var taikhoan = from l in db.TaiKhoans
+                           select l;
+            if (!String.IsNullOrEmpty(s))
+            {
+                taikhoan = taikhoan.Where(mcs => mcs.Username.Contains(s));
+            }
+
+            taikhoan = taikhoan.OrderBy(id => id.Username);
+
+            return View(taikhoan.ToPagedList(pageNum, pageSize));
         }
 
         // GET: TaiKhoans/Details/5
