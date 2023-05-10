@@ -21,7 +21,7 @@ namespace QuanLyThuVien.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogIn(TaiKhoan users)
+        public ActionResult LogIn([Bind(Include = "Username,Password")] TaiKhoan users)
         {
             if (ModelState.IsValid)
             {
@@ -36,24 +36,17 @@ namespace QuanLyThuVien.Controllers
                     if (user != null)
                     {
                         //Lưu thông vào session
-                        if (user.LoaiTK == "AD")
-                        {
-                            Session["Admin"] = user;
-                            return View("~/Views/Admin/Dashboard.cshtml");
-                        }
-                        else if (user.LoaiTK == "TT")
-                        {
-                            Session["ThuThu"] = user;
-                            return View("~/Views/Librarian/Dashboard.cshtml");
-                        }
-                        else
-                            return View("~/Views/Employee/Dashboard.cshtml");
+                        Session["Account"] = user;
+                        Session["Username"] = user.Username;
+                        Session["Fullname"] = user.NhanVien.Hoten;
+                        Session["EmployeeID"] = user.MaNV;
+                        Session["Role"] = user.LoaiTK;    
                     }
                     else
                         ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng!";
                 }
             }
-            return View();
+            return Redirect("~/Dashboard/Dashboard");       
         }
 
         public ActionResult Logout()
@@ -62,8 +55,12 @@ namespace QuanLyThuVien.Controllers
             //Remove any authentication cookies or session state information
             //Redirect the user to the login page
             Session["Account"] = null;
+            Session["Fullname"] = null;
+            Session["Username"] = null;
+            Session["EmployeeID"] = null;
+            Session["Role"] = null;
             Session.Abandon();
-            return RedirectToAction("Login", "Users");
+            return RedirectToAction("/");
         }
     }
 }
