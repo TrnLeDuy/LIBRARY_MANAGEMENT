@@ -857,7 +857,6 @@
     <Content Include="Views\NhanViens\Delete.cshtml" />
     <Content Include="Views\NhanViens\Details.cshtml" />
     <Content Include="Views\NhanViens\Edit.cshtml" />
-    <Content Include="Views\NhanViens\Index.cshtml" />
     <Content Include="Views\TaiKhoans\Create.cshtml" />
     <Content Include="Views\TaiKhoans\Delete.cshtml" />
     <Content Include="Views\TaiKhoans\Details.cshtml" />
@@ -878,6 +877,7 @@
     <Content Include="Views\CuonSaches\Details.cshtml" />
     <Content Include="Views\CuonSaches\Edit.cshtml" />
     <Content Include="Views\CuonSaches\Index.cshtml" />
+    <Content Include="Views\NhanViens\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
