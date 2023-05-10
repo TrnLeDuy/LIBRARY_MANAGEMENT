@@ -40,13 +40,14 @@ namespace QuanLyThuVien.Controllers
                         Session["Username"] = user.Username;
                         Session["Fullname"] = user.NhanVien.Hoten;
                         Session["EmployeeID"] = user.MaNV;
-                        Session["Role"] = user.LoaiTK;    
+                        Session["Role"] = user.LoaiTK;
+                        return Redirect("~/Dashboard/Dashboard");
                     }
                     else
                         ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng!";
                 }
             }
-            return Redirect("~/Dashboard/Dashboard");       
+            return View();       
         }
 
         public ActionResult Logout()

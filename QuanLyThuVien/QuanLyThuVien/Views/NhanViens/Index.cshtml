@@ -1,70 +1,136 @@
-﻿@model IEnumerable<QuanLyThuVien.Models.NhanVien>
+﻿@using QuanLyThuVien.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<NhanVien>
+
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<style>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Hoten)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgaySinh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gioitinh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SDT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Diachi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TaiKhoan.Username)
-        </th>
-        <th></th>
-    </tr>
+    .delete-button {
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hoten)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgaySinh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gioitinh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SDT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Diachi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TaiKhoan.Username)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaNV }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaNV }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaNV })
-        </td>
-    </tr>
-}
+    .edit-button {
+        background-color: green;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
+</style>
 
-</table>
+<div class="row mt-4">
+    <div class="col-6">
+        @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+        {
+            @Html.ActionLink("Thêm Nhân viên mới", "Create", null, new { @class = "btn btn-primary" })
+        }
+    </div>
+    <div class="col-6">
+        <form style="width: 100%; padding-left: 250px;" action="/NhanViens/Index" method="get">
+            <div class="form-group">
+                <input class="form-control" id="search" type="text" name="search" placeholder="Tìm kiếm nhân viên" value="" />
+            </div>
+        </form>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Mã Nhân viên
+            </th>
+            <th>
+                Họ tên
+            </th>
+            <th>
+                Giới tính
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Email
+            </th>
+            @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+            {
+                <th></th>
+            }
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/NhanViens/Details?id=@item.MaNV">
+                        @Html.DisplayFor(modelItem => item.MaNV)
+                    </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/NhanViens/Details?id=@item.MaNV">
+                        @Html.DisplayFor(modelItem => item.Hoten)
+                    </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/NhanViens/Details?id=@item.MaNV">
+                        @{
+                            if (item.Gioitinh == "Male")
+                            {
+                                <div>Nam</div>
+                            }
+                            else
+                            {
+                                <div>Nữ</div>
+                            }
+                        }
+                    </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/NhanViens/Details?id=@item.MaNV">
+                        @Html.DisplayFor(modelItem => item.SDT)
+                    </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/NhanViens/Details?id=@item.MaNV">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </a>
+                </td>
+                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                {
+                    <td>
+                        <a class="edit-button fa fa-pencil" href="~/NhanViens/Edit?id=@item.MaNV"></a>
+                        <a class="delete-button fa fa-trash" href="~/NhanViens/Delete?id=@item.MaNV"></a>
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+</div>
+<!-- Thêm mã phân trang -->
+<br />
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <style>
+        .MenuTrang li {
+            display: inline;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 20px;
+            margin: 2px 5px;
+            border-radius: 5px;
+            border: none;
+            text-decoration: none;
+        }
+    </style>
+    <!-- Kết thúc -->
