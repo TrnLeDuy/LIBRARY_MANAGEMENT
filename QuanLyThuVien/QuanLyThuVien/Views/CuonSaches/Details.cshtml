@@ -5,79 +5,74 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="wrapper">
+    <div class="profile-card js-profile-card">
+        <div class="profile-card__img">
+            <img src="~/Images/@Model.Hinhmota" alt="profile card">
+        </div>
 
-<div>
-    <h4>CuonSach</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ten_cuonsach)
-        </dt>
+        <div class="profile-card__cnt js-profile-cnt">
+            <div class="profile-card__name">@Html.DisplayFor(model => model.ten_cuonsach)</div>
+            <div class="profile-card__txt">Mã Cuốn Sách: <strong>@Html.DisplayFor(model => model.ma_cuonsach)</strong> </div>
+            <div class="profile-card__txt">Đầu sách: <strong>@Html.DisplayFor(model => model.DauSach.ten_dausach)</strong> </div>
+            <div class="profile-card__txt">Tác giả: <strong>@Html.DisplayFor(model => model.tacgia)</strong> </div>
+            <div class="profile-card__txt">Thể loại: <strong>@Html.DisplayFor(model => model.LoaiSach.ten_loaisach)</strong> </div>
+            <div class="profile-card__txt">Nhà xuất bản: <strong>@Html.DisplayFor(model => model.nhaxuatban)</strong> </div>
+            <div class="profile-card__txt">Năm xuất bản: <strong>@Html.DisplayFor(model => model.namxuatban)</strong> </div>
+            <div class="profile-card__txt">Tình trạng: <strong>@Html.DisplayFor(model => model.TinhTrang)</strong> </div>
+            <div class="profile-card__txt">Mô tả: <strong>@Html.DisplayFor(model => model.Mota)</strong> </div>
+            <div class="profile-card-ctr">
+                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                {
+                    <a class="profile-card__button button--orange" href="~/CuonSaches/Edit?id=@Model.ma_cuonsach">Chỉnh sửa</a>
+                }
+                <a class="profile-card__button button--blue" href="~/CuonSaches/Index">Trở về</a>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ten_cuonsach)
-        </dd>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tacgia)
-        </dt>
+        <div class="profile-card-message js-message">
+            <form class="profile-card-form">
+                <div class="profile-card-form__container">
+                    <textarea placeholder="Say something..."></textarea>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.tacgia)
-        </dd>
+                <div class="profile-card-form__bottom">
+                    <button class="profile-card__button button--blue js-message-close">
+                    </button>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.namxuatban)
-        </dt>
+                    <button class="profile-card__button button--gray js-message-close">
+                        Cancel
+                    </button>
+                </div>
+            </form>
 
-        <dd>
-            @Html.DisplayFor(model => model.namxuatban)
-        </dd>
+            <div class="profile-card__overlay js-message-close"></div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nhaxuatban)
-        </dt>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.nhaxuatban)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TinhTrang)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TinhTrang)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mota)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mota)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DauSach.ten_dausach)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DauSach.ten_dausach)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LoaiSach.ten_loaisach)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LoaiSach.ten_loaisach)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+
+<script>
+    var messageBox = document.querySelector('.js-message');
+    var btn = document.querySelector('.js-message-btn');
+    var card = document.querySelector('.js-profile-card');
+    var closeBtn = document.querySelectorAll('.js-message-close');
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        card.classList.add('active');
+    });
+
+    closeBtn.forEach(function (element, index) {
+        console.log(element);
+        element.addEventListener('click', function (e) {
+            e.preventDefault();
+            card.classList.remove('active');
+        });
+    });
+</script>

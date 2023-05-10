@@ -5,53 +5,44 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="container" style="background-image: url('../../Images/library-background-form.jpg');">
+    <div class="inner">
+        @using (Html.BeginForm("Edit", "DauSaches", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.isbn)
+            <h3>Cập nhập thông tin Đầu Sách</h3>
+            <div class="form-group">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>DauSach</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.isbn)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ten_dausach, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ten_dausach, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ten_dausach, "", new { @class = "text-danger" })
+                <div class="form-wrapper">
+                    Tên đầu sách:
+                    @Html.EditorFor(model => model.ten_dausach, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ten_dausach, "", new { @class = "text-danger" })
+                    @*<input type="text" class="form-control1">*@
+                </div>
+                <div class="form-wrapper">
+                    Số lượng:
+                    @Html.EditorFor(model => model.soluong, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.soluong, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-wrapper">
+                    Trạng thái:
+                    @Html.EditorFor(model => model.trangthai, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.trangthai, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.soluong, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.soluong, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.soluong, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input style="margin-left:-15px;background-color:Green" type="submit" value="Lưu" class=" button1" />
+                </div>
             </div>
-        </div>
+        }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.trangthai, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.trangthai, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.trangthai, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <div style="margin-left:45px;color:#ccc">
+            <a href="~/DauSaches/Index">Quay lại</a>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
-
-

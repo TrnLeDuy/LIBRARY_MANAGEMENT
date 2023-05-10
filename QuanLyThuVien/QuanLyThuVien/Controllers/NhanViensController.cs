@@ -159,7 +159,10 @@ namespace QuanLyThuVien.Controllers
         {
             NhanVien nhanVien = db.NhanViens.Find(id);
             TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
-            db.TaiKhoans.Remove(taiKhoan);
+            if(taiKhoan != null)
+            {
+                db.TaiKhoans.Remove(taiKhoan);
+            }
             db.NhanViens.Remove(nhanVien);
             db.SaveChanges();
             return RedirectToAction("Index");
