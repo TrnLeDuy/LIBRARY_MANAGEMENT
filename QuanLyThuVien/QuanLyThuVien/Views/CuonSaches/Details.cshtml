@@ -1,0 +1,83 @@
+﻿@model QuanLyThuVien.Models.CuonSach
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CuonSach</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ten_cuonsach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ten_cuonsach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tacgia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tacgia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.namxuatban)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.namxuatban)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nhaxuatban)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nhaxuatban)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mota)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mota)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DauSach.ten_dausach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DauSach.ten_dausach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiSach.ten_loaisach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiSach.ten_loaisach)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

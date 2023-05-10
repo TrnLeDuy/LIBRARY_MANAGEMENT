@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -69,21 +71,36 @@ namespace QuanLyThuVien.Controllers
             return View();
         }
 
+        public int GetNextUserID()
+        {
+            int id = 1;
+            if (db.NhanViens.Any())
+            {
+                id = db.NhanViens.Max(nv => nv.MaNV) + 1;
+            }
+            return id;
+        }
+
         // POST: NhanViens/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaNV,Hoten,NgaySinh,Gioitinh,Email,SDT,Diachi")] NhanVien nhanVien)
+        public ActionResult Create([Bind(Include = "Hoten,NgaySinh,Gioitinh,Email,SDT,Diachi")] NhanVien nhanVien)
         {
+            int nextUserID = GetNextUserID();
+            nhanVien.MaNV = nextUserID;
+            if (db.NhanViens.Any())
+            {
+
+            }
             if (ModelState.IsValid)
             {
-                db.NhanViens.Add(nhanVien);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.MaNV = new SelectList(db.TaiKhoans, "MaNV", "Username", nhanVien.MaNV);
+                    db.NhanViens.Add(nhanVien);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+            }
             return View(nhanVien);
         }
 
@@ -108,7 +125,7 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaNV,Hoten,NgaySinh,Gioitinh,Email,SDT,Diachi")] NhanVien nhanVien)
+        public ActionResult Edit([Bind(Include = "Hoten,NgaySinh,Gioitinh,Email,SDT,Diachi")] NhanVien nhanVien)
         {
             if (ModelState.IsValid)
             {

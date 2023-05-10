@@ -1,0 +1,64 @@
+﻿@using QuanLyThuVien.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<LoaiSach>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DANH SÁCH THỂ LOẠI</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+
+    @using (Html.BeginForm("Index", "LoaiSaches", FormMethod.Get))
+    {
+    <p>
+        @Html.TextBox("s") <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Mã thể loại
+            </th>
+            <th>
+                Thể loại
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ma_loaisach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ten_loaisach)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ma_loaisach }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ma_loaisach }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ma_loaisach })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+    <!-- Thêm mã phân trang -->
+    <br />
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <style>
+        .MenuTrang li {
+            display: inline;
+        }
+    </style>
+    <!-- Kết thúc -->

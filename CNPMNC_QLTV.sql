@@ -40,7 +40,8 @@ CREATE TABLE [CuonSach] (
 	[nhaxuatban] nvarchar(100),
 	[ma_loaisach] [char] (10) NOT NULL,
 	[TinhTrang] [nvarchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[Mota] nvarchar(500)
+	[Mota] nvarchar(500),
+	Hinhmota nvarchar(100)
 ) ON [PRIMARY]
 GO
 
@@ -275,3 +276,4 @@ ALTER TABLE [dbo].[TheThuVien]  WITH CHECK ADD CHECK  (([ma_sinhvien] like '[0-9
 GO
 ALTER TABLE [dbo].[TheThuVien]  WITH CHECK ADD CHECK  (([ma_sinhvien] like '[0-9][0-9]DH[0-9][0-9][0-9][0-9][0-9][0-9]'))
 GO
+
