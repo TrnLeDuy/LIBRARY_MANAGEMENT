@@ -15,10 +15,14 @@ namespace QuanLyThuVien.Controllers
         private CNPM_QLTVEntities db = new CNPM_QLTVEntities();
 
         // GET: TaiKhoans
-        public ActionResult Index()
+        public ActionResult Index(string s)
         {
-            var taiKhoans = db.TaiKhoans.Include(t => t.NhanVien);
-            return View(taiKhoans.ToList());
+            var taiKhoans = from l in db.TaiKhoans select l;
+            if (!string.IsNullOrEmpty(s))
+            {
+                taiKhoans = taiKhoans.Where(id => id.Username.Contains(s));
+            }
+            return View(taiKhoans);
         }
 
         // GET: TaiKhoans/Details/5
