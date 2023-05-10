@@ -32,47 +32,58 @@
     <div class="col-6">
         @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
         {
-            @Html.ActionLink("Thêm tài khoản mới", "Create", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Thêm Tài Khoản mới", "Create", null, new { @class = "btn btn-primary" })
         }
     </div>
     <div class="col-6">
         <form style="width: 100%; padding-left: 250px;" action="/TaiKhoans/Index" method="get">
             <div class="form-group">
-                <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm nhân viên" value="" />
+                <input class="form-control" id="search" type="text" name="search" placeholder="Tìm kiếm Tài Khoản" value="" />
             </div>
         </form>
     </div>
     <table class="table">
         <tr>
             <th>
-                Username
+                Tài khoản
             </th>
             <th>
-                Họ và tên
+                Họ tên
             </th>
             <th>
-                Loại tài khoản
+                Quyền
             </th>
-            <th></th>
+            @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+            {
+                <th></th>
+            }
         </tr>
 
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Username)
+                    <a style="text-decoration: none; color: black;" href="~/TaiKhoans/Details?id=@item.MaNV">
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NhanVien.Hoten)
+                    <a style="text-decoration: none; color: black;" href="~/TaiKhoans/Details?id=@item.MaNV">
+                        @Html.DisplayFor(modelItem => item.NhanVien.Hoten)
+                    </a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LoaiTK)
+                    <a style="text-decoration: none; color: black;" href="~/TaiKhoans/Details?id=@item.MaNV">
+                        @Html.DisplayFor(modelItem => item.LoaiTK)
+                    </a>
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MaNV }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.MaNV }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.MaNV })
-                </td>
+                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                {
+                    <td>
+                        <a class="edit-button fa fa-pencil" href="~/TaiKhoans/Edit?id=@item.MaNV"></a>
+                        <a class="delete-button fa fa-trash" href="~/TaiKhoans/Delete?id=@item.MaNV"></a>
+                    </td>
+                }
             </tr>
         }
 

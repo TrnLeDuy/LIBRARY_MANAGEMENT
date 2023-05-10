@@ -20,7 +20,7 @@ namespace QuanLyThuVien.Controllers
         // GET: NhanViens
         public ActionResult Index(string currentFilter, string search, int? page)
         {
-            int pageSize = 7;
+            int pageSize = 10;
             int pageNum = (page ?? 1);
 
             if (search != null)

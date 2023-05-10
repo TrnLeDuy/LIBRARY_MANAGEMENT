@@ -16,27 +16,27 @@ namespace QuanLyThuVien.Controllers
         private CNPM_QLTVEntities db = new CNPM_QLTVEntities();
 
         // GET: TaiKhoans
-        public ActionResult Index(string currentFilter, string s, int? page)
+        public ActionResult Index(string currentFilter, string search, int? page)
         {
-            int pageSize = 7;
+            int pageSize = 10;
             int pageNum = (page ?? 1);
 
-            if (s != null)
+            if (search != null)
             {
                 page = 1;
             }
             else
             {
-                s = currentFilter;
+                search = currentFilter;
             }
 
-            ViewBag.CurrentFilter = s;
+            ViewBag.CurrentFilter = search;
 
             var taikhoan = from l in db.TaiKhoans
                            select l;
-            if (!String.IsNullOrEmpty(s))
+            if (!String.IsNullOrEmpty(search))
             {
-                taikhoan = taikhoan.Where(mcs => mcs.Username.Contains(s));
+                taikhoan = taikhoan.Where(tk => tk.Username.Contains(search));
             }
 
             taikhoan = taikhoan.OrderBy(id => id.Username);
