@@ -27,7 +27,10 @@
 
 <div class="row mt-4">
     <div class="col-6">
-        @Html.ActionLink("Thêm Nhân viên mới", "Create", null, new { @class = "btn btn-primary" })
+        @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+        {
+            @Html.ActionLink("Thêm Nhân viên mới", "Create", null, new { @class = "btn btn-primary" })
+        }
     </div>
     <div class="col-6">
         <form style="width: 100%; padding-left: 250px;" action="/NhanViens/Index" method="get">
