@@ -1,8 +1,8 @@
-﻿USE CNPM_QLTV
+USE CNPM_QLTV
 GO
 
 -----NhanVien-----
-INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('10000', N'Trần Lê Duy', '2/26/2002', 'Male', 'trn.duyle@gmail.com', '0904689418', '368/25A Tôn Đản Phường 4, Quận 4, TP.HCM');
+INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('10000', N'Trần Lê Duy', '2/26/2002', 'Male', 'trn.duyle@gmail.com', '0904689418', N'368/25A Tôn Đản Phường 4, Quận 4, TP.HCM');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('20761', 'Balduin Leyden', '10/31/2022', 'Male', 'bleyden0@ovh.net', '3425661617', 'Apt 1474');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('25792', 'Dalila Willoway', '12/28/2022', 'Female', 'dwilloway1@guardian.co.uk', '1688118968', '16th Floor');
 INSERT INTO NhanVien (MaNV, Hoten, NgaySinh, Gioitinh, Email, SDT, Diachi) VALUES ('17610', 'Hertha Kirstein', '9/29/2022', 'Female', 'hkirstein2@vimeo.com', '1717320705', '12th Floor');

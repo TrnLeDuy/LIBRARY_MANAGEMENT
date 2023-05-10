@@ -5,9 +5,61 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<div class="container" style="background-image: url('../../Images/library-background-form.jpg');">
+    <div class="inner">
 
-@using (Html.BeginForm()) 
+        @using (Html.BeginForm("Create", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <h3>Thêm Nhân viên Thư viện</h3>
+            <div class="form-group">
+                <div class="form-wrapper">
+                    Họ và tên: 
+                    @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control1" } })
+                    @Html.ValidationMessageFor(model => model.Hoten, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-wrapper">
+                Giới tính:
+                @Html.DropDownListFor(model => model.Gioitinh,
+                new List<SelectListItem>
+                {
+                    new SelectListItem{Text="Nam", Value="Male"},
+                    new SelectListItem{Text="Nữ", Value="Female"}}, "Lựa chọn", new { @class = "form-control1" })
+                @Html.ValidationMessageFor(model => model.Gioitinh, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-wrapper">
+                Số điện thoại:
+                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control1" } })
+                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-wrapper">
+                Ngày sinh
+                @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control1", @type = "date" } })
+                @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-wrapper">
+                Email:
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control1" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-wrapper">
+                Địa chỉ:
+                @Html.EditorFor(model => model.Diachi, new { htmlAttributes = new { @class = "form-control1" } })
+                @Html.ValidationMessageFor(model => model.Diachi, "", new { @class = "text-danger" })
+            </div>
+
+
+            <button class="btn btn-success button1">Xác nhận</button>
+        }
+        <div style="margin-left:238px;color:#ccc">
+            @Html.ActionLink("Quay lại danh sách", "Index")
+        </div>
+    </div>
+
+</div>
+
+@*@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
@@ -81,4 +133,4 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+</div>*@
