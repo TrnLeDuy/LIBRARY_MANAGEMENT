@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -132,7 +132,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CuonSachesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DauSachesController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\LoaiSachesController.cs" />
     <Compile Include="Controllers\NhanViensController.cs" />
     <Compile Include="Controllers\TaiKhoansController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -176,9 +180,6 @@
       <DependentUpon>QLTV.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\SinhVien.cs">
-      <DependentUpon>QLTV.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>QLTV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaiKhoan.cs">
@@ -500,8 +501,8 @@
     <Content Include="Images\orangehrm-logo.png" />
     <Content Include="Models\QLTV.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>QLTV.Context.cs</LastGenOutput>
       <DependentUpon>QLTV.edmx</DependentUpon>
+      <LastGenOutput>QLTV.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\QLTV.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -514,13 +515,6 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\QLTV.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QLTV.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\QLTV.edmx.diagram">
-      <DependentUpon>QLTV.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -714,6 +708,13 @@
     <Content Include="Assets\Login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Assets\Login\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Assets\Login\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <EntityDeploy Include="Models\QLTV.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QLTV.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\QLTV.edmx.diagram">
+      <DependentUpon>QLTV.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.6.4.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.4.js" />
     <Content Include="Scripts\jquery-3.6.4.min.js" />
@@ -863,6 +864,21 @@
     <Content Include="Views\TaiKhoans\Details.cshtml" />
     <Content Include="Views\TaiKhoans\Edit.cshtml" />
     <Content Include="Views\TaiKhoans\Index.cshtml" />
+    <Content Include="Views\DauSaches\Create.cshtml" />
+    <Content Include="Views\DauSaches\Delete.cshtml" />
+    <Content Include="Views\DauSaches\Details.cshtml" />
+    <Content Include="Views\DauSaches\Edit.cshtml" />
+    <Content Include="Views\DauSaches\Index.cshtml" />
+    <Content Include="Views\LoaiSaches\Create.cshtml" />
+    <Content Include="Views\LoaiSaches\Delete.cshtml" />
+    <Content Include="Views\LoaiSaches\Details.cshtml" />
+    <Content Include="Views\LoaiSaches\Edit.cshtml" />
+    <Content Include="Views\LoaiSaches\Index.cshtml" />
+    <Content Include="Views\CuonSaches\Create.cshtml" />
+    <Content Include="Views\CuonSaches\Delete.cshtml" />
+    <Content Include="Views\CuonSaches\Details.cshtml" />
+    <Content Include="Views\CuonSaches\Edit.cshtml" />
+    <Content Include="Views\CuonSaches\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -29,6 +29,7 @@ namespace QuanLyThuVien.Models
         public string ma_loaisach { get; set; }
         public string TinhTrang { get; set; }
         public string Mota { get; set; }
+        public string Hinhmota { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietMuonTra> ChiTietMuonTras { get; set; }
