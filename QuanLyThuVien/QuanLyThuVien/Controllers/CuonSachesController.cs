@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using QuanLyThuVien.Models;
 
 namespace QuanLyThuVien.Controllers
@@ -15,10 +17,32 @@ namespace QuanLyThuVien.Controllers
         private CNPM_QLTVEntities db = new CNPM_QLTVEntities();
 
         // GET: CuonSaches
-        public ActionResult Index(string s)
+        public ActionResult Index(string currentFilter, string s, int? page)
         {
-            var cuonSaches = from l in db.CuonSaches select l;
-            return View(cuonSaches);
+            int pageSize = 7;
+            int pageNum = (page ?? 1);
+
+            if(s != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                s = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = s;
+
+            var danhSach = from l in db.CuonSaches
+                           select l;
+            if (!String.IsNullOrEmpty(s))
+            {
+                danhSach = danhSach.Where(mcs => mcs.ten_cuonsach.Contains(s) || mcs.DauSach.ten_dausach.Contains(s) || mcs.LoaiSach.ten_loaisach.Contains(s));
+            }
+
+            danhSach = danhSach.OrderBy(id => id.ma_cuonsach);
+
+            return View(danhSach.ToPagedList(pageNum, pageSize));
         }
 
         // GET: CuonSaches/Details/5
@@ -59,12 +83,37 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "isbn,ten_cuonsach,tacgia,namxuatban,nhaxuatban,ma_loaisach,Mota")] CuonSach cuonSach)
+        public ActionResult Create([Bind(Include = "isbn,ten_cuonsach,tacgia,namxuatban,nhaxuatban,ma_loaisach,Mota")] CuonSach cuonSach, HttpPostedFileBase Hinhmota)
         {
-            string nextID = GetNextBookID();
-            cuonSach.ma_cuonsach = nextID;
+            if(Hinhmota == null)
+            {
+                ViewBag.ThongBao = "Vui lòng chọn ảnh bìa";
+                return View();
+            }
             if (ModelState.IsValid)
             {
+                //Lấy tên file của hình được up
+                var fileName = Path.GetFileName(Hinhmota.FileName);
+
+                //Tạo đường dẫn > file
+                var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+
+                //Kiểm tra hình đã tồn tại trong hệ thống chưa
+                if (System.IO.File.Exists(path))
+                {
+                    ViewBag.ThongBao = "Ảnh đã tồn tại";
+                }
+                else
+                {
+                    Hinhmota.SaveAs(path);
+                }
+                //Lưu tên sách vào trường Hinhmota
+                cuonSach.Hinhmota = fileName;
+
+                //Tự động tạo mã cuốn sách
+                string nextID = GetNextBookID();
+                cuonSach.ma_cuonsach = nextID;
+
                 cuonSach.TinhTrang = "Còn sách";
                 db.CuonSaches.Add(cuonSach);
                 db.SaveChanges();
@@ -98,10 +147,23 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "isbn,ma_cuonsach,ten_cuonsach,tacgia,namxuatban,nhaxuatban,ma_loaisach,TinhTrang,Mota")] CuonSach cuonSach)
+        public ActionResult Edit([Bind(Include = "isbn,ma_cuonsach,ten_cuonsach,tacgia,namxuatban,nhaxuatban,ma_loaisach,TinhTrang,Mota")] CuonSach cuonSach, HttpPostedFileBase Hinhmota)
         {
             if (ModelState.IsValid)
             {
+                if(Hinhmota != null)
+                {
+                    //Lấy tên file của hình được up
+                    var fileName = Path.GetFileName(Hinhmota.FileName);
+
+                    //Tạo đường dẫn > file
+                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+
+                    //Lưu tên
+                    cuonSach.Hinhmota = fileName;
+                    Hinhmota.SaveAs(path);
+                }
+
                 db.Entry(cuonSach).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<QuanLyThuVien.Models.CuonSach>
+﻿@using QuanLyThuVien.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<CuonSach>
 
 @{
     ViewBag.Title = "Index";
@@ -9,48 +11,76 @@
 
 <p>
     @Html.ActionLink("Thêm mới", "Create")
+
+    @using (Html.BeginForm("Index", "CuonSaches", FormMethod.Get))
+    {
+    <p>
+        @Html.TextBox("s", ViewBag.CurrentFilter as string) <input type="submit" value="Tìm kiếm" />
+    </p>
+    }
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Mã cuốn sách
-        </th>
-        <th>
-            Tên sách
-        </th>
-        <th>
-            Đầu sách
-        </th>
-        <th>
-            Tình trạng
-        </th>
+    <table class="table">
+        <tr>
+            <th>
+                Mã cuốn sách
+            </th>
+            <th>
+                Tên sách
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Đầu sách
+            </th>
+            <th>
+                Tình trạng
+            </th>
 
-        <th></th>
-    </tr>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ma_cuonsach)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ten_cuonsach)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DauSach.ten_dausach)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TinhTrang)
-        </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id = item.ma_cuonsach }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ma_cuonsach }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ma_cuonsach })*@
-            <a href="~/CuonSaches/Edit?id=@item.ma_cuonsach">Cập nhật</a>
-            <a href="~/CuonSaches/Details?id=@item.ma_cuonsach">Chi tiết</a>
-            <a href="~/CuonSaches/Delete?id=@item.ma_cuonsach">Xóa</a>
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ma_cuonsach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ten_cuonsach)
+                </td>
+                <td>
+                    <img src="~/Images/@item.Hinhmota" style="width: 80px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DauSach.ten_dausach)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.ma_cuonsach }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ma_cuonsach }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ma_cuonsach })*@
+                    <a href="~/CuonSaches/Edit?id=@item.ma_cuonsach">Cập nhật</a>
+                    <a href="~/CuonSaches/Details?id=@item.ma_cuonsach">Chi tiết</a>
+                    <a href="~/CuonSaches/Delete?id=@item.ma_cuonsach">Xóa</a>
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+
+
+    <!-- Thêm mã phân trang -->
+    <br />
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index",new { page, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <style>
+        .MenuTrang li {
+            display: inline;
+        }
+    </style>
+    <!-- Kết thúc -->
