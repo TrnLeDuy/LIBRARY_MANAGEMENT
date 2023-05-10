@@ -24,7 +24,7 @@
 
 
             <div class="profile-card-ctr">
-                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
                 {
                     <a class="profile-card__button button--orange" href="~/DauSaches/Edit?id=@Model.isbn">Chỉnh sửa</a>
                 }

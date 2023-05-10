@@ -30,7 +30,7 @@
 
 <div class="row mt-4">
     <div class="col-6">
-        @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+        @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
         {
             @Html.ActionLink("Thêm thể loại", "Create", null, new { @class = "btn btn-primary" })
         }
@@ -51,7 +51,7 @@
             <th>
                 Thể loại
             </th>
-            @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+            @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
             {
                 <th></th>
             }
@@ -69,7 +69,7 @@
                         @Html.DisplayFor(modelItem => item.ten_loaisach)
                     </a>
                 </td>
-                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
                 {
                     <td>
                         <a class="edit-button fa fa-pencil" href="~/LoaiSaches/Edit?id=@item.ma_loaisach"></a>

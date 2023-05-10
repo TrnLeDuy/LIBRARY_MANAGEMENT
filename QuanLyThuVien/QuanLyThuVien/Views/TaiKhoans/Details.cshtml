@@ -53,7 +53,10 @@
                     <a class="profile-card__button button--blue" href="~/TaiKhoans/Index">Trở về</a>
 
                 }
-                <a class="profile-card__button button--blue" href="~/Dashboard/Dashboard">Trở về</a>
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "TT" || Session["Role"].ToString() == "NV"))
+                {
+                    <a class="profile-card__button button--blue" href="~/Dashboard/Dashboard">Trở về</a>
+                }
             </div>
 
         </div>

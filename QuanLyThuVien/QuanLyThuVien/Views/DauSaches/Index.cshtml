@@ -30,7 +30,7 @@
 
 <div class="row mt-4">
     <div class="col-6">
-        @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+        @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
         {
             @Html.ActionLink("Thêm đầu sách", "Create", null, new { @class = "btn btn-primary" })
         }
@@ -82,7 +82,7 @@
                         @Html.DisplayFor(modelItem => item.trangthai)
                     </a>
                 </td>
-                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
                 {
                     <td>
                         <a class="edit-button fa fa-pencil" href="~/DauSaches/Edit?id=@item.isbn"></a>
