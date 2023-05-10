@@ -36,3 +36,8 @@ body {
         height: 40px;
         box-shadow: 0 12px 20px #00c2ff6e;
 }
+
+#message-box input:hover {
+    transition: transform 0.5s;
+    transform: scale(110%);
+}
