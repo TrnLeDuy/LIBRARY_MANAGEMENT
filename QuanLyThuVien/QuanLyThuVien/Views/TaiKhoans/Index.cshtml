@@ -1,34 +1,57 @@
-﻿@model IEnumerable<QuanLyThuVien.Models.TaiKhoan>
+﻿@using QuanLyThuVien.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<TaiKhoan>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>TÀI KHOẢN</h2>
+<style>
 
-<p>
-    @Html.ActionLink("Tạo mới", "Create")
-    @using (Html.BeginForm())
-    {
-    <p>
-        Tìm tài khoản: @Html.TextBox("s") <input type="submit" value="Tìm kiếm" />
-    </p>
+    .delete-button {
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
     }
-</p>
+
+    .edit-button {
+        background-color: green;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
+</style>
+
+<div class="row mt-4">
+    <div class="col-6">
+        @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+        {
+            @Html.ActionLink("Thêm tài khoản mới", "Create", null, new { @class = "btn btn-primary" })
+        }
+    </div>
+    <div class="col-6">
+        <form style="width: 100%; padding-left: 250px;" action="/TaiKhoans/Index" method="get">
+            <div class="form-group">
+                <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm nhân viên" value="" />
+            </div>
+        </form>
+    </div>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Username)
+                Username
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Password)
+                Họ và tên
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LoaiTK)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NhanVien.Hoten)
+                Loại tài khoản
             </th>
             <th></th>
         </tr>
@@ -40,13 +63,10 @@
                     @Html.DisplayFor(modelItem => item.Username)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Password)
+                    @Html.DisplayFor(modelItem => item.NhanVien.Hoten)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LoaiTK)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NhanVien.Hoten)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.MaNV }) |
@@ -57,3 +77,23 @@
         }
 
     </table>
+</div>
+<!-- Thêm mã phân trang -->
+<br />
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <style>
+        .MenuTrang li {
+            display: inline;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 20px;
+            margin: 2px 5px;
+            border-radius: 5px;
+            border: none;
+            text-decoration: none;
+        }
+    </style>
+    <!-- Kết thúc -->
