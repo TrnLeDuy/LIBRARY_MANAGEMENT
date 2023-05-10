@@ -12,13 +12,12 @@
         {
             @Html.AntiForgeryToken()
             <h3>Thêm Nhân viên Thư viện</h3>
-            <div class="form-group">
                 <div class="form-wrapper">
                     Họ và tên: 
                     @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control1" } })
                     @Html.ValidationMessageFor(model => model.Hoten, "", new { @class = "text-danger" })
                 </div>
-            </div>
+
             <div class="form-wrapper">
                 Giới tính:
                 @Html.DropDownListFor(model => model.Gioitinh,

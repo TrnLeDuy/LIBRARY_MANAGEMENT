@@ -5,23 +5,69 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="wrapper">
+    <div class="profile-card js-profile-card">
+        <div class="profile-card__img">
+            <img src="~/images/avatar.png" alt="profile card">
+        </div>
 
-<div>
-    <h4>LoaiSach</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ten_loaisach)
-        </dt>
+        <div class="profile-card__cnt js-profile-cnt">
+            <div class="profile-card__name">@Html.DisplayFor(model => model.ten_loaisach)</div>
+            <div class="profile-card__txt">Mã thể loại: <strong>@Html.DisplayFor(model => model.ma_loaisach)</strong> </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ten_loaisach)
-        </dd>
 
-    </dl>
+            <div class="profile-card-ctr">
+                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                {
+                    <a class="profile-card__button button--orange" href="~/LoaiSaches/Edit?id=@Model.ma_loaisach">Chỉnh sửa</a>
+                }
+                <a class="profile-card__button button--blue" href="~/LoaiSaches/Index">Trở về</a>
+            </div>
+
+        </div>
+
+        <div class="profile-card-message js-message">
+            <form class="profile-card-form">
+                <div class="profile-card-form__container">
+                    <textarea placeholder="Say something..."></textarea>
+                </div>
+
+                <div class="profile-card-form__bottom">
+                    <button class="profile-card__button button--blue js-message-close">
+                    </button>
+
+                    <button class="profile-card__button button--gray js-message-close">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+
+            <div class="profile-card__overlay js-message-close"></div>
+        </div>
+
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ma_loaisach }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+
+<script>
+    var messageBox = document.querySelector('.js-message');
+    var btn = document.querySelector('.js-message-btn');
+    var card = document.querySelector('.js-profile-card');
+    var closeBtn = document.querySelectorAll('.js-message-close');
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        card.classList.add('active');
+    });
+
+    closeBtn.forEach(function (element, index) {
+        console.log(element);
+        element.addEventListener('click', function (e) {
+            e.preventDefault();
+            card.classList.remove('active');
+        });
+    });
+</script>

@@ -36,7 +36,7 @@ namespace QuanLyThuVien.Controllers
                            select l;
             if (!String.IsNullOrEmpty(s))
             {
-                loaiSach = loaiSach.Where(mcs => mcs.ten_loaisach.Contains(s));
+                loaiSach = loaiSach.Where(mcs => mcs.ten_loaisach.Contains(s) || mcs.ma_loaisach.Contains(s));
             }
 
             loaiSach = loaiSach.OrderBy(id => id.ma_loaisach);
