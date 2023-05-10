@@ -17,14 +17,10 @@ namespace QuanLyThuVien.Controllers
         private CNPM_QLTVEntities db = new CNPM_QLTVEntities();
 
         // GET: NhanViens
-        public ActionResult Index(string s, string u, string b)
+        public ActionResult Index()
         {
             var nhanViens = from l in db.NhanViens
                         select l;
-            if (!string.IsNullOrEmpty(s))
-            {
-                nhanViens = nhanViens.Where(id => id.Hoten.Contains(s));
-            }
             return View(nhanViens);
         }
 
@@ -59,6 +55,7 @@ namespace QuanLyThuVien.Controllers
             }
             return id;
         }
+
         // POST: NhanViens/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

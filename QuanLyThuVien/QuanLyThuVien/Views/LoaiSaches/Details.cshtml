@@ -1,0 +1,27 @@
+﻿@model QuanLyThuVien.Models.LoaiSach
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LoaiSach</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ten_loaisach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ten_loaisach)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ma_loaisach }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

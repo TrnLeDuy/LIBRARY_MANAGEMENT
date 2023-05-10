@@ -132,9 +132,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CuonSachesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DauSachesController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\LoaiSachesController.cs" />
     <Compile Include="Controllers\NhanViensController.cs" />
     <Compile Include="Controllers\TaiKhoansController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -868,6 +870,16 @@
     <Content Include="Views\DauSaches\Details.cshtml" />
     <Content Include="Views\DauSaches\Edit.cshtml" />
     <Content Include="Views\DauSaches\Index.cshtml" />
+    <Content Include="Views\LoaiSaches\Create.cshtml" />
+    <Content Include="Views\LoaiSaches\Delete.cshtml" />
+    <Content Include="Views\LoaiSaches\Details.cshtml" />
+    <Content Include="Views\LoaiSaches\Edit.cshtml" />
+    <Content Include="Views\LoaiSaches\Index.cshtml" />
+    <Content Include="Views\CuonSaches\Create.cshtml" />
+    <Content Include="Views\CuonSaches\Delete.cshtml" />
+    <Content Include="Views\CuonSaches\Details.cshtml" />
+    <Content Include="Views\CuonSaches\Edit.cshtml" />
+    <Content Include="Views\CuonSaches\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
