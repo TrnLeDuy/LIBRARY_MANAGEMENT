@@ -62,7 +62,7 @@ namespace QuanLyThuVien.Controllers
         // GET: TaiKhoans/Create
         public ActionResult Create()
         {
-            ViewBag.MaNV = new SelectList(db.NhanViens, "MaNV", "Hoten");
+            ViewBag.MaNV = new SelectList(db.NhanViens.Where(e => !db.TaiKhoans.Any(u => u.MaNV == e.MaNV)), "MaNV", "Hoten");
             return View();
         }
 

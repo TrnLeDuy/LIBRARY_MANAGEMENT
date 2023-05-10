@@ -50,8 +50,10 @@
                 @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
                 {
                     <a class="profile-card__button button--orange" href="~/TaiKhoans/Edit?id=@Model.MaNV">Chỉnh sửa</a>
+                    <a class="profile-card__button button--blue" href="~/TaiKhoans/Index">Trở về</a>
+
                 }
-                <a class="profile-card__button button--blue" href="~/TaiKhoans/Index">Trở về</a>
+                <a class="profile-card__button button--blue" href="~/Dashboard/Dashboard">Trở về</a>
             </div>
 
         </div>

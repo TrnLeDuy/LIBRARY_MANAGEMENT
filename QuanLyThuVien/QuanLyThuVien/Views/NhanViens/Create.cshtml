@@ -8,7 +8,7 @@
 <div class="container" style="background-image: url('../../Images/library-background-form.jpg');">
     <div class="inner">
 
-        @using (Html.BeginForm("Create", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Create", "NhanViens", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             <h3>Thêm Nhân viên Thư viện</h3>
