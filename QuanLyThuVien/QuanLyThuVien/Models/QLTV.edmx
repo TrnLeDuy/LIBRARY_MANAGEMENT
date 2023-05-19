@@ -12,7 +12,7 @@
             <PropertyRef Name="ma_cuonsach" />
           </Key>
           <Property Name="isbn" Type="int" Nullable="false" />
-          <Property Name="ma_phieumuontra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ma_phieumuontra" Type="int" Nullable="false" />
           <Property Name="ma_cuonsach" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="ma_sinhvien" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="ngayGio_tra" Type="smalldatetime" />
@@ -77,7 +77,7 @@
           <Key>
             <PropertyRef Name="ma_phieumuontra" />
           </Key>
-          <Property Name="ma_phieumuontra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ma_phieumuontra" Type="int" Nullable="false" />
           <Property Name="MaNV" Type="int" Nullable="false" />
           <Property Name="ma_sinhvien" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="ngay_lapphieu" Type="smalldatetime" />
@@ -176,19 +176,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MuonTra_PhieuPhat">
-          <End Role="PhieuPhat" Type="Self.PhieuPhat" Multiplicity="1" />
-          <End Role="MuonTra" Type="Self.MuonTra" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="PhieuPhat">
-              <PropertyRef Name="ma_phieumuontra" />
-            </Principal>
-            <Dependent Role="MuonTra">
-              <PropertyRef Name="ma_phieumuontra" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MuonTra_TheThuVien">
+        <Association Name="FK_MuonTra_TheThuVien1">
           <End Role="TheThuVien" Type="Self.TheThuVien" Multiplicity="1" />
           <End Role="MuonTra" Type="Self.MuonTra" Multiplicity="*" />
           <ReferentialConstraint>
@@ -197,6 +185,18 @@
             </Principal>
             <Dependent Role="MuonTra">
               <PropertyRef Name="ma_sinhvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuPhat_MuonTra">
+          <End Role="MuonTra" Type="Self.MuonTra" Multiplicity="1" />
+          <End Role="PhieuPhat" Type="Self.PhieuPhat" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MuonTra">
+              <PropertyRef Name="ma_phieumuontra" />
+            </Principal>
+            <Dependent Role="PhieuPhat">
+              <PropertyRef Name="ma_phieumuontra" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -279,13 +279,13 @@
             <End Role="NhanVien" EntitySet="NhanVien" />
             <End Role="MuonTra" EntitySet="MuonTra" />
           </AssociationSet>
-          <AssociationSet Name="FK_MuonTra_PhieuPhat" Association="Self.FK_MuonTra_PhieuPhat">
-            <End Role="PhieuPhat" EntitySet="PhieuPhat" />
-            <End Role="MuonTra" EntitySet="MuonTra" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MuonTra_TheThuVien" Association="Self.FK_MuonTra_TheThuVien">
+          <AssociationSet Name="FK_MuonTra_TheThuVien1" Association="Self.FK_MuonTra_TheThuVien1">
             <End Role="TheThuVien" EntitySet="TheThuVien" />
             <End Role="MuonTra" EntitySet="MuonTra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuPhat_MuonTra" Association="Self.FK_PhieuPhat_MuonTra">
+            <End Role="MuonTra" EntitySet="MuonTra" />
+            <End Role="PhieuPhat" EntitySet="PhieuPhat" />
           </AssociationSet>
           <AssociationSet Name="FK_PhieuPhat_NhanVien" Association="Self.FK_PhieuPhat_NhanVien">
             <End Role="NhanVien" EntitySet="NhanVien" />
@@ -316,7 +316,7 @@
             <PropertyRef Name="ma_cuonsach" />
           </Key>
           <Property Name="isbn" Type="Int32" Nullable="false" />
-          <Property Name="ma_phieumuontra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ma_phieumuontra" Type="Int32" Nullable="false" />
           <Property Name="ma_cuonsach" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="ma_sinhvien" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ngayGio_tra" Type="DateTime" Precision="0" />
@@ -373,8 +373,8 @@
           <Property Name="ngay_hethan" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ChiTietMuonTras" Relationship="Self.FK_ChiTietMuonTra_MuonTra" FromRole="MuonTra" ToRole="ChiTietMuonTra" />
           <NavigationProperty Name="NhanVien" Relationship="Self.FK_MuonTra_NhanVien" FromRole="MuonTra" ToRole="NhanVien" />
-          <NavigationProperty Name="PhieuPhat" Relationship="Self.FK_MuonTra_PhieuPhat" FromRole="MuonTra" ToRole="PhieuPhat" />
-          <NavigationProperty Name="TheThuVien" Relationship="Self.FK_MuonTra_TheThuVien" FromRole="MuonTra" ToRole="TheThuVien" />
+          <NavigationProperty Name="TheThuVien" Relationship="Self.FK_MuonTra_TheThuVien1" FromRole="MuonTra" ToRole="TheThuVien" />
+          <NavigationProperty Name="PhieuPhat" Relationship="Self.FK_PhieuPhat_MuonTra" FromRole="MuonTra" ToRole="PhieuPhat" />
         </EntityType>
         <EntityType Name="NhanVien">
           <Key>
@@ -395,7 +395,7 @@
           <Key>
             <PropertyRef Name="ma_phieumuontra" />
           </Key>
-          <Property Name="ma_phieumuontra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ma_phieumuontra" Type="Int32" Nullable="false" />
           <Property Name="MaNV" Type="Int32" Nullable="false" />
           <Property Name="ma_sinhvien" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ngay_lapphieu" Type="DateTime" Precision="0" />
@@ -404,7 +404,7 @@
           <Property Name="Tongtien" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Sotienthu" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Conlai" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="MuonTra" Relationship="Self.FK_MuonTra_PhieuPhat" FromRole="PhieuPhat" ToRole="MuonTra" />
+          <NavigationProperty Name="MuonTra" Relationship="Self.FK_PhieuPhat_MuonTra" FromRole="PhieuPhat" ToRole="MuonTra" />
           <NavigationProperty Name="NhanVien" Relationship="Self.FK_PhieuPhat_NhanVien" FromRole="PhieuPhat" ToRole="NhanVien" />
           <NavigationProperty Name="TheThuVien" Relationship="Self.FK_PhieuPhat_TheThuVien" FromRole="PhieuPhat" ToRole="TheThuVien" />
         </EntityType>
@@ -436,7 +436,7 @@
           <Property Name="Hoten" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NgaySinh" Type="DateTime" Precision="0" />
           <Property Name="Tinhtrangthe" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MuonTras" Relationship="Self.FK_MuonTra_TheThuVien" FromRole="TheThuVien" ToRole="MuonTra" />
+          <NavigationProperty Name="MuonTras" Relationship="Self.FK_MuonTra_TheThuVien1" FromRole="TheThuVien" ToRole="MuonTra" />
           <NavigationProperty Name="PhieuPhats" Relationship="Self.FK_PhieuPhat_TheThuVien" FromRole="TheThuVien" ToRole="PhieuPhat" />
           <NavigationProperty Name="SinhVien" Relationship="Self.FK_TheThuVien_SinhVien" FromRole="TheThuVien" ToRole="SinhVien" />
         </EntityType>
@@ -502,19 +502,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MuonTra_PhieuPhat">
-          <End Role="PhieuPhat" Type="Self.PhieuPhat" Multiplicity="1" />
-          <End Role="MuonTra" Type="Self.MuonTra" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="PhieuPhat">
-              <PropertyRef Name="ma_phieumuontra" />
-            </Principal>
-            <Dependent Role="MuonTra">
-              <PropertyRef Name="ma_phieumuontra" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MuonTra_TheThuVien">
+        <Association Name="FK_MuonTra_TheThuVien1">
           <End Role="TheThuVien" Type="Self.TheThuVien" Multiplicity="1" />
           <End Role="MuonTra" Type="Self.MuonTra" Multiplicity="*" />
           <ReferentialConstraint>
@@ -523,6 +511,18 @@
             </Principal>
             <Dependent Role="MuonTra">
               <PropertyRef Name="ma_sinhvien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhieuPhat_MuonTra">
+          <End Role="MuonTra" Type="Self.MuonTra" Multiplicity="1" />
+          <End Role="PhieuPhat" Type="Self.PhieuPhat" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MuonTra">
+              <PropertyRef Name="ma_phieumuontra" />
+            </Principal>
+            <Dependent Role="PhieuPhat">
+              <PropertyRef Name="ma_phieumuontra" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -605,13 +605,13 @@
             <End Role="NhanVien" EntitySet="NhanViens" />
             <End Role="MuonTra" EntitySet="MuonTras" />
           </AssociationSet>
-          <AssociationSet Name="FK_MuonTra_PhieuPhat" Association="Self.FK_MuonTra_PhieuPhat">
-            <End Role="PhieuPhat" EntitySet="PhieuPhats" />
-            <End Role="MuonTra" EntitySet="MuonTras" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MuonTra_TheThuVien" Association="Self.FK_MuonTra_TheThuVien">
+          <AssociationSet Name="FK_MuonTra_TheThuVien1" Association="Self.FK_MuonTra_TheThuVien1">
             <End Role="TheThuVien" EntitySet="TheThuViens" />
             <End Role="MuonTra" EntitySet="MuonTras" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhieuPhat_MuonTra" Association="Self.FK_PhieuPhat_MuonTra">
+            <End Role="MuonTra" EntitySet="MuonTras" />
+            <End Role="PhieuPhat" EntitySet="PhieuPhats" />
           </AssociationSet>
           <AssociationSet Name="FK_PhieuPhat_NhanVien" Association="Self.FK_PhieuPhat_NhanVien">
             <End Role="NhanVien" EntitySet="NhanViens" />

@@ -1,0 +1,62 @@
+﻿@using QuanLyThuVien.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<MuonTra>
+
+@{
+    ViewBag.Title = "XemLichSu";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<h2>XemLichSu</h2>
+
+<div class="row mt-4">
+    <div class="col-6">
+        <form style="width: 100%; padding-left: 250px;" action="/Home/XemLichSu" method="get">
+            <div class="form-group">
+                <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm lịch sử mượn" value="" />
+            </div>
+        </form>
+    </div>
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            <thead>
+                <tr>
+                    <th>Mã sinh viên</th>
+                    <th>Tên sinh viên</th>
+                    <th>Ngày giờ mượn</th>
+                    <th>Ngày giờ trả</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@item.ma_sinhvien</td>
+                    <td>@item.TheThuVien.Hoten</td>
+                    <td>@item.ngayGio_muon</td>
+                    <td>@item.ngay_hethan</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+
+<!-- Thêm mã phân trang -->
+<br />
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("XemLichSu", new { page, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <style>
+        .MenuTrang li {
+            display: inline;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 20px;
+            margin: 2px 5px;
+            border-radius: 5px;
+            border: none;
+            text-decoration: none;
+        }
+    </style>
+    <!-- Kết thúc -->

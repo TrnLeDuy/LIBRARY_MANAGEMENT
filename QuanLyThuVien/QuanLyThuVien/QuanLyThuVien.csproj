@@ -135,6 +135,7 @@
     <Compile Include="Controllers\CuonSachesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DauSachesController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoaiSachesController.cs" />
     <Compile Include="Controllers\NhanViensController.cs" />
     <Compile Include="Controllers\TaiKhoansController.cs" />
@@ -494,6 +495,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\avatar.png" />
     <Content Include="Images\delete.jpg" />
+    <Content Include="Images\home-background.jpg" />
     <Content Include="Images\library-background-form.jpg" />
     <Content Include="Images\library-logo.png" />
     <Content Include="Images\background.png" />
@@ -878,6 +880,9 @@
     <Content Include="Views\CuonSaches\Edit.cshtml" />
     <Content Include="Views\CuonSaches\Index.cshtml" />
     <Content Include="Views\NhanViens\Index.cshtml" />
+    <Content Include="Views\Shared\_HomeLayout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\XemLichSu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
