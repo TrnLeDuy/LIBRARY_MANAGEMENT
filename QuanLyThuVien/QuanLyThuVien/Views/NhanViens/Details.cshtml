@@ -14,6 +14,7 @@
         <div class="profile-card__cnt js-profile-cnt">
             <div class="profile-card__name">@Html.DisplayFor(model => model.Hoten)</div>
             <div class="profile-card__txt">Mã Nhân viên: <strong>@Html.DisplayFor(model => model.MaNV)</strong> </div>
+            <div class="profile-card__txt">Ngày Sinh: <strong>@Html.DisplayFor(model => model.NgaySinh)</strong> </div>
             <div class="profile-card__txt">Email: <strong>@Html.DisplayFor(model => model.Email)</strong> </div>
             @{
                 if (Model.Gioitinh == "Male")
@@ -29,6 +30,7 @@
             }
             @*<div class="profile-card__txt">@Html.DisplayNameFor(model => model.Gioitinh): <strong> @Html.DisplayFor(model => model.Gioitinh)</strong> </div>*@
             <div class="profile-card__txt">Số điện thoại: <strong>@Html.DisplayFor(model => model.SDT)</strong> </div>
+            <div class="profile-card__txt">Tài Khoản: <strong>@Html.DisplayFor(model => model.TaiKhoan.Username)</strong> </div>
 
             <div class="profile-card-loc">
                 <span class="profile-card-loc__icon">
@@ -45,8 +47,12 @@
                 @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
                 {
                     <a class="profile-card__button button--orange" href="~/NhanViens/Edit?id=@Model.MaNV">Chỉnh sửa</a>
+                    <a class="profile-card__button button--blue" href="~/NhanViens/Index">Trở về</a>
                 }
-                <a class="profile-card__button button--blue" href="~/NhanViens/Index">Trở về</a>
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "TT" || Session["Role"].ToString() == "NV"))
+                {
+                    <a class="profile-card__button button--blue" href="~/Dashboard/Dashboard">Trở về</a>
+                }
             </div>
 
         </div>

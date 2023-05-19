@@ -22,7 +22,7 @@
             <div class="profile-card__txt">Tình trạng: <strong>@Html.DisplayFor(model => model.TinhTrang)</strong> </div>
             <div class="profile-card__txt">Mô tả: <strong>@Html.DisplayFor(model => model.Mota)</strong> </div>
             <div class="profile-card-ctr">
-                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
                 {
                     <a class="profile-card__button button--orange" href="~/CuonSaches/Edit?id=@Model.ma_cuonsach">Chỉnh sửa</a>
                 }
