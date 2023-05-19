@@ -64,7 +64,7 @@ GO
 
 CREATE TABLE [ChiTietMuonTra] (
 	[isbn] [int] NOT NULL,
-	[ma_phieumuontra] [int] IDENTITY (1,1) NOT NULL ,
+	[ma_phieumuontra] [int] NOT NULL ,
 	[ma_cuonsach]  [char] (10) NOT NULL ,
 	[ma_sinhvien] nvarchar(10) check (ma_sinhvien like '[0-9][0-9]DH[0-9][0-9][0-9][0-9][0-9][0-9]') NOT NULL,
 	[ngayGio_tra] [smalldatetime] NULL ,
@@ -75,7 +75,7 @@ GO
 
 
 CREATE TABLE [PhieuPhat] (
-	[ma_phieumuontra] [int] IDENTITY (1,1) NOT NULL ,
+	[ma_phieumuontra] [int] NOT NULL ,
 	MaNV [int] check (MaNV like '[0-9][0-9][0-9][0-9][0-9]') NOT NULL,
 	[ma_sinhvien] [nvarchar] (10) check (ma_sinhvien like '[0-9][0-9]DH[0-9][0-9][0-9][0-9][0-9][0-9]') NOT NULL,
 	[ngay_lapphieu] smalldatetime,
@@ -214,15 +214,15 @@ REFERENCES [dbo].[NhanVien] ([MaNV])
 GO
 ALTER TABLE [dbo].[MuonTra] CHECK CONSTRAINT [FK_MuonTra_NhanVien]
 GO
-ALTER TABLE [dbo].[MuonTra]  WITH CHECK ADD  CONSTRAINT [FK_MuonTra_PhieuPhat] FOREIGN KEY([ma_phieumuontra])
-REFERENCES [dbo].[PhieuPhat] ([ma_phieumuontra])
-GO
-ALTER TABLE [dbo].[MuonTra] CHECK CONSTRAINT [FK_MuonTra_PhieuPhat]
-GO
-ALTER TABLE [dbo].[MuonTra]  WITH CHECK ADD  CONSTRAINT [FK_MuonTra_TheThuVien] FOREIGN KEY([ma_sinhvien])
+ALTER TABLE [dbo].[MuonTra]  WITH CHECK ADD  CONSTRAINT [FK_MuonTra_TheThuVien1] FOREIGN KEY([ma_sinhvien])
 REFERENCES [dbo].[TheThuVien] ([ma_sinhvien])
 GO
-ALTER TABLE [dbo].[MuonTra] CHECK CONSTRAINT [FK_MuonTra_TheThuVien]
+ALTER TABLE [dbo].[MuonTra] CHECK CONSTRAINT [FK_MuonTra_TheThuVien1]
+GO
+ALTER TABLE [dbo].[PhieuPhat]  WITH CHECK ADD  CONSTRAINT [FK_PhieuPhat_MuonTra] FOREIGN KEY([ma_phieumuontra])
+REFERENCES [dbo].[MuonTra] ([ma_phieumuontra])
+GO
+ALTER TABLE [dbo].[PhieuPhat] CHECK CONSTRAINT [FK_PhieuPhat_MuonTra]
 GO
 ALTER TABLE [dbo].[PhieuPhat]  WITH CHECK ADD  CONSTRAINT [FK_PhieuPhat_NhanVien] FOREIGN KEY([MaNV])
 REFERENCES [dbo].[NhanVien] ([MaNV])
@@ -246,17 +246,9 @@ ALTER TABLE [dbo].[TheThuVien] CHECK CONSTRAINT [FK_TheThuVien_SinhVien]
 GO
 ALTER TABLE [dbo].[ChiTietMuonTra]  WITH CHECK ADD CHECK  (([ma_sinhvien] like '[0-9][0-9]DH[0-9][0-9][0-9][0-9][0-9][0-9]'))
 GO
-ALTER TABLE [dbo].[ChiTietMuonTra]  WITH CHECK ADD CHECK  (([ma_sinhvien] like '[0-9][0-9]DH[0-9][0-9][0-9][0-9][0-9][0-9]'))
-GO
-ALTER TABLE [dbo].[MuonTra]  WITH CHECK ADD CHECK  (([ma_sinhvien] like '[0-9][0-9]DH[0-9][0-9][0-9][0-9][0-9][0-9]'))
-GO
 ALTER TABLE [dbo].[MuonTra]  WITH CHECK ADD CHECK  (([ma_sinhvien] like '[0-9][0-9]DH[0-9][0-9][0-9][0-9][0-9][0-9]'))
 GO
 ALTER TABLE [dbo].[MuonTra]  WITH CHECK ADD CHECK  (([MaNV] like '[0-9][0-9][0-9][0-9][0-9]'))
-GO
-ALTER TABLE [dbo].[MuonTra]  WITH CHECK ADD CHECK  (([MaNV] like '[0-9][0-9][0-9][0-9][0-9]'))
-GO
-ALTER TABLE [dbo].[NhanVien]  WITH CHECK ADD CHECK  (([MaNV] like '[0-9][0-9][0-9][0-9][0-9]'))
 GO
 ALTER TABLE [dbo].[NhanVien]  WITH CHECK ADD CHECK  (([MaNV] like '[0-9][0-9][0-9][0-9][0-9]'))
 GO
@@ -266,14 +258,8 @@ ALTER TABLE [dbo].[PhieuPhat]  WITH CHECK ADD CHECK  (([MaNV] like '[0-9][0-9][0
 GO
 ALTER TABLE [dbo].[SinhVien]  WITH CHECK ADD CHECK  (([ma_sinhvien] like '[0-9][0-9]DH[0-9][0-9][0-9][0-9][0-9][0-9]'))
 GO
-ALTER TABLE [dbo].[SinhVien]  WITH CHECK ADD CHECK  (([ma_sinhvien] like '[0-9][0-9]DH[0-9][0-9][0-9][0-9][0-9][0-9]'))
-GO
 ALTER TABLE [dbo].[TaiKhoan]  WITH CHECK ADD CHECK  (([MaNV] like '[0-9][0-9][0-9][0-9][0-9]'))
 GO
-ALTER TABLE [dbo].[TaiKhoan]  WITH CHECK ADD CHECK  (([MaNV] like '[0-9][0-9][0-9][0-9][0-9]'))
 GO
 ALTER TABLE [dbo].[TheThuVien]  WITH CHECK ADD CHECK  (([ma_sinhvien] like '[0-9][0-9]DH[0-9][0-9][0-9][0-9][0-9][0-9]'))
 GO
-ALTER TABLE [dbo].[TheThuVien]  WITH CHECK ADD CHECK  (([ma_sinhvien] like '[0-9][0-9]DH[0-9][0-9][0-9][0-9][0-9][0-9]'))
-GO
-
