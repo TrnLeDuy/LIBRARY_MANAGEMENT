@@ -18,19 +18,14 @@ namespace Library_Management.Models
         public DauSach()
         {
             this.CuonSaches = new HashSet<CuonSach>();
-            this.DangKies = new HashSet<DangKy>();
         }
     
         public int isbn { get; set; }
-        public string ma_tuasach { get; set; }
-        public string ngonngu { get; set; }
-        public string bia { get; set; }
+        public string ten_dausach { get; set; }
+        public Nullable<int> soluong { get; set; }
         public string trangthai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CuonSach> CuonSaches { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DangKy> DangKies { get; set; }
-        public virtual TuaSach TuaSach { get; set; }
     }
 }

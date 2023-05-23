@@ -17,7 +17,8 @@ namespace Library_Management.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NhanVien()
         {
-            this.QuaTrinhMuons = new HashSet<QuaTrinhMuon>();
+            this.MuonTras = new HashSet<MuonTra>();
+            this.PhieuPhats = new HashSet<PhieuPhat>();
         }
     
         public int MaNV { get; set; }
@@ -29,7 +30,9 @@ namespace Library_Management.Models
         public string Diachi { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuaTrinhMuon> QuaTrinhMuons { get; set; }
+        public virtual ICollection<MuonTra> MuonTras { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhieuPhat> PhieuPhats { get; set; }
         public virtual TaiKhoan TaiKhoan { get; set; }
     }
 }

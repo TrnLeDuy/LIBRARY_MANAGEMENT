@@ -13,19 +13,6 @@ namespace Library_Management.Controllers
         {
             return View();
         }
-        public ActionResult Books()
-        {
-            return View();
-        }
 
-        public ActionResult Readers()
-        {
-            return View();
-        }
-
-        public ActionResult Borrows()
-        {
-            return View();
-        }
     }
 }

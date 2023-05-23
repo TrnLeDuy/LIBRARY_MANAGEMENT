@@ -1,0 +1,110 @@
+﻿@using QuanLyThuVien.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<TaiKhoan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .delete-button {
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
+
+    .edit-button {
+        background-color: green;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
+</style>
+
+<div class="row mt-4">
+    <div class="col-6">
+        @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+        {
+            @Html.ActionLink("Thêm Tài Khoản mới", "Create", null, new { @class = "btn btn-primary" })
+        }
+    </div>
+    <div class="col-6">
+        <form style="width: 100%; padding-left: 250px;" action="/TaiKhoans/Index" method="get">
+            <div class="form-group">
+                <input class="form-control" id="search" type="text" name="search" placeholder="Tìm kiếm Tài Khoản" value="" />
+            </div>
+        </form>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Tài khoản
+            </th>
+            <th>
+                Họ tên
+            </th>
+            <th>
+                Quyền
+            </th>
+            @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+            {
+                <th></th>
+            }
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/TaiKhoans/Details?id=@item.MaNV">
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/TaiKhoans/Details?id=@item.MaNV">
+                        @Html.DisplayFor(modelItem => item.NhanVien.Hoten)
+                    </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/TaiKhoans/Details?id=@item.MaNV">
+                        @Html.DisplayFor(modelItem => item.LoaiTK)
+                    </a>
+                </td>
+                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                {
+                    <td>
+                        <a class="edit-button fa fa-pencil" href="~/TaiKhoans/Edit?id=@item.MaNV"></a>
+                        <a class="delete-button fa fa-trash" href="~/TaiKhoans/Delete?id=@item.MaNV"></a>
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+</div>
+<!-- Thêm mã phân trang -->
+<br />
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <style>
+        .MenuTrang li {
+            display: inline;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 20px;
+            margin: 2px 5px;
+            border-radius: 5px;
+            border: none;
+            text-decoration: none;
+        }
+    </style>
+    <!-- Kết thúc -->

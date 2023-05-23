@@ -17,13 +17,13 @@ namespace Library_Management.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LoaiSach()
         {
-            this.TuaSaches = new HashSet<TuaSach>();
+            this.CuonSaches = new HashSet<CuonSach>();
         }
     
         public string ma_loaisach { get; set; }
         public string ten_loaisach { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TuaSach> TuaSaches { get; set; }
+        public virtual ICollection<CuonSach> CuonSaches { get; set; }
     }
 }

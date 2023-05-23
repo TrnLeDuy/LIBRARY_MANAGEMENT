@@ -13,25 +13,5 @@ namespace Library_Management.Controllers
         {
             return View();
         }
-
-        public ActionResult Users()
-        {
-            return View();
-        }
-
-        public ActionResult Books()
-        {
-            return View();
-        }
-        //Đọc giả: Học sinh - Tạo thẻ thư viện
-        public ActionResult Readers()
-        {
-            return View();
-        }
-
-        public ActionResult Borrows()
-        {
-            return View();
-        }
     }
 }

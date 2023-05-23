@@ -1,0 +1,49 @@
+﻿@model QuanLyThuVien.Models.DauSach
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="background-image: url('../../Images/library-background-form.jpg');">
+    <div class="inner">
+
+        @using (Html.BeginForm("Create", "DauSaches", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <h3>Thêm đầu sách</h3>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-wrapper">
+                @Html.LabelFor(model => model.ten_dausach, "Tên đầu sách", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ten_dausach, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ten_dausach, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-wrapper">
+                @Html.LabelFor(model => model.soluong, "Số lượng", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.soluong, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.soluong, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-wrapper">
+                @Html.LabelFor(model => model.trangthai, "Trạng thái", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.trangthai, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.trangthai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <input class="btn btn-success button1" type="submit" value="Xác nhận">
+        }
+        <div style="margin-left:238px;color:#ccc">
+            @Html.ActionLink("Quay lại danh sách", "Index")
+        </div>
+    </div>
+
+</div>
+

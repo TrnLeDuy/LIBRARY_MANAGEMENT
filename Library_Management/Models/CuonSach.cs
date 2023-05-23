@@ -17,16 +17,22 @@ namespace Library_Management.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CuonSach()
         {
-            this.QuaTrinhMuons = new HashSet<QuaTrinhMuon>();
+            this.ChiTietMuonTras = new HashSet<ChiTietMuonTra>();
         }
     
         public int isbn { get; set; }
         public string ma_cuonsach { get; set; }
+        public string ten_cuonsach { get; set; }
+        public string tacgia { get; set; }
+        public Nullable<System.DateTime> namxuatban { get; set; }
+        public string nhaxuatban { get; set; }
+        public string ma_loaisach { get; set; }
         public string TinhTrang { get; set; }
+        public string Mota { get; set; }
     
-        public virtual DauSach DauSach { get; set; }
-        public virtual Muon Muon { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuaTrinhMuon> QuaTrinhMuons { get; set; }
+        public virtual ICollection<ChiTietMuonTra> ChiTietMuonTras { get; set; }
+        public virtual DauSach DauSach { get; set; }
+        public virtual LoaiSach LoaiSach { get; set; }
     }
 }

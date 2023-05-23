@@ -38,12 +38,17 @@ namespace Library_Management.Controllers
                     if (user != null)
                     {
                         //Lưu thông vào session
-                        Session["Account"] = user;
                         if (user.LoaiTK == "AD")
+                        {
+                            Session["Admin"] = user;
                             return View("~/Views/Management/Dashboard.cshtml");
+                        }
                         else if (user.LoaiTK == "TT")
+                        {
+                            Session["ThuThu"] = user;
                             return View("~/Views/Librarian/Dashboard.cshtml");
-                        else 
+                        }
+                        else
                             return View("~/Views/Employee/Readers.cshtml");
                     }
                     else

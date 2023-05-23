@@ -1,0 +1,102 @@
+﻿@using QuanLyThuVien.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<LoaiSach>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .delete-button {
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
+
+    .edit-button {
+        background-color: green;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
+</style>
+
+<div class="row mt-4">
+    <div class="col-6">
+        @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+        {
+            @Html.ActionLink("Thêm thể loại", "Create", null, new { @class = "btn btn-primary" })
+        }
+    </div>
+    <div class="col-6">
+        <form style="width: 100%; padding-left: 250px;" action="/LoaiSaches/Index" method="get">
+            <div class="form-group">
+                <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm thể loại" value="" />
+            </div>
+        </form>
+    </div>
+    <table class="table">
+        <tr>
+
+            <th>
+                Mã thể loại
+            </th>
+            <th>
+                Thể loại
+            </th>
+            @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+            {
+                <th></th>
+            }
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                   <a style="text-decoration: none; color: black;" href="~/LoaiSaches/Details?id=@item.ma_loaisach">
+                       @Html.DisplayFor(modelItem => item.ma_loaisach)
+                   </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/LoaiSaches/Details?id=@item.ma_loaisach">
+                        @Html.DisplayFor(modelItem => item.ten_loaisach)
+                    </a>
+                </td>
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+                {
+                    <td>
+                        <a class="edit-button fa fa-pencil" href="~/LoaiSaches/Edit?id=@item.ma_loaisach"></a>
+                        <a class="delete-button fa fa-trash" href="~/LoaiSaches/Delete?id=@item.ma_loaisach"></a>
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+</div>
+<!-- Thêm mã phân trang -->
+<br />
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <style>
+        .MenuTrang li {
+            display: inline;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 20px;
+            margin: 2px 5px;
+            border-radius: 5px;
+            border: none;
+            text-decoration: none;
+        }
+    </style>
+    <!-- Kết thúc -->
