@@ -32,9 +32,7 @@
     <div class="col-6">
         @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
         {
-            @Html.ActionLink("Thêm đầu sách", "Create", null, new { @class = "btn btn-primary" }) 
-        <span><a class="btn btn-success" href="@Url.Action("CapNhatTrangThai", "DauSaches")">Cập nhật trạng thái</a></span>
-            
+            @Html.ActionLink("Thêm đầu sách", "Create", null, new { @class = "btn btn-primary" })
         }
     </div>
     <div class="col-6">

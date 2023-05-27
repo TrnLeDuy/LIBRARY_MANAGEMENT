@@ -18,9 +18,6 @@ namespace QuanLyThuVien.Controllers
         // GET: DauSaches
         public ActionResult Index(string currentFilter, string s, int? page)
         {
-            if (Session["Role"] == null)
-                return RedirectToAction("Login", "Users");
-
             int pageSize = 7;
             int pageNum = (page ?? 1);
 
@@ -42,13 +39,7 @@ namespace QuanLyThuVien.Controllers
                 dauSach = dauSach.Where(mcs => mcs.ten_dausach.Contains(s));
             }
 
-            
-
             dauSach = dauSach.OrderBy(id => id.isbn);
-            foreach(var item in dauSach)
-            {
-                item.soluong = db.CuonSaches.Count(i => i.isbn == item.isbn);
-            }
 
             return View(dauSach.ToPagedList(pageNum, pageSize));
         }
@@ -56,9 +47,6 @@ namespace QuanLyThuVien.Controllers
         // GET: DauSaches/Details/5
         public ActionResult Details(int? id)
         {
-            if (Session["Role"] == null)
-                return RedirectToAction("Login", "Users");
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -74,9 +62,6 @@ namespace QuanLyThuVien.Controllers
         // GET: DauSaches/Create
         public ActionResult Create()
         {
-            if (Session["Role"] == null)
-                return RedirectToAction("Login", "Users");
-
             return View();
         }
 
@@ -95,32 +80,15 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ten_dausach")] DauSach dauSach)
+        public ActionResult Create([Bind(Include = "ten_dausach,soluong,trangthai")] DauSach dauSach)
         {
+            int nextCateID = GetNextCateID();
+            dauSach.isbn = nextCateID;
             if (ModelState.IsValid)
             {
-                if(db.DauSaches.Any(d => d.ten_dausach == dauSach.ten_dausach))
-                {
-                    TempData["ThongBaoFailed"] = "Đã tồn tại đầu sách " + dauSach.ten_dausach;
-                    return RedirectToAction("Index");
-                }
-                try
-                {
-                    int nextCateID = GetNextCateID();
-                    dauSach.isbn = nextCateID;
-                    dauSach.soluong = db.CuonSaches.Count(i => i.isbn == dauSach.isbn);
-                    dauSach.trangthai = "Hết sách";
-                    db.DauSaches.Add(dauSach);
-                    db.SaveChanges();
-                    TempData["ThongBaoSuccess"] = "Thêm thành công đầu sách " + dauSach.ten_dausach;
-                    return RedirectToAction("Create");
-                }
-                catch (Exception ex)
-                {
-                    TempData["ThongBaoFailed"] = "Thất bại khi thêm đầu sách!";
-                    return RedirectToAction("Create");
-                }
-                
+                db.DauSaches.Add(dauSach);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
             return View(dauSach);
@@ -129,9 +97,6 @@ namespace QuanLyThuVien.Controllers
         // GET: DauSaches/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (Session["Role"] == null)
-                return RedirectToAction("Login", "Users");
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -153,18 +118,9 @@ namespace QuanLyThuVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    db.Entry(dauSach).State = EntityState.Modified;
-                    db.SaveChanges();
-                    TempData["ThongBaoSuccess"] = "Cập nhật thành công đầu sách " + dauSach.ten_dausach;
-                    return RedirectToAction("Edit", new { id = dauSach.isbn});
-                }
-                catch(Exception ex)
-                {
-                    TempData["ThongBaoFailed"] = "Thất bại khi cập nhật đầu sách " + dauSach.ten_dausach;
-                    return RedirectToAction("Edit", new { id = dauSach.isbn });
-                }
+                db.Entry(dauSach).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             return View(dauSach);
         }
@@ -172,9 +128,6 @@ namespace QuanLyThuVien.Controllers
         // GET: DauSaches/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (Session["Role"] == null)
-                return RedirectToAction("Login", "Users");
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -193,18 +146,9 @@ namespace QuanLyThuVien.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             DauSach dauSach = db.DauSaches.Find(id);
-            try
-            {
-                db.DauSaches.Remove(dauSach);
-                db.SaveChanges();
-                TempData["ThongBaoSuccess"] = "Xóa thành công đầu sách " + dauSach.ten_dausach;
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                TempData["ThongBaoFailed"] = "Thất bại khi xóa đầu sách " + dauSach.ten_dausach;
-                return RedirectToAction("Index");
-            }
+            db.DauSaches.Remove(dauSach);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -214,29 +158,6 @@ namespace QuanLyThuVien.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public ActionResult CapNhatTrangThai()
-        {
-            try
-            {
-                var dauSach = db.DauSaches.ToList();
-                foreach (var item in dauSach)
-                {
-                    if (db.CuonSaches.Count(s => s.isbn == item.isbn) > 0)
-                        item.trangthai = "Còn sách";
-                    else
-                        item.trangthai = "Hết sách";
-                    db.SaveChanges();
-                }
-                TempData["ThongBaoSuccess"] = "Cập nhật trạng thái đầu sách thành công.";
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                TempData["ThongBaoFailed"] = "Cập nhật trạng thái đầu sách thất bại!";
-                return RedirectToAction("Index");
-            }
         }
     }
 }

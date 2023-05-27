@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -20,9 +20,6 @@ namespace QuanLyThuVien.Controllers
         // GET: NhanViens
         public ActionResult Index(string currentFilter, string search, int? page)
         {
-            if (Session["Role"] == null)
-                return RedirectToAction("Login", "Users");
-
             int pageSize = 10;
             int pageNum = (page ?? 1);
 
@@ -55,9 +52,6 @@ namespace QuanLyThuVien.Controllers
         // GET: NhanViens/Details/5
         public ActionResult Details(int? id)
         {
-            if (Session["Role"] == null)
-                return RedirectToAction("Login", "Users");
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -73,24 +67,16 @@ namespace QuanLyThuVien.Controllers
         // GET: NhanViens/Create
         public ActionResult Create()
         {
-            if (Session["Role"] == null)
-                return RedirectToAction("Login", "Users");
-
             ViewBag.MaNV = new SelectList(db.TaiKhoans, "MaNV", "Username");
             return View();
         }
 
         public int GetNextUserID()
         {
-            var maNV = db.NhanViens.OrderByDescending(i => i.MaNV).FirstOrDefault();
-            int id;
-            if(maNV == null)
+            int id = 1;
+            if (db.NhanViens.Any())
             {
-                id = 1;
-            }
-            else
-            {
-                id = maNV.MaNV + 1;
+                id = db.NhanViens.Max(nv => nv.MaNV) + 1;
             }
             return id;
         }
@@ -102,34 +88,25 @@ namespace QuanLyThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Hoten,NgaySinh,Gioitinh,Email,SDT,Diachi")] NhanVien nhanVien)
         {
+            int nextUserID = GetNextUserID();
+            nhanVien.MaNV = nextUserID;
+            if (db.NhanViens.Any())
+            {
 
+            }
             if (ModelState.IsValid)
             {
-                try
-                {
-                    var nextUserID = GetNextUserID();
-                    nhanVien.MaNV = nextUserID;
 
                     db.NhanViens.Add(nhanVien);
                     db.SaveChanges();
-                    TempData["ThongBaoSuccess"] = "Thêm thành công Nhân viên " + nhanVien.Hoten;
-                    return RedirectToAction("Create");
-                }
-                catch (Exception ex)
-                {
-                    TempData["ThongBaoFailed"] = "Thất bại khi thêm mới Nhân viên!";
-                    return RedirectToAction("Create");
-                }
+                    return RedirectToAction("Index");
             }
             return View(nhanVien);
         }
 
         // GET: NhanViens/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            if (Session["Role"] == null)
-                return RedirectToAction("Login", "Users");
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -148,23 +125,13 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaNV,Hoten,NgaySinh,Gioitinh,Email,SDT,Diachi")] NhanVien nhanVien)
+        public ActionResult Edit([Bind(Include = "Hoten,NgaySinh,Gioitinh,Email,SDT,Diachi")] NhanVien nhanVien)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    db.Entry(nhanVien).State = EntityState.Modified;
-                    db.SaveChanges();
-                    TempData["ThongBaoSuccess"] = "Cập nhật thành công Nhân viên " + nhanVien.Hoten;
-                    return RedirectToAction("Edit", new {id = nhanVien.MaNV});
-                }
-                catch(Exception ex)
-                {
-                    TempData["ThongBaoFailed"] = "Thất bại khi cập nhật Nhân viên!";
-                    return RedirectToAction("Edit", new { id = nhanVien.MaNV });
-                }
-
+                db.Entry(nhanVien).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             ViewBag.MaNV = new SelectList(db.TaiKhoans, "MaNV", "Username", nhanVien.MaNV);
             return View(nhanVien);
@@ -173,9 +140,6 @@ namespace QuanLyThuVien.Controllers
         // GET: NhanViens/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (Session["Role"] == null)
-                return RedirectToAction("Login", "Users");
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -195,22 +159,13 @@ namespace QuanLyThuVien.Controllers
         {
             NhanVien nhanVien = db.NhanViens.Find(id);
             TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
-            try
+            if(taiKhoan != null)
             {
-                if (taiKhoan != null)
-                {
-                    db.TaiKhoans.Remove(taiKhoan);
-                }
-                db.NhanViens.Remove(nhanVien);
-                db.SaveChanges();
-                TempData["ThongBaoSuccess"] = "Xóa thành công Nhân viên " + nhanVien.Hoten;
-                return RedirectToAction("Index");
+                db.TaiKhoans.Remove(taiKhoan);
             }
-            catch (Exception ex)
-            {
-                TempData["ThongBaoFailed"] = "Thất bại khi xóa Nhân viên " + nhanVien.Hoten;
-                return RedirectToAction("Index");
-            }
+            db.NhanViens.Remove(nhanVien);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
