@@ -95,7 +95,7 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ten_dausach,trangthai")] DauSach dauSach)
+        public ActionResult Create([Bind(Include = "ten_dausach")] DauSach dauSach)
         {
             if (ModelState.IsValid)
             {
@@ -109,6 +109,7 @@ namespace QuanLyThuVien.Controllers
                     int nextCateID = GetNextCateID();
                     dauSach.isbn = nextCateID;
                     dauSach.soluong = db.CuonSaches.Count(i => i.isbn == dauSach.isbn);
+                    dauSach.trangthai = "Hết sách";
                     db.DauSaches.Add(dauSach);
                     db.SaveChanges();
                     TempData["ThongBaoSuccess"] = "Thêm thành công đầu sách " + dauSach.ten_dausach;
@@ -213,6 +214,29 @@ namespace QuanLyThuVien.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult CapNhatTrangThai()
+        {
+            try
+            {
+                var dauSach = db.DauSaches.ToList();
+                foreach (var item in dauSach)
+                {
+                    if (db.CuonSaches.Count(s => s.isbn == item.isbn) > 0)
+                        item.trangthai = "Còn sách";
+                    else
+                        item.trangthai = "Hết sách";
+                    db.SaveChanges();
+                }
+                TempData["ThongBaoSuccess"] = "Cập nhật trạng thái đầu sách thành công.";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                TempData["ThongBaoFailed"] = "Cập nhật trạng thái đầu sách thất bại!";
+                return RedirectToAction("Index");
+            }
         }
     }
 }

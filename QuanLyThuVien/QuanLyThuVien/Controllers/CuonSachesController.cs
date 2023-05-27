@@ -125,7 +125,7 @@ namespace QuanLyThuVien.Controllers
 
                     var lastCuonsach = db.CuonSaches.OrderByDescending(s => s.ma_cuonsach).FirstOrDefault();
                     string id;
-                    if (lastCuonsach.ma_cuonsach == null)
+                    if (lastCuonsach == null)
                     {
                         id = "CS" + cuonSach.isbn + "_001";
                         cuonSach.ma_cuonsach = id;
@@ -265,5 +265,7 @@ namespace QuanLyThuVien.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
     }
 }
