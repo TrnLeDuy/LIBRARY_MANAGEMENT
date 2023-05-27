@@ -4,6 +4,7 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
 
 <div class="container" style="background-image: url('../../Images/library-background-form.jpg');">
     <div class="inner">
@@ -15,32 +16,34 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.isbn)
                 @Html.HiddenFor(model => model.ma_cuonsach)
-                <div class="form-wrapper">
-                    Tên cuốn sách:
-                    @Html.EditorFor(model => model.ten_cuonsach, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ten_cuonsach, "", new { @class = "text-danger" })
-                    @*<input type="text" class="form-control1">*@
-                </div>
-                <div class="form-wrapper">
-                    Tác giả:
-                    @Html.EditorFor(model => model.tacgia, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.tacgia, "", new { @class = "text-danger" })
-                </div>
+
+            </div>
+            <div class="form-wrapper">
+                Tên cuốn sách:
+                @Html.EditorFor(model => model.ten_cuonsach, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ten_cuonsach, "", new { @class = "text-danger" })
+                @*<input type="text" class="form-control1">*@
+            </div>
+            <div class="form-wrapper">
+                Tác giả:
+                @Html.EditorFor(model => model.tacgia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tacgia, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
                 <div class="form-wrapper">
                     Năm xuất bản:
                     @Html.EditorFor(model => model.namxuatban, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                     @Html.ValidationMessageFor(model => model.namxuatban, "", new { @class = "text-danger" })
                 </div>
-            </div>
-
-            <div class="form-wrapper">
-                Nhà xuất bản:
-                @Html.EditorFor(model => model.nhaxuatban, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nhaxuatban, "", new { @class = "text-danger" })
+                <div class="form-wrapper">
+                    Nhà xuất bản:
+                    @Html.EditorFor(model => model.nhaxuatban, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nhaxuatban, "", new { @class = "text-danger" })
+                </div>
             </div>
             <div class="form-wrapper">
                 Thể loại:
-                @Html.DropDownList("ma_loaisach", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ma_loaisach", null, htmlAttributes: new { @class = "form-control", @id = "cateDropdown" })
                 @Html.ValidationMessageFor(model => model.ma_loaisach, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
@@ -76,3 +79,9 @@
 
 </div>
 
+<script type="text/javascript">
+    $(function () {
+        $("#isbnDropdown").chosen();
+        $("#cateDropdown").chosen();
+    });
+</script>

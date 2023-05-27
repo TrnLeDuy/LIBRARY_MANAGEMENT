@@ -30,7 +30,7 @@
 
 <div class="row mt-4">
     <div class="col-6">
-        @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+        @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
         {
             @Html.ActionLink("Thêm Cuốn Sách mới", "Create", null, new { @class = "btn btn-primary" })
         }
@@ -59,7 +59,7 @@
             <th>
                 Tình trạng
             </th>
-            @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+            @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
             {
                 <th></th>
             }
@@ -96,7 +96,7 @@
                     @*@Html.ActionLink("Edit", "Edit", new { id = item.ma_cuonsach }) |
             @Html.ActionLink("Details", "Details", new { id = item.ma_cuonsach }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.ma_cuonsach })*@
-                    @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                    @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
                     {
                     <td>
                         <a class="edit-button fa fa-pencil" href="~/CuonSaches/Edit?id=@item.ma_cuonsach"></a>
