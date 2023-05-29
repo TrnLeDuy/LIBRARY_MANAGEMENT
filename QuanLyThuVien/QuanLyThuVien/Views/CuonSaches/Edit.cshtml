@@ -4,6 +4,7 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
 
 <div class="container" style="background-image: url('../../Images/library-background-form.jpg');">
     <div class="inner">
@@ -42,7 +43,7 @@
             </div>
             <div class="form-wrapper">
                 Thể loại:
-                @Html.DropDownList("ma_loaisach", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ma_loaisach", null, htmlAttributes: new { @class = "form-control", @id = "cateDropdown" })
                 @Html.ValidationMessageFor(model => model.ma_loaisach, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
@@ -78,3 +79,9 @@
 
 </div>
 
+<script type="text/javascript">
+    $(function () {
+        $("#isbnDropdown").chosen();
+        $("#cateDropdown").chosen();
+    });
+</script>

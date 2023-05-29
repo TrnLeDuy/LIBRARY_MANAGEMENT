@@ -1,14 +1,11 @@
-﻿using System;
+﻿using QuanLyThuVien.Models;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList.Mvc;
 using PagedList;
-using QuanLyThuVien.Models;
 
 namespace QuanLyThuVien.Controllers
 {
@@ -50,34 +47,6 @@ namespace QuanLyThuVien.Controllers
 
             dsLichsu = dsLichsu.OrderBy(id => s);
             return View(dsLichsu.ToPagedList(pageNum, pageSize));
-        }
-
-        public ActionResult XemSach(string currentFilter, string s, int? page)
-        {
-            int pageSize = 7;
-            int pageNum = (page ?? 1);
-
-            if (s != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                s = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = s;
-
-            var danhSach = from l in db.CuonSaches
-                           select l;
-            if (!String.IsNullOrEmpty(s))
-            {
-                danhSach = danhSach.Where(mcs => mcs.ten_cuonsach.Contains(s) || mcs.tacgia.Contains(s) || mcs.nhaxuatban.Contains(s) || mcs.TinhTrang.Contains(s) || mcs.Mota.Contains(s) || mcs.Hinhmota.Contains(s));
-            }
-
-            danhSach = danhSach.OrderBy(id => id.ma_cuonsach);
-
-            return View(danhSach.ToPagedList(pageNum, pageSize));
         }
     }
 }
