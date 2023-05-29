@@ -42,13 +42,13 @@ namespace QuanLyThuVien.Controllers
 
             return View(theThuVien.ToPagedList(pageNum, pageSize));
         }
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TheThuVien theThuVien = db.TheThuViens.Find(id);
+            TheThuVien theThuVien = db.TheThuViens.First(mttv => mttv.ma_sinhvien == id);
             if (theThuVien == null)
             {
                 return HttpNotFound();
@@ -99,7 +99,7 @@ namespace QuanLyThuVien.Controllers
             ViewBag.ma_sinhhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "Hoten", theThuVien.ma_sinhvien);
             return View(theThuVien);
         }
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {

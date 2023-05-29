@@ -498,9 +498,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\avatar.png" />
+    <Content Include="Images\background-form.png" />
     <Content Include="Images\delete.jpg" />
     <Content Include="Images\home-background.jpg" />
-    <Content Include="Images\library-background-form.jpg" />
     <Content Include="Images\library-logo.png" />
     <Content Include="Images\background.png" />
     <Content Include="Images\orangehrm-logo.png" />
@@ -893,9 +893,9 @@
     <Content Include="Views\NhanViens\Create.cshtml" />
     <Content Include="Views\TheThuViens\Create.cshtml" />
     <Content Include="Views\TheThuViens\Delete.cshtml" />
-    <Content Include="Views\TheThuViens\Details.cshtml" />
     <Content Include="Views\TheThuViens\Edit.cshtml" />
     <Content Include="Views\TheThuViens\Index.cshtml" />
+    <Content Include="Views\TheThuViens\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
