@@ -11,12 +11,11 @@ using QuanLyThuVien.Models;
 
 namespace QuanLyThuVien.Controllers
 {
-    public class DauSachesController : Controller
+    public class TheThuViensController : Controller
     {
         private CNPM_QLTVEntities db = new CNPM_QLTVEntities();
-
-        // GET: DauSaches
-        public ActionResult Index(string currentFilter, string s, int? page)
+        // GET: TheThuViens
+        public ActionResult Index(string currentFilter, string s, int? page )
         {
             int pageSize = 7;
             int pageNum = (page ?? 1);
@@ -32,125 +31,96 @@ namespace QuanLyThuVien.Controllers
 
             ViewBag.CurrentFilter = s;
 
-            var dauSach = from l in db.DauSaches
-                           select l;
+            var theThuVien = from l in db.TheThuViens
+                          select l;
             if (!String.IsNullOrEmpty(s))
             {
-                dauSach = dauSach.Where(mcs => mcs.ten_dausach.Contains(s));
+                theThuVien = theThuVien.Where(mcs => mcs.ma_sinhvien.Contains(s));
             }
 
-            dauSach = dauSach.OrderBy(id => id.isbn);
+            theThuVien = theThuVien.OrderBy(id => id.ma_sinhvien);
 
-            return View(dauSach.ToPagedList(pageNum, pageSize));
+            return View(theThuVien.ToPagedList(pageNum, pageSize));
         }
-
-        // GET: DauSaches/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DauSach dauSach = db.DauSaches.Find(id);
-            if (dauSach == null)
+            TheThuVien theThuVien = db.TheThuViens.Find(id);
+            if (theThuVien == null)
             {
                 return HttpNotFound();
             }
-            return View(dauSach);
+            return View(theThuVien);
         }
-
-        // GET: DauSaches/Create
         public ActionResult Create()
         {
             return View();
         }
-
-        public int GetNextCateID()
-        {
-            int dsID = 1;
-            if (db.DauSaches.Any(s => s.isbn == dsID))
-            {
-                dsID = db.DauSaches.Max(id => id.isbn) + 1;
-            }
-            return dsID;
-        }
-
-        // POST: DauSaches/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ten_dausach,soluong,trangthai")] DauSach dauSach)
+        public ActionResult Create([Bind(Include = "ma_sinhvien,Hoten, Ngaysinh, Tinhtrangthe")] TheThuVien theThuVien)
         {
-            int nextCateID = GetNextCateID();
-            dauSach.isbn = nextCateID;
             if (ModelState.IsValid)
             {
-                db.DauSaches.Add(dauSach);
+                db.TheThuViens.Add(theThuVien);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(dauSach);
+            return View(theThuVien);
         }
-
-        // GET: DauSaches/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DauSach dauSach = db.DauSaches.Find(id);
-            if (dauSach == null)
+            TheThuVien theThuVien= db.TheThuViens.Find(id);
+            if (theThuVien == null)
             {
                 return HttpNotFound();
             }
-            return View(dauSach);
+            ViewBag.ma_sinhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "Hoten", theThuVien.ma_sinhvien);
+            return View(theThuVien);
         }
-
-        // POST: DauSaches/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "isbn,ten_dausach,soluong,trangthai")] DauSach dauSach)
+        public ActionResult Edit([Bind(Include = "ma_sinhvien,Hoten")] TheThuVien theThuVien)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(dauSach).State = EntityState.Modified;
+                db.Entry(theThuVien).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(dauSach);
+            ViewBag.ma_sinhhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "Hoten", theThuVien.ma_sinhvien);
+            return View(theThuVien);
         }
-
-        // GET: DauSaches/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DauSach dauSach = db.DauSaches.Find(id);
-            if (dauSach == null)
+            TheThuVien theThuVien= db.TheThuViens.Find(id);
+            if (theThuVien == null)
             {
                 return HttpNotFound();
             }
-            return View(dauSach);
+            return View(theThuVien);
         }
-
-        // POST: DauSaches/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            DauSach dauSach = db.DauSaches.Find(id);
-            db.DauSaches.Remove(dauSach);
+            TheThuVien theThuVien= db.TheThuViens.Find(id);
+            db.TheThuViens.Remove(theThuVien);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -160,4 +130,5 @@ namespace QuanLyThuVien.Controllers
             base.Dispose(disposing);
         }
     }
+
 }

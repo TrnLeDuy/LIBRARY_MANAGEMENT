@@ -15,6 +15,7 @@ namespace QuanLyThuVien.Controllers
         {
             ViewBag.countLibCard = db.TheThuViens.Count();
             ViewBag.countBook = db.CuonSaches.Count();
+        
             ViewBag.countEmployee = db.TaiKhoans.Count(s => s.LoaiTK != "AD");
             ViewBag.countBookRent = db.MuonTras.Count();
             return View();

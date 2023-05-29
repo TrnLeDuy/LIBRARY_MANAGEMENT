@@ -1,11 +1,12 @@
 ﻿@using QuanLyThuVien.Models;
 @using PagedList.Mvc;
-@model PagedList.PagedList<DauSach>
-
+@model PagedList.PagedList<TheThuVien>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>Thẻ thư viện </h2>
 
 <style>
 
@@ -32,29 +33,29 @@
     <div class="col-6">
         @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
         {
-            @Html.ActionLink("Thêm đầu sách", "Create", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Thêm thẻ thư viện ", "Create", null, new { @class = "btn btn-primary" })
         }
     </div>
     <div class="col-6">
-        <form style="width: 100%; padding-left: 250px;" action="/DauSaches/Index" method="get">
+        <form style="width: 100%; padding-left: 250px;" action="/TheThuViens/Index" method="get">
             <div class="form-group">
-                <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm đầu sách" value="" />
+                <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm thẻ thư viện " value="" />
             </div>
         </form>
     </div>
     <table class="table">
         <tr>
             <th>
-                Mã đầu sách
+                Mã sinh viên
             </th>
             <th>
-                Tên đầu sách
+                Họ tên
             </th>
             <th>
-                Số lượng sách
+                Ngày sinh
             </th>
             <th>
-                Trạng thái
+                Tình trạng thẻ
             </th>
             <th></th>
         </tr>
@@ -63,35 +64,35 @@
         {
             <tr>
                 <td>
-                    <a style="text-decoration: none; color: black;" href="~/DauSaches/Details?id=@item.isbn">
-                        @Html.DisplayFor(modelItem => item.isbn)
+                    <a style="text-decoration: none; color: black;" href="~/DauSaches/Details?id=@item.ma_sinhvien">
+                        @Html.DisplayFor(modelItem => item.ma_sinhvien)
+                    </a>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/DauSaches/Details?id=@item.ma_sinhvien">
+                        @Html.DisplayFor(modelItem => item.Hoten)
+                    </a>
+
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/DauSaches/Details?id=@item.ma_sinhvien">
+                        @Html.DisplayFor(modelItem => item.NgaySinh)
                     </a>
                 </td>
                 <td>
-                    <a style="text-decoration: none; color: black;" href="~/DauSaches/Details?id=@item.isbn">
-                        @Html.DisplayFor(modelItem => item.ten_dausach)
-                    </a>
-                </td>
-                <td>
-                    <a style="text-decoration: none; color: black;" href="~/DauSaches/Details?id=@item.isbn">
-                        @Html.DisplayFor(modelItem => item.soluong)
-                    </a>
-                </td>
-                <td>
-                    <a style="text-decoration: none; color: black;" href="~/DauSaches/Details?id=@item.isbn">
-                        @Html.DisplayFor(modelItem => item.trangthai)
+                    <a style="text-decoration: none; color: black;" href="~/DauSaches/Details?id=@item.ma_sinhvien">
+                        @Html.DisplayFor(modelItem => item.Tinhtrangthe)
                     </a>
                 </td>
                 @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
                 {
                     <td>
-                        <a class="edit-button fa fa-pencil" href="~/DauSaches/Edit?id=@item.isbn"></a>
-                        <a class="delete-button fa fa-trash" href="~/DauSaches/Delete?id=@item.isbn"></a>
+                        <a class="edit-button fa fa-pencil" href="~/TheThuViens/Edit?id=@item.ma_sinhvien"></a>
+                        <a class="delete-button fa fa-trash" href="~/TheThuViens/Delete?id=@item.ma_sinhvien"></a>
                     </td>
                 }
+
             </tr>
         }
-
     </table>
 </div>
 <!-- Thêm mã phân trang -->
