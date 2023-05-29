@@ -42,7 +42,7 @@
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.LoaiTK, new List<SelectListItem>
                     {
-                    new SelectListItem{Text="ADMIN", Value="AD"},
+                    new SelectListItem{Text="Quản trị viên", Value="AD"},
                     new SelectListItem{Text="Thủ thư", Value="TT"},
                     new SelectListItem{Text="Nhân viên Thư viện", Value="NV"}}, "Lựa chọn", new { @class = "form-control1" })
                     @Html.ValidationMessageFor(model => model.LoaiTK, "", new { @class = "text-danger" })

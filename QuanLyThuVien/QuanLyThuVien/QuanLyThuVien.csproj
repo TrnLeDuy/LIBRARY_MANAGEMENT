@@ -139,6 +139,7 @@
     <Compile Include="Controllers\LoaiSachesController.cs" />
     <Compile Include="Controllers\NhanViensController.cs" />
     <Compile Include="Controllers\TaiKhoansController.cs" />
+    <Compile Include="Controllers\TheThuViensController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -237,6 +238,7 @@
     <Content Include="Assets\Login\vendor\select2\select2.min.js" />
     <Content Include="Assets\Login\vendor\tilt\tilt.jquery.min.js" />
     <Content Include="Assets\Profile\datail.css" />
+    <Content Include="Content\bootstrap-chosen.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -253,6 +255,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\general.css" />
@@ -716,7 +720,11 @@
     <Content Include="Models\QLTV.edmx.diagram">
       <DependentUpon>QLTV.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-chosen.less" />
+    <Content Include="Content\bootstrap-chosen.scss" />
     <None Include="Scripts\jquery-3.6.4.intellisense.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-3.6.4.js" />
     <Content Include="Scripts\jquery-3.6.4.min.js" />
     <Content Include="Scripts\jquery-3.6.4.slim.js" />
@@ -855,7 +863,6 @@
     <Content Include="table\scss\style.scss" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
-    <Content Include="Views\NhanViens\Create.cshtml" />
     <Content Include="Views\NhanViens\Delete.cshtml" />
     <Content Include="Views\NhanViens\Details.cshtml" />
     <Content Include="Views\NhanViens\Edit.cshtml" />
@@ -883,6 +890,12 @@
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\XemLichSu.cshtml" />
+    <Content Include="Views\NhanViens\Create.cshtml" />
+    <Content Include="Views\TheThuViens\Create.cshtml" />
+    <Content Include="Views\TheThuViens\Delete.cshtml" />
+    <Content Include="Views\TheThuViens\Details.cshtml" />
+    <Content Include="Views\TheThuViens\Edit.cshtml" />
+    <Content Include="Views\TheThuViens\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
