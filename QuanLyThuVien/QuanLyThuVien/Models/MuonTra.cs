@@ -29,7 +29,7 @@ namespace QuanLyThuVien.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietMuonTra> ChiTietMuonTras { get; set; }
         public virtual NhanVien NhanVien { get; set; }
-        public virtual TheThuVien TheThuVien { get; set; }
         public virtual PhieuPhat PhieuPhat { get; set; }
+        public virtual TheThuVien TheThuVien { get; set; }
     }
 }
