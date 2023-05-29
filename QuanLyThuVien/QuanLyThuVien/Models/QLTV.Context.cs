@@ -33,6 +33,7 @@ namespace QuanLyThuVien.Models
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<PhieuPhat> PhieuPhats { get; set; }
         public virtual DbSet<SinhVien> SinhViens { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
         public virtual DbSet<TheThuVien> TheThuViens { get; set; }
     }
