@@ -21,8 +21,8 @@
         <AssociationConnector Association="CNPM_QLTVModel.FK_CuonSach_DauSach" ManuallyRouted="false" />
         <AssociationConnector Association="CNPM_QLTVModel.FK_CuonSach_LoaiSach" ManuallyRouted="false" />
         <AssociationConnector Association="CNPM_QLTVModel.FK_MuonTra_NhanVien" ManuallyRouted="false" />
-        <AssociationConnector Association="CNPM_QLTVModel.FK_MuonTra_TheThuVien1" ManuallyRouted="false" />
-        <AssociationConnector Association="CNPM_QLTVModel.FK_PhieuPhat_MuonTra" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_MuonTra_PhieuPhat" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_QLTVModel.FK_MuonTra_TheThuVien" ManuallyRouted="false" />
         <AssociationConnector Association="CNPM_QLTVModel.FK_PhieuPhat_NhanVien" ManuallyRouted="false" />
         <AssociationConnector Association="CNPM_QLTVModel.FK_TaiKhoan_NhanVien" ManuallyRouted="false" />
         <AssociationConnector Association="CNPM_QLTVModel.FK_PhieuPhat_TheThuVien" ManuallyRouted="false" />
