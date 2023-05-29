@@ -1,11 +1,9 @@
-﻿@model QuanLyThuVien.Models.NhanVien
+@model QuanLyThuVien.Models.NhanVien
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 
 <div class="container" style="background-image: url('../../Images/library-background-form.jpg');">
     <div class="inner">
@@ -13,13 +11,12 @@
         @using (Html.BeginForm("Create", "NhanViens", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <h3>Thêm Nhân viên Thư viện</h3>
-            <div class="form-wrapper">
-                Họ và tên:
-                @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control1", required = "required" } })
-                @Html.ValidationMessageFor(model => model.Hoten, "", new { @class = "text-danger" })
-            </div>
+                <div class="form-wrapper">
+                    Họ và tên: 
+                    @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control1" } })
+                    @Html.ValidationMessageFor(model => model.Hoten, "", new { @class = "text-danger" })
+                </div>
 
             <div class="form-wrapper">
                 Giới tính:
@@ -27,27 +24,27 @@
                 new List<SelectListItem>
                 {
                     new SelectListItem{Text="Nam", Value="Male"},
-                    new SelectListItem{Text="Nữ", Value="Female"}}, "Lựa chọn", new { @class = "form-control1", required = "required" })
+                    new SelectListItem{Text="Nữ", Value="Female"}}, "Lựa chọn", new { @class = "form-control1" })
                 @Html.ValidationMessageFor(model => model.Gioitinh, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
                 Số điện thoại:
-                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control1", required = "required" } })
+                @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control1" } })
                 @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
                 Ngày sinh
-                @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control1", @type = "date", required = "required" } })
+                @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control1", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
                 Email:
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control1", required = "required" } })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control1" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
                 Địa chỉ:
-                @Html.EditorFor(model => model.Diachi, new { htmlAttributes = new { @class = "form-control1", required = "required" } })
+                @Html.EditorFor(model => model.Diachi, new { htmlAttributes = new { @class = "form-control1" } })
                 @Html.ValidationMessageFor(model => model.Diachi, "", new { @class = "text-danger" })
             </div>
 

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // T4 code generation is enabled for model 'D:\D Drive\Projects\CNPM-QLTV\LIBRARY_MANAGEMENT\QuanLyThuVien\QuanLyThuVien\Models\QLTV.edmx'. 
+=======
+﻿// T4 code generation is enabled for model 'D:\Git Projects\LIBRARY_MANAGEMENT\QuanLyThuVien\QuanLyThuVien\Models\QLTV.edmx'. 
+>>>>>>> f1b1430... Revert "Khang Update (#75)"
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

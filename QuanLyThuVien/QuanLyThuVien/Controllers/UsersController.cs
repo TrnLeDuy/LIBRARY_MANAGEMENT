@@ -61,7 +61,7 @@ namespace QuanLyThuVien.Controllers
             Session["EmployeeID"] = null;
             Session["Role"] = null;
             Session.Abandon();
-            return RedirectToAction("Login");
+            return RedirectToAction("/");
         }
     }
 }

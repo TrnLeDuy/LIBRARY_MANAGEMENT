@@ -319,22 +319,16 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid ">
-                        <br />
-                        @if (TempData["ThongBaoSuccess"] != null)
+                        @if (TempData["Success"] != null)
                         {
-                            <div class="alert alert-success d-flex" role="alert">
-                                <p>
-                                    <i class="fas fa-check"></i> <span>@TempData["ThongBaoSuccess"].ToString()</span>
-                                </p>
-
+                            <div class="alert alert-primary" role="alert">
+                                @TempData["Success"]
                             </div>
                         }
-                        @if (TempData["ThongBaoFailed"] != null)
+                        @if (TempData["Error"] != null)
                         {
-                            <div class="alert alert-danger d-flex" role="alert">
-                                <p>
-                                    <i class="fas fa-exclamation-circle"></i> <span>@TempData["ThongBaoFailed"].ToString()</span>
-                                </p>
+                            <div class="alert alert-danger" role="alert">
+                                @TempData["Error"]
                             </div>
                         }
 
@@ -378,7 +372,7 @@
         <script src="~/table/js/popper.js"></script>
         <script src="~/table/js/bootstrap.min.js"></script>
         <script src="~/table/js/main.js"></script>
-        <script src="~/Scripts/chosen.jquery.js"></script>
+
         
     </div>
 </body>
