@@ -1,0 +1,93 @@
+﻿@model PagedList.PagedList<CuonSach>
+@using QuanLyThuVien.Models;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "XemSach";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<h2>XemSach</h2>
+
+<div class="col-6">
+    <form style="width: 100%; padding-left: 250px;" action="/CuonSaches/Index/XemSach" method="get">
+        <div class="form-group">
+            <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm cuốn sách" value="" />
+        </div>
+    </form>
+</div>
+<table class="table">
+    <tr>
+
+        <th>
+            Ma cuon sach
+        </th>
+        <th>
+            Ten cuon sach
+        </th>
+        <th>
+            Tac gia
+
+        <th>
+            Nha xuat ban
+        </th>
+
+        <th>
+            Tinh trang
+        </th>
+        <th>
+            Mo ta
+        </th>
+        <th>
+            Hinh mo ta
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.ten_cuonsach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tacgia)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.nhaxuatban)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.TinhTrang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mota)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hinhmota)
+            </td>
+           
+        </tr>
+    }
+
+</table>
+<!-- Thêm mã phân trang -->
+<br />
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <style>
+        .MenuTrang li {
+            display: inline;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 20px;
+            margin: 2px 5px;
+            border-radius: 5px;
+            border: none;
+            text-decoration: none;
+        }
+    </style>
+    <!-- Kết thúc -->
