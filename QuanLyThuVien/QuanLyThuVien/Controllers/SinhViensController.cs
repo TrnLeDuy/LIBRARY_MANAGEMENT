@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using QuanLyThuVien.Models;
+using PagedList;
 
 namespace QuanLyThuVien.Controllers
 {
@@ -15,15 +18,47 @@ namespace QuanLyThuVien.Controllers
         private CNPM_QLTVEntities db = new CNPM_QLTVEntities();
 
         // GET: SinhViens
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string search, int? page)
         {
-            var sinhViens = db.SinhViens.Include(s => s.TheThuVien);
-            return View(sinhViens.ToList());
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+            
+            int pageSize = 10;
+            int pageNum = (page ?? 1);
+
+            if (search != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                search = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = search;
+
+            var sinhViens = from l in db.SinhViens select l;
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                employees = db.NhanViens.Where((
+                        nhanvien => nhanvien.MaNV.ToString().Contains(search) ||
+                        nhanvien.Hoten.Contains(search) ||
+                        nhanvien.SDT.Contains(search) ||
+                        nhanvien.Email.Contains(search)));
+            }
+            employees = employees.OrderBy(id => id.MaNV);
+
+
+            return View(sinhViens.ToPagedList(pageNum, pageSize));
         }
 
         // GET: SinhViens/Details/5
         public ActionResult Details(string id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +74,9 @@ namespace QuanLyThuVien.Controllers
         // GET: SinhViens/Create
         public ActionResult Create()
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             ViewBag.ma_sinhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "Hoten");
             return View();
         }
@@ -64,6 +102,9 @@ namespace QuanLyThuVien.Controllers
         // GET: SinhViens/Edit/5
         public ActionResult Edit(string id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -97,6 +138,9 @@ namespace QuanLyThuVien.Controllers
         // GET: SinhViens/Delete/5
         public ActionResult Delete(string id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
