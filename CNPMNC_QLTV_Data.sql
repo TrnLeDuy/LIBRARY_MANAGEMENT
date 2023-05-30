@@ -2911,6 +2911,7 @@ INSERT INTO DauSach VALUES (1,N'Ngoại ngữ', null,N'Còn sách'),
 (2,N'Văn học Việt Nam', null,N'Còn sách'),
 (3,N'Khoa học tự nhiên', null,N'Còn sách')
 
+
 --------Trigger----------
 GO
 
@@ -2925,7 +2926,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER trg_SoluongDauSach_XoaSach on CuonSach
+CREATE TRIGGER trg_SoluongDauSach_XoaSach on CuonSach
 FOR DELETE
 AS
 BEGIN
@@ -2938,4 +2939,4 @@ GO
 
 select * from DauSach
 
-select * from SinhVien
+

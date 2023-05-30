@@ -132,11 +132,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ChiTietMuonTrasController.cs" />
     <Compile Include="Controllers\CuonSachesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DauSachesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoaiSachesController.cs" />
+    <Compile Include="Controllers\MuonTrasController.cs" />
     <Compile Include="Controllers\NhanViensController.cs" />
     <Compile Include="Controllers\SinhViensController.cs" />
     <Compile Include="Controllers\TaiKhoansController.cs" />
@@ -182,6 +184,9 @@
       <DependentUpon>QLTV.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\SinhVien.cs">
+      <DependentUpon>QLTV.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>QLTV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaiKhoan.cs">
@@ -726,6 +731,8 @@
     <Content Include="Assets\Login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Assets\Login\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Assets\Login\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap-chosen.scss" />
+    <Content Include="Content\bootstrap-chosen.less" />
     <EntityDeploy Include="Models\QLTV.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QLTV.Designer.cs</LastGenOutput>
@@ -904,6 +911,16 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\XemLichSu.cshtml" />
     <Content Include="Views\NhanViens\Create.cshtml" />
+    <Content Include="Views\MuonTras\Create.cshtml" />
+    <Content Include="Views\MuonTras\Delete.cshtml" />
+    <Content Include="Views\MuonTras\Details.cshtml" />
+    <Content Include="Views\MuonTras\Edit.cshtml" />
+    <Content Include="Views\MuonTras\Index.cshtml" />
+    <Content Include="Views\ChiTietMuonTras\Create.cshtml" />
+    <Content Include="Views\ChiTietMuonTras\Delete.cshtml" />
+    <Content Include="Views\ChiTietMuonTras\Details.cshtml" />
+    <Content Include="Views\ChiTietMuonTras\Edit.cshtml" />
+    <Content Include="Views\ChiTietMuonTras\Index.cshtml" />
     <Content Include="Views\TheThuViens\Create.cshtml" />
     <Content Include="Views\TheThuViens\Delete.cshtml" />
     <Content Include="Views\TheThuViens\Edit.cshtml" />
