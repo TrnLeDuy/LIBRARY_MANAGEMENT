@@ -41,13 +41,13 @@ namespace QuanLyThuVien.Controllers
 
             if (!String.IsNullOrEmpty(search))
             {
-                employees = db.NhanViens.Where((
-                        nhanvien => nhanvien.MaNV.ToString().Contains(search) ||
-                        nhanvien.Hoten.Contains(search) ||
-                        nhanvien.SDT.Contains(search) ||
-                        nhanvien.Email.Contains(search)));
+                sinhViens = db.SinhViens.Where((
+                        sinhvien => sinhvien.ma_sinhvien.ToString().Contains(search)));
+                        //sinhViens.Hoten.Contains(search) ||
+                        //sinhViens.SDT.Contains(search) ||
+                        //sinhViens.Email.Contains(search)));
             }
-            employees = employees.OrderBy(id => id.MaNV);
+            sinhViens = sinhViens.OrderBy(id => id.ma_sinhvien);
 
 
             return View(sinhViens.ToPagedList(pageNum, pageSize));
