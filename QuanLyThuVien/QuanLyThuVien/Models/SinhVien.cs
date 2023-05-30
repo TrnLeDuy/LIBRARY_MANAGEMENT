@@ -11,12 +11,14 @@ namespace QuanLyThuVien.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SinhVien
     {
         public string ma_sinhvien { get; set; }
         public string diachi { get; set; }
         public string dienthoai { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime han_sd { get; set; }
     
         public virtual TheThuVien TheThuVien { get; set; }

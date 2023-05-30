@@ -30,30 +30,31 @@
             }
             @*<div class="profile-card__txt">@Html.DisplayNameFor(model => model.Gioitinh): <strong> @Html.DisplayFor(model => model.Gioitinh)</strong> </div>*@
             <div class="profile-card__txt">Số điện thoại: <strong>@Html.DisplayFor(model => model.SDT)</strong> </div>
-            <div class="profile-card__txt">Tài Khoản: <strong>@Html.DisplayFor(model => model.TaiKhoan.Username)</strong> </div>
+            <a style="text-decoration: none; color: black;" href="~/TaiKhoans/Details?id=@Model.MaNV">
+                <div class="profile-card__txt">Tài Khoản: <strong>@Html.DisplayFor(model => model.TaiKhoan.Username)</strong> </div>
+            </a>
+                <div class="profile-card-loc">
+                    <span class="profile-card-loc__icon">
+                        <svg class="icon"><use xlink:href="#icon-location"></use></svg>
+                    </span>
+                    <span class="profile-card-loc__txt">
+                        @Html.DisplayFor(model => model.Diachi)
+                    </span>
+                </div>
 
-            <div class="profile-card-loc">
-                <span class="profile-card-loc__icon">
-                    <svg class="icon"><use xlink:href="#icon-location"></use></svg>
-                </span>
-                <span class="profile-card-loc__txt">
-                    @Html.DisplayFor(model => model.Diachi)
-                </span>
-            </div>
 
 
-
-            <div class="profile-card-ctr">
-                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
-                {
-                    <a class="profile-card__button button--orange" href="~/NhanViens/Edit?id=@Model.MaNV">Chỉnh sửa</a>
-                    <a class="profile-card__button button--blue" href="~/NhanViens/Index">Trở về</a>
-                }
-                @if (Session["Role"] != null && (Session["Role"].ToString() == "TT" || Session["Role"].ToString() == "NV"))
-                {
-                    <a class="profile-card__button button--blue" href="~/Dashboard/Dashboard">Trở về</a>
-                }
-            </div>
+                <div class="profile-card-ctr">
+                    @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                    {
+                        <a class="profile-card__button button--orange" href="~/NhanViens/Edit?id=@Model.MaNV">Chỉnh sửa</a>
+                        <a class="profile-card__button button--blue" href="~/NhanViens/Index">Trở về</a>
+                    }
+                    @if (Session["Role"] != null && (Session["Role"].ToString() == "TT" || Session["Role"].ToString() == "NV"))
+                    {
+                        <a class="profile-card__button button--blue" href="~/Dashboard/Dashboard">Trở về</a>
+                    }
+                </div>
 
         </div>
 

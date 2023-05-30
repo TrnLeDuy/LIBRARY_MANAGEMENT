@@ -11,7 +11,8 @@ namespace QuanLyThuVien.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CuonSach
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,6 +25,7 @@ namespace QuanLyThuVien.Models
         public string ma_cuonsach { get; set; }
         public string ten_cuonsach { get; set; }
         public string tacgia { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public Nullable<System.DateTime> namxuatban { get; set; }
         public string nhaxuatban { get; set; }
         public string ma_loaisach { get; set; }

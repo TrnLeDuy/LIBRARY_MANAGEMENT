@@ -1,4 +1,4 @@
-﻿@model QuanLyThuVien.Models.NhanVien
+﻿    @model QuanLyThuVien.Models.NhanVien
 
 @{
     ViewBag.Title = "Create";
@@ -12,6 +12,7 @@
         {
             @Html.AntiForgeryToken()
             <h3>Thêm Nhân viên Thư viện</h3>
+            <hr />
             <div class="form-wrapper">
                 Họ và tên:
                 @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control1" } })

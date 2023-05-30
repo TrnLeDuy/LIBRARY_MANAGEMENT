@@ -57,6 +57,10 @@ namespace QuanLyThuVien.Controllers
         }
         public ActionResult Create()
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
+            ViewBag.ma_sinhvien = new SelectList(db.SinhViens.Where(e => !db.TheThuViens.Any(u => u.ma_sinhvien == e.ma_sinhvien)), "ma_sinhvien", "ma_sinhvien");
             return View();
         }
         [HttpPost]
@@ -65,8 +69,29 @@ namespace QuanLyThuVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TheThuViens.Add(theThuVien);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    if (db.TheThuViens.Any(a => a.ma_sinhvien == theThuVien.ma_sinhvien))
+                    {
+                        TempData["ThongBaoFailed"] = "Đã tồn tại Thẻ thư viện: " + theThuVien.ma_sinhvien;
+                        return RedirectToAction("Create");
+                    }
+                    try
+                    {
+                        db.TheThuViens.Add(theThuVien);
+                        db.SaveChanges();
+                        TempData["ThongBaoSuccess"] = "Tạo thẻ thành công " + theThuVien.ma_sinhvien;
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["ThongBaoFailed"] = "Thất bại khi tạo thẻ!";
+                        return RedirectToAction("Create");
+                    }
+                }
+
+                ViewBag.ma_sinhvien = new SelectList(db.SinhViens, "ma_sinhvien", "ma_sinhvien", theThuVien.ma_sinhvien);
+                
                 return RedirectToAction("Index");
             }
 
@@ -92,9 +117,18 @@ namespace QuanLyThuVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(theThuVien).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(theThuVien).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["ThongBaoSuccess"] = "Cập nhật thành công thẻ thư viện " + theThuVien.ma_sinhvien;
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    TempData["ThongBaoFailed"] = "Thất bại khi cập nhật thẻ thư viện " + theThuVien.ma_sinhvien;
+                    return RedirectToAction("Edit", new { id = theThuVien.ma_sinhvien });
+                }
             }
             ViewBag.ma_sinhhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "Hoten", theThuVien.ma_sinhvien);
             return View(theThuVien);

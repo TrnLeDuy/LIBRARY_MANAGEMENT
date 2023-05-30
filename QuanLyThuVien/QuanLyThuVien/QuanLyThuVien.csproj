@@ -189,6 +189,7 @@
     <Compile Include="Models\TheThuVien.cs">
       <DependentUpon>QLTV.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\map\ThuVienHS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -500,6 +501,7 @@
     <Content Include="Images\avatar.png" />
     <Content Include="Images\background-form.png" />
     <Content Include="Images\delete.jpg" />
+    <Content Include="Images\Faenza-edit-delete-symbolic.png" />
     <Content Include="Images\home-background.jpg" />
     <Content Include="Images\library-logo.png" />
     <Content Include="Images\background.png" />
