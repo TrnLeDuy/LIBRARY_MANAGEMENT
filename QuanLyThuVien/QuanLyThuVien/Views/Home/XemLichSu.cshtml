@@ -7,11 +7,14 @@
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
-<h2>XemLichSu</h2>
-
+<style>
+    body {
+        background-image: url('../../Images/bg-sts.jpg');
+    }
+</style>
 <div class="row mt-4">
-    <div class="col-6">
-        <form style="width: 100%; padding-left: 250px;" action="/Home/XemLichSu" method="get">
+    <div class="col-12">
+        <form style="width: 60%; padding-left: 20%; float: right; padding-right: 50px; padding-bottom: 30px" action="/Home/XemLichSu" method="get">
             <div class="form-group">
                 <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm lịch sử mượn" value="" />
             </div>

@@ -1,0 +1,71 @@
+﻿@model QuanLyThuVien.Models.CuonSach
+@{
+    ViewBag.Title = "Xemchitiet";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<style>
+    body {
+        
+        background-image: url('../../Images/bg-sts.jpg');
+        background-size: 100%;
+    }
+</style>
+<div class="wrapper">
+    <div class="profile-card js-profile-card">
+        <h2 class="profile-card__name" style="margin-top: 50px; margin-left:120px">@Html.DisplayFor(model => model.ten_cuonsach)</h2>
+        <div class="profile-card__img">
+            <img src="~/Images/@Model.Hinhmota" alt="profile card" style="width: 350px">
+        </div>
+
+        <div class="profile-card__cnt js-profile-cnt">
+            <p style="font-size: 25px">Thông tin sách:</p>
+            <div class="profile-card__txt" style="margin-top: 15px"><strong style="margin-right:15px">Mã Cuốn Sách:</strong> @Html.DisplayFor(model => model.ma_cuonsach) </div>
+            <div class="profile-card__txt"> <strong style="margin-right:15px">Đầu sách:</strong>@Html.DisplayFor(model => model.DauSach.ten_dausach) </div>
+            <div class="profile-card__txt"><strong style="margin-right:15px">Tác giả:</strong>@Html.DisplayFor(model => model.tacgia) </div>
+            <div class="profile-card__txt"><strong style="margin-right:15px">Thể loại:</strong>@Html.DisplayFor(model => model.LoaiSach.ten_loaisach)</div>
+            <div class="profile-card__txt"><strong style="margin-right:15px">Nhà xuất bản:</strong>@Html.DisplayFor(model => model.nhaxuatban)</div>
+            <div class="profile-card__txt"><strong style="margin-right:15px">Năm xuất bản:</strong>@Html.DisplayFor(model => model.namxuatban) </div>
+            <div class="profile-card__txt"><strong style="margin-right:15px">Tình trạng: </strong>@Html.DisplayFor(model => model.TinhTrang) </div>
+            <div class="profile-card__txt"><strong style="margin-right:15px">Mô tả:</strong>@Html.DisplayFor(model => model.Mota) </div>
+            <hr/>
+            <div class="profile-card-ctr">
+
+                <a class="profile-card__button button--blue" href="~/Home/XemSach">Trở về</a>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+<style>
+    .profile-card js-profile-card{
+       
+    }
+    .profile-card__img {
+        margin-top: 40px;
+        width: 40%;
+        height: 500px;
+        float: left;
+        text-align: center;
+    }
+
+    .profile-card__cnt js-profile-cnt {
+        
+        width: 60%;
+        float: right;
+        text-align: center;
+    }
+    .profile-card__txt {
+        
+        padding:10px;
+    }
+</style>
+
+
+
+

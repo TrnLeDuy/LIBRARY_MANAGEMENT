@@ -493,7 +493,9 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\1800.jpg" />
     <Content Include="Images\avatar.png" />
+    <Content Include="Images\bg-sts.jpg" />
     <Content Include="Images\delete.jpg" />
     <Content Include="Images\home-background.jpg" />
     <Content Include="Images\library-background-form.jpg" />
@@ -883,6 +885,9 @@
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\XemLichSu.cshtml" />
+    <Content Include="Views\Home\XemSach.cshtml" />
+    <Content Include="Views\Home\Xemchitiet.cshtml" />
+    <Content Include="Views\Home\Dangnhap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

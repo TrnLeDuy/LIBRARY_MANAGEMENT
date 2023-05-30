@@ -68,16 +68,77 @@ namespace QuanLyThuVien.Controllers
 
             ViewBag.CurrentFilter = s;
 
-            var danhSach = from l in db.CuonSaches
+            var list = from l in db.CuonSaches
                            select l;
             if (!String.IsNullOrEmpty(s))
             {
-                danhSach = danhSach.Where(mcs => mcs.ten_cuonsach.Contains(s) || mcs.tacgia.Contains(s) || mcs.nhaxuatban.Contains(s) || mcs.TinhTrang.Contains(s) || mcs.Mota.Contains(s) || mcs.Hinhmota.Contains(s));
+                list = list.Where(k => k.ten_cuonsach.Contains(s));
             }
 
-            danhSach = danhSach.OrderBy(id => id.ma_cuonsach);
+            list = list.OrderBy(id => id.ma_cuonsach);
 
-            return View(danhSach.ToPagedList(pageNum, pageSize));
+            return View(list.ToPagedList(pageNum, pageSize));
+        }
+        public ActionResult Xemchitiet(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CuonSach cuonSach = db.CuonSaches.First(mcs => mcs.ma_cuonsach == id);
+            if (cuonSach == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cuonSach);
+        }
+
+
+        [HttpGet]
+        public ActionResult Dangnhap()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Dangnhap([Bind(Include = "ma_sinhvien")] TheThuVien tks )
+        {
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(tks.ma_sinhvien))
+                    ModelState.AddModelError(string.Empty, "Vui lòng nhập mã sinh viên");
+               
+                if (ModelState.IsValid)
+                {
+                    //Tìm người dùng có tên đăng nhập và password hợp lệ trong CSDL
+                    var tk = db.TheThuViens.FirstOrDefault(k => k.ma_sinhvien == tks.ma_sinhvien);
+                    if (tk != null)
+                    {
+                        //Lưu thông vào session
+                        
+                        Session["MSV"] = tk.ma_sinhvien;
+                        Session["HT"] = tk.Hoten;
+                        Session["NS"] = tk.NgaySinh;
+                        Session["TT"] = tk.Tinhtrangthe;
+                        return Redirect("XemLichSu");
+                    }
+                    else
+                        ViewBag.ThongBao = "Mã sinh viên không đúng!";
+                }
+            }
+            return View();
+        }
+        public ActionResult Dangxuat()
+        {
+            //Perform any necessary cleanup or logging out of the user
+            //Remove any authentication cookies or session state information
+            //Redirect the user to the login page
+            Session["MSV"] = null;
+            Session["HT"] = null;
+            Session["NS"] = null;
+            Session["TT"] = null;
+            Session.Abandon();
+            return RedirectToAction("Index");
         }
     }
 }

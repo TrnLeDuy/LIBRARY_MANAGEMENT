@@ -1,82 +1,93 @@
-﻿@model PagedList.PagedList<CuonSach>
-@using QuanLyThuVien.Models;
+﻿@using QuanLyThuVien.Models;
 @using PagedList.Mvc;
+@model PagedList.PagedList<CuonSach>
+
 @{
     ViewBag.Title = "XemSach";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
-<h2>XemSach</h2>
-
-<div class="col-6">
-    <form style="width: 100%; padding-left: 250px;" action="/CuonSaches/Index/XemSach" method="get">
-        <div class="form-group">
-            <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm cuốn sách" value="" />
-        </div>
-    </form>
-</div>
-<table class="table">
-    <tr>
-
-        <th>
-            Ma cuon sach
-        </th>
-        <th>
-            Ten cuon sach
-        </th>
-        <th>
-            Tac gia
-
-        <th>
-            Nha xuat ban
-        </th>
-
-        <th>
-            Tinh trang
-        </th>
-        <th>
-            Mo ta
-        </th>
-        <th>
-            Hinh mo ta
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.ten_cuonsach)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tacgia)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.nhaxuatban)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.TinhTrang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mota)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hinhmota)
-            </td>
-           
-        </tr>
+<style>
+    body {
+        background-image: url('../../Images/bg-sts.jpg');
+        background-size: cover;
     }
+</style>
 
-</table>
+<h2 style="margin-left: 50px; margin-top: 30px">Mời bạn đọc tham khảo</h2>
+
+<div class="row mt-4" style="text-align: center; margin-left: 30px; margin-right: 30px">
+
+    <div class="col-12">
+        <form style="width: 60%; padding-left: 20%; float: right; padding-right: 50px; padding-bottom: 30px" action="/Home/XemSach" method="get">
+            <div class="form-group">
+                <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm cuốn sách" value="" />
+            </div>
+        </form>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Tên sách
+            </th>
+            <th>
+                Tác giả
+            </th>
+            <th>
+                Nhà xuất bản
+            </th>
+            <th>
+                Tình trạng
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a style="text-decoration: none; padding-top: 50px; color: black;" href="~/Home/Xemchitiet?id=@item.ma_cuonsach">
+                        <img src="~/Images/@item.Hinhmota" style="width:100px" />
+
+                    </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black; padding-top: 30px" href="~/Home/Xemchitiet?id=@item.ma_cuonsach">
+                        @Html.DisplayFor(modelItem => item.ten_cuonsach)
+                    </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/Home/Xemchitiet?id=@item.ma_cuonsach">
+                        @Html.DisplayFor(modelItem => item.tacgia)
+                    </a>
+                </td>
+
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/Home/Xemchitiet?id=@item.ma_cuonsach">
+                        @Html.DisplayFor(modelItem => item.nhaxuatban)
+                    </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/Home/Xemchitiet?id=@item.ma_cuonsach">
+                        @Html.DisplayFor(modelItem => item.TinhTrang)
+                    </a>
+                </td>
+
+
+            </tr>
+        }
+
+
+    </table>
+</div>
 <!-- Thêm mã phân trang -->
 <br />
     Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
     <div class="MenuTrang">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+        @Html.PagedListPager(Model, page => Url.Action("XemLichSu", new { page, currentFilter = ViewBag.CurrentFilter }))
     </div>
     <style>
         .MenuTrang li {
