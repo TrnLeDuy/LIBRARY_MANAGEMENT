@@ -42,10 +42,10 @@ namespace QuanLyThuVien.Controllers
             if (!String.IsNullOrEmpty(search))
             {
                 sinhViens = db.SinhViens.Where((
-                        sinhvien => sinhvien.ma_sinhvien.ToString().Contains(search)));
-                        //sinhViens.Hoten.Contains(search) ||
-                        //sinhViens.SDT.Contains(search) ||
-                        //sinhViens.Email.Contains(search)));
+                        sinhvien => sinhvien.ma_sinhvien.Contains(search) ||
+                        sinhvien.TheThuVien.Hoten.Contains(search) ||
+                        sinhvien.dienthoai.Contains(search) ||
+                        sinhvien.diachi.Contains(search)));
             }
             sinhViens = sinhViens.OrderBy(id => id.ma_sinhvien);
 

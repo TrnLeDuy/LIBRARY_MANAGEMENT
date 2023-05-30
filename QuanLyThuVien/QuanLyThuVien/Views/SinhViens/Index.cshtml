@@ -1,52 +1,118 @@
-﻿@model IEnumerable<QuanLyThuVien.Models.SinhVien>
+﻿@using QuanLyThuVien.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<SinhVien>
 
 @{
     ViewBag.Title = "Danh sách Sinh viên";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<style>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.diachi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dienthoai)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.han_sd)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TheThuVien.Hoten)
-        </th>
-        <th></th>
-    </tr>
+    .delete-button {
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.diachi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dienthoai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.han_sd)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TheThuVien.Hoten)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ma_sinhvien }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ma_sinhvien }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ma_sinhvien })
-        </td>
-    </tr>
-}
+    .edit-button {
+        background-color: green;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
+</style>
 
-</table>
+
+
+<div class="row mt-4">
+    <div class="col-6">
+        @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+        {
+            @Html.ActionLink("Thêm Sinh viên mới", "Create", null, new { @class = "btn btn-primary" })
+        }
+    </div>
+    <div class="col-6">
+        <form style="width: 100%; padding-left: 250px;" action="/SinhViens/Index" method="get">
+            <div class="form-group">
+                <input class="form-control" id="search" type="text" name="search" placeholder="Tìm kiếm Sinh viên" value="" />
+            </div>
+        </form>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Mã Sinh viên
+            </th>
+            <th>
+                Họ tên
+            </th>
+            <th>
+                Địa chỉ
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Hạn sử dụng
+            </th>
+            @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+            {
+                <th></th>
+            }
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                        @Html.DisplayFor(modelItem => item.ma_sinhvien)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.TheThuVien.Hoten)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.diachi)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.dienthoai)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.han_sd)
+                </td>
+                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
+                {
+                    <td>
+                        <a class="edit-button fa fa-pencil" href="~/SinhViens/Edit?id=@item.ma_sinhvien"></a>
+                        <a class="delete-button fa fa-trash" href="~/SinhViens/Delete?id=@item.ma_sinhvien"></a>
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+</div>
+<!-- Thêm mã phân trang -->
+<br />
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <style>
+        .MenuTrang li {
+            display: inline;
+            background-color: lightblue;
+            color: white;
+            padding: 10px 20px;
+            margin: 2px 5px;
+            border-radius: 5px;
+            border: none;
+            text-decoration: none;
+        }
+    </style>
+    <!-- Kết thúc -->
