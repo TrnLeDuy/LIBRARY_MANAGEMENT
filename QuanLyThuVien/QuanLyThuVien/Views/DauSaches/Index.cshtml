@@ -32,10 +32,9 @@
     <div class="col-6">
         @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
         {
-            @Html.ActionLink("Thêm đầu sách", "Create", null, new { @class = "btn btn-primary" }) 
-        <span><a class="btn btn-success" href="@Url.Action("CapNhatTrangThai", "DauSaches")">Cập nhật trạng thái</a></span>
-            
+            @Html.ActionLink("Thêm đầu sách", "Create", null, new { @class = "btn btn-primary" })
         }
+        <span><a class="btn btn-success" href="@Url.Action("CapNhatTrangThai", "DauSaches")">Cập nhật trạng thái</a></span>
     </div>
     <div class="col-6">
         <form style="width: 100%; padding-left: 250px;" action="/DauSaches/Index" method="get">
@@ -84,13 +83,23 @@
                         @Html.DisplayFor(modelItem => item.trangthai)
                     </a>
                 </td>
-                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+                @*@if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
                 {
                     <td>
                         <a class="edit-button fa fa-pencil" href="~/DauSaches/Edit?id=@item.isbn"></a>
                         <a class="delete-button fa fa-trash" href="~/DauSaches/Delete?id=@item.isbn"></a>
                     </td>
+                }*@
+            <td>
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+                {
+                    <a class="edit-button fa fa-pencil" href="~/DauSaches/Edit?id=@item.isbn"></a>
                 }
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD"))
+                {
+                    <a class="delete-button fa fa-trash" href="~/DauSaches/Delete?id=@item.isbn"></a>
+                }
+            </td>
             </tr>
         }
 

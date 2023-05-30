@@ -29,10 +29,7 @@
 
 <div class="row mt-4">
     <div class="col-6">
-        @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
-        {
             @Html.ActionLink("Thêm thẻ thư viện ", "Create", null, new { @class = "btn btn-primary" })
-        }
     </div>
     <div class="col-6">
         <form style="width: 100%; padding-left: 250px;" action="/TheThuViens/Index" method="get">
@@ -94,14 +91,16 @@
                         }
                     </a>
                 </td>
-                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
-                {
-                    <td>
+                <td>
+                    @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+                    {
                         <a class="edit-button fa fa-pencil" href="~/TheThuViens/Edit?id=@item.ma_sinhvien"></a>
+                    }
+                    @if (Session["Role"] != null && (Session["Role"].ToString() == "AD"))
+                    {
                         <a class="delete-button fa fa-trash" href="~/TheThuViens/Delete?id=@item.ma_sinhvien"></a>
-                    </td>
-                }
-
+                    }
+                </td>
             </tr>
         }
     </table>

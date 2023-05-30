@@ -3,7 +3,7 @@
 @model PagedList.PagedList<MuonTra>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách Phiếu mượn";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -30,10 +30,7 @@
 
 <div class="row mt-4">
     <div class="col-6">
-        @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
-        {
             @Html.ActionLink("Thêm phiếu mượn trả", "Create", null, new { @class = "btn btn-primary" })
-        }
     </div>
     <div class="col-6">
         <form style="width: 100%; padding-left: 250px;" action="/MuonTras/Index" method="get">
@@ -51,18 +48,9 @@
                 Mã Thẻ thư viện
             </th>
             <th>
-                Nhân viên phụ trách
-            </th>
-            <th>
                 Ngày mượn
             </th>
-            <th>
-                Ngày trả
-            </th>
-            @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
-            {
-                <th></th>
-            }
+            <th></th>
         </tr>
 
         @foreach (var item in Model)
@@ -80,29 +68,29 @@
                 </td>
                 <td>
                     <a style="text-decoration: none; color: black;" href="~/MuonTras/Details?id=@item.ma_phieumuontra">
-                        @Html.DisplayFor(modelItem => item.NhanVien.Hoten)
-                    </a>
-                </td>
-                <td>
-                    <a style="text-decoration: none; color: black;" href="~/MuonTras/Details?id=@item.ma_phieumuontra">
                         @Html.DisplayFor(modelItem => item.ngayGio_muon)
                     </a>
                 </td>
-                <td>
-                    <a style="text-decoration: none; color: black;" href="~/MuonTras/Details?id=@item.ma_phieumuontra">
-                        @Html.DisplayFor(modelItem => item.ngay_hethan)
-                    </a>
-                </td>
                 @*@Html.ActionLink("Edit", "Edit", new { id = item.ma_cuonsach }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ma_cuonsach }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ma_cuonsach })*@
-                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+                @Html.ActionLink("Details", "Details", new { id = item.ma_cuonsach }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ma_cuonsach })*@
+                @*@if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
                 {
                     <td>
                         <a class="edit-button fa fa-pencil" href="~/MuonTras/Edit?id=@item.ma_phieumuontra"></a>
                         <a class="delete-button fa fa-trash" href="~/MuonTras/Delete?id=@item.ma_phieumuontra"></a>
                     </td>
-                }
+                }*@
+                <td>
+                    @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+                    {
+                        <a class="edit-button fa fa-pencil" href="~/MuonTras/Edit?id=@item.ma_phieumuontra"></a>
+                    }
+                    @if (Session["Role"] != null && (Session["Role"].ToString() == "AD"))
+                    {
+                        <a class="delete-button fa fa-trash" href="~/MuonTras/Delete?id=@item.ma_phieumuontra"></a>
+                    }
+                </td>
 
             </tr>
         }

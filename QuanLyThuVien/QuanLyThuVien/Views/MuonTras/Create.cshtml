@@ -1,16 +1,16 @@
 ﻿@model QuanLyThuVien.Models.MuonTra
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Tạo Phiếu Mượn";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+@*<h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>MuonTra</h4>
         <hr />
@@ -53,8 +53,69 @@
             </div>
         </div>
     </div>
-}
+}*@
 
-<div>
+@*<div>
     @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+<link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
+
+<div class="container" style="background-image: url('../../Images/background-form5.png');">
+    <div class="inner">
+
+        @using (Html.BeginForm("Create", "MuonTras", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <h3>Tạo Phiếu mượn</h3>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-wrapper">
+                <div class="col-md-5">Sinh viên</div>
+                <div class="col-md-10">
+                    @Html.DropDownList("ma_sinhvien", null, htmlAttributes: new { @class = "form-control1", @id = "svienDropdown", required = "required" })
+                    @Html.ValidationMessageFor(model => model.MaNV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Nhân viên</div>
+                <div class="col-md-10">
+                        @Html.DropDownList("MaNV", null, htmlAttributes: new { @class = "form-control1", @id = "nvienDropdown", required = "required" })
+                        @Html.ValidationMessageFor(model => model.MaNV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Ngày Mượn</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ngayGio_muon, new { htmlAttributes = new { @class = "form-control1", type = "date", required = "required" } })
+                    @Html.ValidationMessageFor(model => model.ngayGio_muon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-wrapper">
+                <div class="col-md-5">Hạn trả sách</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ngay_hethan, new { htmlAttributes = new { @class = "form-control1", type = "date", required = "required" } })
+                    @Html.ValidationMessageFor(model => model.ngay_hethan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <input class="btn btn-success button1" type="submit" value="Xác nhận">
+        }
+            <div style="margin-left:238px;color:#ccc">
+                @Html.ActionLink("Quay lại danh sách", "Index")
+            </div>
+
+    </div>
 </div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#svienDropdown").chosen();
+        $("#nvienDropdown").chosen();
+    });
+</script>
+
