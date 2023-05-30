@@ -5,62 +5,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="container" style="background-image: url('../../Images/background-form6.png');">
+    <div class="inner">
+        @using (Html.BeginForm("Edit", "ChiTietMuonTras", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <h3>Cập nhập sách mượn</h3>
+            <hr />
+            <div class="form-group">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.isbn)
+                @Html.HiddenFor(model => model.ma_sinhvien)
+                @Html.HiddenFor(model => model.ma_phieumuontra)
+                @Html.HiddenFor(model => model.soluong)
+                @Html.HiddenFor(model => model.ma_cuonsach)
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>ChiTietMuonTra</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.isbn)
 
-        @Html.HiddenFor(model => model.ma_phieumuontra)
-
-        @Html.HiddenFor(model => model.ma_cuonsach)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ma_sinhvien, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ma_sinhvien, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ma_sinhvien, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ngayGio_tra, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ngayGio_tra, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="form-wrapper">
+                Cuốn sách:
+                @Html.EditorFor(model => model.CuonSach.ten_cuonsach, new { htmlAttributes = new { @class = "form-control1", @readonly = "readonly" } })
+
+            </div>
+
+            <div class="form-wrapper">
+                Ngày giờ trả:
+                @Html.EditorFor(model => model.ngayGio_tra, new { htmlAttributes = new { @class = "form-control1", type = "date" } })
                 @Html.ValidationMessageFor(model => model.ngayGio_tra, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.soluong, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.soluong, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.soluong, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ghichu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ghichu, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="form-wrapper">
+                Ghi chú:
+                @Html.EditorFor(model => model.ghichu, new { htmlAttributes = new { @class = "form-control1" } })
                 @Html.ValidationMessageFor(model => model.ghichu, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input style="margin-left:-15px;background-color:Green" type="submit" value="Lưu" class=" button1" />
+                </div>
             </div>
+        }
+
+        <div style="margin-left:45px;color:#ccc">
+            <a href="~/MuonTras/Details?id=@Model.ma_phieumuontra">Quay lại</a>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>

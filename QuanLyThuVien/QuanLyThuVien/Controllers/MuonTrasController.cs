@@ -49,8 +49,11 @@ namespace QuanLyThuVien.Controllers
         }
 
         // GET: MuonTras/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -66,8 +69,11 @@ namespace QuanLyThuVien.Controllers
         // GET: MuonTras/Create
         public ActionResult Create()
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             ViewBag.MaNV = new SelectList(db.NhanViens, "MaNV", "Hoten");
-            ViewBag.ma_sinhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "Hoten");
+            ViewBag.ma_sinhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "ma_sinhvien");
             ViewBag.ma_phieumuontra = new SelectList(db.PhieuPhats, "ma_phieumuontra", "ma_sinhvien");
             return View();
         }
@@ -77,13 +83,29 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ma_phieumuontra,ma_sinhvien,MaNV,ngayGio_muon,ngay_hethan")] MuonTra muonTra)
+        public ActionResult Create([Bind(Include = "ma_phieumuontra,MaNV,ngayGio_muon,ma_sinhvien,ngay_hethan")] MuonTra muonTra)
         {
             if (ModelState.IsValid)
             {
-                db.MuonTras.Add(muonTra);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    var nhanVien = Session["Account"] as TaiKhoan;
+                    if (nhanVien != null)
+                    {
+                        muonTra.MaNV = nhanVien.MaNV;
+                    }
+                    muonTra.ngayGio_muon = DateTime.Now;
+                    db.MuonTras.Add(muonTra);
+                    db.SaveChanges();
+                    TempData["ThongBaoSuccess"] = "Phiếu mượn số " + muonTra.ma_phieumuontra.ToString() + " đã được thêm!";
+                    return RedirectToAction("Create");
+                }
+                catch (Exception ex)
+                {
+                    TempData["ThongBaoFailed"] = "Thất bại khi thêm mới phiếu mượn";
+                    return RedirectToAction("Create");
+                }
+                
             }
 
             ViewBag.MaNV = new SelectList(db.NhanViens, "MaNV", "Hoten", muonTra.MaNV);
@@ -95,6 +117,9 @@ namespace QuanLyThuVien.Controllers
         // GET: MuonTras/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -119,9 +144,18 @@ namespace QuanLyThuVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(muonTra).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(muonTra).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["ThongBaoSuccess"] = "Cập nhật thành công phiếu mượn " + muonTra.ma_phieumuontra.ToString();
+                    return RedirectToAction("Edit", new { id = muonTra.ma_phieumuontra});
+                }
+                catch (Exception ex)
+                {
+                    TempData["ThongBaoFailed"] = "Thất bại khi cập nhật phiếu mượn " + muonTra.ma_phieumuontra.ToString();
+                    return RedirectToAction("Edit", new { id = muonTra.ma_phieumuontra });
+                }
             }
             ViewBag.MaNV = new SelectList(db.NhanViens, "MaNV", "Hoten", muonTra.MaNV);
             ViewBag.ma_sinhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "Hoten", muonTra.ma_sinhvien);
@@ -132,6 +166,9 @@ namespace QuanLyThuVien.Controllers
         // GET: MuonTras/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -149,10 +186,25 @@ namespace QuanLyThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MuonTra muonTra = db.MuonTras.Find(id);
-            db.MuonTras.Remove(muonTra);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                MuonTra muonTra = db.MuonTras.Find(id);
+                var chiTietMuon = db.ChiTietMuonTras.Where(c => c.ma_phieumuontra == id).ToList();
+                foreach (var item in chiTietMuon)
+                {
+                    db.ChiTietMuonTras.Remove(item);
+                }
+                db.MuonTras.Remove(muonTra);
+                db.SaveChanges();
+                TempData["ThongBaoSuccess"] = "Xóa thành công phiếu mượn " + muonTra.ma_phieumuontra.ToString();
+                return RedirectToAction("Index");
+            }
+            catch(Exception ex)
+            {
+                MuonTra muonTra = db.MuonTras.Find(id);
+                TempData["ThongBaoFailed"] = "Thất bại khi xóa phiếu mượn " + muonTra.ma_phieumuontra.ToString();
+                return RedirectToAction("Index");
+            }
         }
 
         protected override void Dispose(bool disposing)

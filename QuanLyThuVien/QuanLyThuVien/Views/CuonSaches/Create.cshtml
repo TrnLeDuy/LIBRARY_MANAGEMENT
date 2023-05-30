@@ -54,7 +54,7 @@
             </div>
             <div class="form-wrapper">
                 <div class="col-md-5">Ảnh bìa:</div>
-                <input type="file" name="Hinhmota" />
+                <input type="file" name="Hinhmota" required/>
                 @Html.ValidationMessageFor(model => model.Hinhmota, "", new { @class = "text-danger" })
             </div>
 

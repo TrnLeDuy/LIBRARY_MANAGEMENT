@@ -1,0 +1,124 @@
+﻿@model QuanLyThuVien.Models.PhieuPhat
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="background-image: url('../../Images/background-form6.png');">
+    <div class="inner">
+        @using (Html.BeginForm("Edit", "PhieuPhats", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <h3>Cập nhập phiếu phạt</h3>
+            <hr />
+            <div class="form-group">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ma_phieumuontra)
+                @Html.HiddenFor(model => model.ma_sinhvien)
+
+            </div>
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Ngày lập phiếu</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ngay_lapphieu, new { htmlAttributes = new { @class = "form-control1", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Songay_quahan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Số ngày quá hạn</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Songay_quahan, new { htmlAttributes = new { @class = "form-control1", id = "songay_quahan", name = "songay_quahan" } })
+                    @Html.ValidationMessageFor(model => model.Songay_quahan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Tổng tiền</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Tongtien, new { htmlAttributes = new { @class = "form-control1", id = "tongtien", name = "tongtien" } })
+                    @Html.ValidationMessageFor(model => model.Tongtien, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Số tiền thu</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Sotienthu, new { htmlAttributes = new { @class = "form-control1", id = "sotienthu", name = "sotienthu" } })
+                    @Html.ValidationMessageFor(model => model.Sotienthu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Còn lại</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Conlai, new { htmlAttributes = new { @class = "form-control1", id = "conlai", name = "conlai", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Conlai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Lý do</div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.nguyen_nhan, new List<SelectListItem>
+                    {
+                    new SelectListItem{Text="Trễ hạn", Value="Trễ hạn"},
+                    new SelectListItem{Text="Hỏng sách", Value="Hỏng sách"},
+                    new SelectListItem{Text="Mất sách", Value="Mất sách"}}, "Lựa chọn", new { @class = "form-control1", required = "required", id = "lydo", name = "lydo" })
+                    @Html.ValidationMessageFor(model => model.nguyen_nhan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input style="margin-left:-15px;background-color:Green" type="submit" value="Lưu" class=" button1" />
+                </div>
+            </div>
+        }
+
+        <div style="margin-left:45px;color:#ccc">
+            <a href="~/PhieuPhats/Index">Quay lại</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#songay_quahan, #sotienthu").on("input", function () {
+            var songay_quahan = parseInt($("#songay_quahan").val());
+            var tongtien = songay_quahan * 3000;
+            $("#tongtien").val(tongtien);
+
+            var sotienthu = parseFloat($("#sotienthu").val());
+            var conlai = tongtien - sotienthu;
+            if (conlai < 0) {
+                conlai = 0;
+            }
+            $("#conlai").val(conlai);
+        });
+
+        $("#lydo").change(function () {
+            var selectedValue = $(this).val();
+            var songay_quahan = parseInt($("#songay_quahan").val());
+
+            if (selectedValue === "Trễ hạn") {
+                var tongtien = songay_quahan * 3000;
+                $("#tongtien").val(tongtien);
+            } else if (selectedValue === "Mất sách") {
+                var tongtien = (songay_quahan * 3000) + 50000;
+                $("#tongtien").val(tongtien);
+            } else if (selectedValue === "Hỏng sách") {
+                var tongtien = (songay_quahan * 3000) + 20000;
+                $("#tongtien").val(tongtien);
+            } else {
+                $("#tongtien").val(tongtien);
+            }
+        });
+    });
+
+</script>

@@ -24,6 +24,7 @@ namespace QuanLyThuVien.Models
         public int ma_phieumuontra { get; set; }
         public string ma_sinhvien { get; set; }
         public int MaNV { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime ngayGio_muon { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public Nullable<System.DateTime> ngay_hethan { get; set; }

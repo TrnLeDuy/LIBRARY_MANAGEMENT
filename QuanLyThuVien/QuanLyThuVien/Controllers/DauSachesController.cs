@@ -221,10 +221,21 @@ namespace QuanLyThuVien.Controllers
             try
             {
                 var dauSach = db.DauSaches.ToList();
+                
                 foreach (var item in dauSach)
                 {
                     if (db.CuonSaches.Count(s => s.isbn == item.isbn) > 0)
-                        item.trangthai = "Còn sách";
+                    {
+                        
+                        if (db.CuonSaches.Any(s => s.isbn == item.isbn && s.TinhTrang == "Còn sách"))
+                        {
+                            item.trangthai = "Còn sách";
+                        }
+                        else if(db.CuonSaches.All(s => s.isbn == item.isbn && s.TinhTrang == "Đang mượn"))
+                            item.trangthai = "Hết sách";
+                        else
+                            item.trangthai = "Hết sách";
+                    }
                     else
                         item.trangthai = "Hết sách";
                     db.SaveChanges();

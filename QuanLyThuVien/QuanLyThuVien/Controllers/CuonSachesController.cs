@@ -86,10 +86,10 @@ namespace QuanLyThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "isbn,ten_cuonsach,tacgia,namxuatban,nhaxuatban,ma_loaisach,Mota")] CuonSach cuonSach, HttpPostedFileBase Hinhmota)
         {
-            if(Hinhmota == null)
+            if (Hinhmota == null)
             {
-                ViewBag.ThongBao = "Vui lòng chọn ảnh bìa";
-                return View();
+                TempData["ThongBaoFailed"] = "Vui lòng chọn ảnh bìa!";
+                return View("Create");
             }
 
             if (ModelState.IsValid)
