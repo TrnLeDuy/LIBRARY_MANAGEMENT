@@ -5,58 +5,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="container" style="background-color: white;">
+    <div class="inner">
+        @using (Html.BeginForm("Edit", "MuonTras", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>MuonTra</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ma_phieumuontra)
+            <h3>Cập nhập thông tin phiếu mượn trả</h3>
+            <hr />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ma_sinhvien, "ma_sinhvien", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ma_sinhvien", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ma_phieumuontra)
+            @Html.HiddenFor(model => model.ngayGio_muon)
+            @Html.HiddenFor(model => model.MaNV)
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Mã sinh viên:</div>
+                @Html.EditorFor(model => model.ma_sinhvien, new { htmlAttributes = new { @class = "form-control1", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.ma_sinhvien, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaNV, "MaNV", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MaNV", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MaNV, "", new { @class = "text-danger" })
+            <div class="form-wrapper">
+                <div class="col-md-5">Nhân viên phụ trách:</div>
+                @Html.EditorFor(model => model.NhanVien.Hoten, new { htmlAttributes = new { @class = "form-control1", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.NhanVien.Hoten, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ngayGio_muon, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ngayGio_muon, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ngayGio_muon, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ngay_hethan, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ngay_hethan, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="form-wrapper">
+                <div class="col-md-5">Ngày trả:</div>
+                @Html.EditorFor(model => model.ngay_hethan, new { htmlAttributes = new { @class = "form-control1", type = "date" }})
                 @Html.ValidationMessageFor(model => model.ngay_hethan, "", new { @class = "text-danger" })
-            </div>
-        </div>
+</div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input style="margin-left:-15px;background-color:Green" type="submit" value="Lưu" class=" button1" />
+    </div>
+</div>
+        }
+
+        <div style="margin-left:238px;color:#ccc">
+            <a style="margin-left: -15px;" class="button1" href="~/MuonTras/Details?id=@Model.ma_phieumuontra">Trở về</a>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    </div>

@@ -75,7 +75,7 @@
             <div class="profile-card__txt">Ngày giờ trả: <strong>@Html.DisplayFor(model => model.ngay_hethan)</strong> </div>
 
             <div class="profile-card-ctr">
-                @if (Session["Admin"] != null)
+                @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
                 {
                     <a class="profile-card__button button--orange" href="~/MuonTras/Edit?id=@Model.ma_phieumuontra">Chỉnh sửa</a>
                 }
@@ -117,9 +117,7 @@
 <!--</h2>-->
 
 
-<div style="text-align:center;">
-    <a class="profile-card__button button" style="background-color: green" href="~/ChiTietMuonTras/Create?id=@Model.ma_phieumuontra">Thêm mới</a>
-</div>
+
 
 <hr />
 
@@ -143,8 +141,12 @@
                             <th>
                                 Đầu sách
                             </th>
+
                             <th>
-                                Số lượng
+                                Ngày giờ trả
+                            </th>
+                            <th>
+                                Ghi chú
                             </th>
                             @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
                             {
@@ -156,19 +158,24 @@
                         {
                             <tr>
                                 <td>
-                                    <a style="text-decoration: none; color: black;" href="~/ChiTietMuonTras/Details?id=@item.ma_phieumuontra">
-                                        @Html.DisplayFor(modelItem => item.CuonSach.ten_cuonsach)
-                                    </a>
+
+                                    @Html.DisplayFor(modelItem => item.CuonSach.ten_cuonsach)
+
                                 </td>
                                 <td>
-                                    <a style="text-decoration: none; color: black;" href="~/ChiTietMuonTras/Details?id=@item.ma_phieumuontra">
-                                        @Html.DisplayFor(modelItem => item.CuonSach.DauSach.ten_dausach)
-                                    </a>
+
+                                    @Html.DisplayFor(modelItem => item.CuonSach.DauSach.ten_dausach)
+
+                                </td>
+
+
+                                <td>
+                                    
+                                        @Html.DisplayFor(modelItem => item.ngayGio_tra)
+                                    
                                 </td>
                                 <td>
-                                    <a style="text-decoration: none; color: black;" href="~/ChiTietMuonTras/Details?id=@item.ma_phieumuontra">
-                                        @Html.DisplayFor(modelItem => item.soluong)
-                                    </a>
+                                    @Html.DisplayFor(modelItem => item.ghichu)
                                 </td>
                                 @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
                                 {
@@ -181,8 +188,15 @@
                         }
 
                     </table>
+                    @if (Model.ChiTietMuonTras.Count() <= 5)
+                    {
+                        <div style="text-align:center;">
+                            <a class="profile-card__button button" style="background-color: green" href="~/ChiTietMuonTras/Create?id=@Model.ma_phieumuontra">Thêm mới</a>
+                        </div>
+                    }
                 </div>
             </div>
+
         </div>
 
 
@@ -197,7 +211,7 @@
 </div>
 
 <div class="profile-card-ctr">
-    <a style="text-align:center;" class="profile-card__button button--blue" href="~/SanPhams/Index">Trở về</a>
+    <a style="text-align:center;" class="profile-card__button button--blue" href="~/MuonTras/Index">Trở về</a>
 </div>
 
 <script>

@@ -1,0 +1,146 @@
+﻿@model QuanLyThuVien.Models.PhieuPhat
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.6.4.min.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
+
+
+<div class="container" style="background-image: url('../../Images/background-form5.png');">
+    <div class="inner">
+
+        @using (Html.BeginForm("Create", "PhieuPhats", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <h3>Thêm phiếu phạt</h3>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Mã phiếu mượn</div>
+                <div class="col-md-10">
+                    @Html.DropDownList("ma_phieumuontra", null, htmlAttributes: new { @class = "form-control1", required = "required", id = "mphieuDropdown" })
+                    @Html.ValidationMessageFor(model => model.ma_phieumuontra, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Lý do</div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.nguyen_nhan, new List<SelectListItem>
+                    {
+                    new SelectListItem{Text="Trễ hạn", Value="Trễ hạn"},
+                    new SelectListItem{Text="Hỏng sách", Value="Hỏng sách"},
+                    new SelectListItem{Text="Mất sách", Value="Mất sách"}}, "Lựa chọn", new { @class = "form-control1", required = "required", id = "lydo", name ="lydo" })
+                    @Html.ValidationMessageFor(model => model.nguyen_nhan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Số ngày quá hạn</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Songay_quahan, new { htmlAttributes = new { @class = "form-control1", id = "songay_quahan", name = "songay_quahan" } })
+                    @Html.ValidationMessageFor(model => model.Songay_quahan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Tổng tiền</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Tongtien, new { htmlAttributes = new { @class = "form-control1", id = "tongtien", name = "tongtien" } })
+                    @Html.ValidationMessageFor(model => model.Tongtien, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Số tiền thu</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Sotienthu, new { htmlAttributes = new { @class = "form-control1", id = "sotienthu", name = "sotienthu" } })
+                    @Html.ValidationMessageFor(model => model.Sotienthu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Còn lại</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Conlai, new { htmlAttributes = new { @class = "form-control1", id = "conlai", name = "conlai", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Conlai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <input class="btn btn-success button1" type="submit" value="Xác nhận">
+        }
+        <div style="margin-left:238px;color:#ccc">
+            @Html.ActionLink("Quay lại danh sách", "Index")
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        //$("#songay_quahan, #sotienthu").on("input", function () {
+        //    var songay_quahan = parseInt($("#songay_quahan").val());
+        //    var tongtien = songay_quahan * 3000;
+        //    $("#tongtien").val(tongtien);
+
+        //    var sotienthu = parseFloat($("#sotienthu").val());
+        //    var conlai = tongtien - sotienthu;
+        //    if (conlai < 0) {
+        //        conlai = 0;
+        //    }
+        //    $("#conlai").val(conlai);
+        //});
+
+        $("#lydo").change(function () {
+            var selectedValue = $(this).val();
+            var songay_quahan = parseInt($("#songay_quahan").val());
+            var sotienthu = parseFloat($("#sotienthu").val());
+
+            if (selectedValue === "Trễ hạn") {
+                var tongtien = songay_quahan * 3000;
+                $("#tongtien").val(tongtien);
+                var conlai = tongtien - sotienthu;
+                if (conlai < 0) {
+                    conlai = 0;
+                }
+                $("#conlai").val(conlai);
+            } else if (selectedValue === "Mất sách") {
+                var tongtien = (songay_quahan * 3000) + 50000;
+                var conlai = tongtien - sotienthu;
+                if (conlai < 0) {
+                    conlai = 0;
+                }
+                $("#conlai").val(conlai);
+                $("#tongtien").val(tongtien);
+            } else if (selectedValue === "Hỏng sách") {
+                var tongtien = (songay_quahan * 3000) + 20000;
+                var conlai = tongtien - sotienthu;
+                if (conlai < 0) {
+                    conlai = 0;
+                }
+                $("#conlai").val(conlai);
+                $("#tongtien").val(tongtien);
+            } else {
+                var conlai = tongtien - sotienthu;
+                if (conlai < 0) {
+                    conlai = 0;
+                }
+                $("#conlai").val(conlai);
+                $("#tongtien").val(tongtien);
+            }
+        });
+    });
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#mphieuDropdown").chosen();
+    });
+</script>

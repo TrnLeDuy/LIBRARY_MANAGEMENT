@@ -140,6 +140,7 @@
     <Compile Include="Controllers\LoaiSachesController.cs" />
     <Compile Include="Controllers\MuonTrasController.cs" />
     <Compile Include="Controllers\NhanViensController.cs" />
+    <Compile Include="Controllers\PhieuPhatsController.cs" />
     <Compile Include="Controllers\SinhViensController.cs" />
     <Compile Include="Controllers\TaiKhoansController.cs" />
     <Compile Include="Controllers\TheThuViensController.cs" />
@@ -931,6 +932,11 @@
     <Content Include="Views\SinhViens\Details.cshtml" />
     <Content Include="Views\SinhViens\Edit.cshtml" />
     <Content Include="Views\SinhViens\Index.cshtml" />
+    <Content Include="Views\PhieuPhats\Create.cshtml" />
+    <Content Include="Views\PhieuPhats\Delete.cshtml" />
+    <Content Include="Views\PhieuPhats\Details.cshtml" />
+    <Content Include="Views\PhieuPhats\Edit.cshtml" />
+    <Content Include="Views\PhieuPhats\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

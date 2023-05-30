@@ -17,6 +17,9 @@ namespace QuanLyThuVien.Controllers
         // GET: ChiTietMuonTras
         public ActionResult Index()
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             var chiTietMuonTras = db.ChiTietMuonTras.Include(c => c.CuonSach).Include(c => c.MuonTra);
             return View(chiTietMuonTras.ToList());
         }
@@ -24,11 +27,14 @@ namespace QuanLyThuVien.Controllers
         // GET: ChiTietMuonTras/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ChiTietMuonTra chiTietMuonTra = db.ChiTietMuonTras.Find(id);
+            ChiTietMuonTra chiTietMuonTra = db.ChiTietMuonTras.First(c => c.ma_phieumuontra == id);
             if (chiTietMuonTra == null)
             {
                 return HttpNotFound();
@@ -37,12 +43,25 @@ namespace QuanLyThuVien.Controllers
         }
 
         // GET: ChiTietMuonTras/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
+            ChiTietMuonTra chiTietMuonTra = new ChiTietMuonTra()
+            {
+                isbn = 0,
+                ma_phieumuontra = id,
+                ma_cuonsach = "CS00_000",
+                ma_sinhvien = null,
+                ngayGio_tra = null,
+                soluong = 0,
+                ghichu = null
+            };
             ViewBag.isbn = new SelectList(db.CuonSaches, "isbn", "ten_cuonsach");
             ViewBag.ma_phieumuontra = new SelectList(db.MuonTras, "ma_phieumuontra", "ma_sinhvien");
-            ViewBag.ma_cuonsach = new SelectList(db.CuonSaches, "ma_cuonsach", "ten_cuonsach");
-            return View();
+            ViewBag.ma_cuonsach = new SelectList(db.CuonSaches.Where(s => s.TinhTrang == "Còn sách"), "ma_cuonsach", "ten_cuonsach");
+            return View(chiTietMuonTra);
         }
 
         // POST: ChiTietMuonTras/Create
@@ -53,16 +72,31 @@ namespace QuanLyThuVien.Controllers
         public ActionResult Create([Bind(Include = "ma_phieumuontra,ma_cuonsach,soluong,ghichu")] ChiTietMuonTra chiTietMuonTra)
         {
             var cuonSach = db.CuonSaches.First(cs => cs.ma_cuonsach == chiTietMuonTra.ma_cuonsach);
+            if (cuonSach.TinhTrang == "Đang mượn")
+            {
+                TempData["ThongBaoFailed"] = "Cuốn sách đang được mượn!";
+                return RedirectToAction("Create", new {id = chiTietMuonTra.ma_phieumuontra});
+            }
             var phieuMuon = db.MuonTras.Find(chiTietMuonTra.ma_phieumuontra);
             if (ModelState.IsValid)
             {
-                chiTietMuonTra.isbn = cuonSach.isbn;
-                chiTietMuonTra.soluong = 1;
-                chiTietMuonTra.ngayGio_tra = phieuMuon.ngay_hethan;
-                chiTietMuonTra.ma_sinhvien = phieuMuon.ma_sinhvien;
-                db.ChiTietMuonTras.Add(chiTietMuonTra);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    chiTietMuonTra.isbn = cuonSach.isbn;
+                    chiTietMuonTra.soluong = 1;
+                    chiTietMuonTra.ngayGio_tra = null;
+                    chiTietMuonTra.ma_sinhvien = phieuMuon.ma_sinhvien;
+                    cuonSach.TinhTrang = "Đang mượn";
+                    db.ChiTietMuonTras.Add(chiTietMuonTra);
+                    db.SaveChanges();
+                    TempData["ThongBaoSuccess"] = "Thêm sách vào phiếu mượn thành công!";
+                    return RedirectToAction("Create", new {id = phieuMuon.ma_phieumuontra});
+                }
+                catch(Exception ex)
+                {
+                    TempData["ThongBaoFailed"] = "Thêm sách vào phiếu thất bại.";
+                    return RedirectToAction("Create", new { id = phieuMuon.ma_phieumuontra });
+                }
             }
 
             ViewBag.isbn = new SelectList(db.CuonSaches, "isbn", "ten_cuonsach", chiTietMuonTra.isbn);
@@ -71,13 +105,16 @@ namespace QuanLyThuVien.Controllers
         }
 
         // GET: ChiTietMuonTras/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ChiTietMuonTra chiTietMuonTra = db.ChiTietMuonTras.Find(id);
+            ChiTietMuonTra chiTietMuonTra = db.ChiTietMuonTras.First(c => c.ma_phieumuontra == id);
             if (chiTietMuonTra == null)
             {
                 return HttpNotFound();
@@ -96,9 +133,18 @@ namespace QuanLyThuVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(chiTietMuonTra).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(chiTietMuonTra).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["ThongBaoSuccess"] = "Cập nhật chi tiết phiếu mượn thành công!";
+                    return RedirectToAction("Edit", new { id = chiTietMuonTra.ma_phieumuontra });
+                }
+                catch (Exception ex)
+                {
+                    TempData["ThongBaoFailed"] = "Cập nhật chi tiết phiếu mượn thất bại.";
+                    return RedirectToAction("Edit", new { id = chiTietMuonTra.ma_phieumuontra });
+                }
             }
             ViewBag.isbn = new SelectList(db.CuonSaches, "isbn", "ten_cuonsach", chiTietMuonTra.isbn);
             ViewBag.ma_phieumuontra = new SelectList(db.MuonTras, "ma_phieumuontra", "ma_sinhvien", chiTietMuonTra.ma_phieumuontra);
@@ -108,6 +154,9 @@ namespace QuanLyThuVien.Controllers
         // GET: ChiTietMuonTras/Delete/5
         public ActionResult Delete(int id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -125,10 +174,22 @@ namespace QuanLyThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ChiTietMuonTra chiTietMuonTra = db.ChiTietMuonTras.First(c => c.ma_phieumuontra == id);
-            db.ChiTietMuonTras.Remove(chiTietMuonTra);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                ChiTietMuonTra chiTietMuonTra = db.ChiTietMuonTras.First(c => c.ma_phieumuontra == id);
+                CuonSach cuonSach = db.CuonSaches.First(c => c.ma_cuonsach == chiTietMuonTra.ma_cuonsach);
+                cuonSach.TinhTrang = "Còn sách";
+                db.ChiTietMuonTras.Remove(chiTietMuonTra);
+                db.SaveChanges();
+                TempData["ThongBaoSuccess"] = "Xóa chi tiết phiếu mượn thành công!";
+                return RedirectToAction("Details", "MuonTras", new {id = chiTietMuonTra.ma_phieumuontra});
+            }
+            catch(Exception ex)
+            {
+                ChiTietMuonTra chiTietMuonTra = db.ChiTietMuonTras.First(c => c.ma_phieumuontra == id);
+                TempData["ThongBaoFailed"] = "Xóa chi tiết phiếu mượn thất bại";
+                return RedirectToAction("Details", "MuonTras", new { id = chiTietMuonTra.ma_phieumuontra });
+            }
         }
 
         protected override void Dispose(bool disposing)
