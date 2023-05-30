@@ -1,13 +1,12 @@
 ﻿@model QuanLyThuVien.Models.NhanVien
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Thêm Nhân viên";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-
-<div class="container" style="background-image: url('../../Images/library-background-form.jpg');">
+<div class="container" style="background-image: url('../../Images/background-form3.png');">
     <div class="inner">
 
         @using (Html.BeginForm("Create", "NhanViens", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -15,6 +14,7 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <h3>Thêm Nhân viên Thư viện</h3>
+            <hr />
             <div class="form-wrapper">
                 Họ và tên:
                 @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control1", required = "required" } })

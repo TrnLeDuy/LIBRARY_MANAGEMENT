@@ -11,7 +11,8 @@ namespace QuanLyThuVien.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class NhanVien
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,15 +21,16 @@ namespace QuanLyThuVien.Models
             this.MuonTras = new HashSet<MuonTra>();
             this.PhieuPhats = new HashSet<PhieuPhat>();
         }
-    
+
         public int MaNV { get; set; }
         public string Hoten { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public string Gioitinh { get; set; }
         public string Email { get; set; }
         public string SDT { get; set; }
         public string Diachi { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MuonTra> MuonTras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

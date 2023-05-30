@@ -1,7 +1,7 @@
 ﻿@model QuanLyThuVien.Models.TaiKhoan
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Thông tin chi tiết Tài khoản";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -27,7 +27,7 @@
                     @{
                         if (Model.LoaiTK == "AD")
                         {
-                            <strong>ADMIN</strong>
+                            <strong>Quản trị viên</strong>
 
                         }
                         else if (Model.LoaiTK == "TT")

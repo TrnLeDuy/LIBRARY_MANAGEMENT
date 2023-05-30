@@ -1,18 +1,19 @@
 ﻿@model QuanLyThuVien.Models.TaiKhoan
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Cập nhật Tài khoản Nhân viên";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 
-<div class="container" style="background-image: url('../../Images/library-background-form.jpg');">
+<div class="container" style="background-image: url('../../Images/background-form6.png');">
     <div class="inner">
         @using (Html.BeginForm("Edit", "TaiKhoans", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             <h3>Cập nhập Tài khoản</h3>
+            <hr />
             <div class="form-group">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.MaNV)
@@ -32,7 +33,7 @@
                 Chức vụ:
                 @Html.DropDownListFor(model => model.LoaiTK, new List<SelectListItem>
                    {
-                   new SelectListItem{Text="ADMIN", Value="AD"},
+                   new SelectListItem{Text="Quản trị viên", Value="AD"},
                    new SelectListItem{Text="Thủ thư", Value="TT"},
                    new SelectListItem{Text="Nhân viên Thư viện", Value="NV"}}, "Lựa chọn", new { @class = "form-control1", required = "required" })
                 @Html.ValidationMessageFor(model => model.LoaiTK, "", new { @class = "text-danger" })

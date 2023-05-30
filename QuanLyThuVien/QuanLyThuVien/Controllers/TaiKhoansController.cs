@@ -39,7 +39,13 @@ namespace QuanLyThuVien.Controllers
                            select l;
             if (!String.IsNullOrEmpty(search))
             {
-                taikhoan = taikhoan.Where(tk => tk.Username.Contains(search));
+                taikhoan = taikhoan.Where(
+                    tk => tk.Username.Contains(search) ||
+                    tk.NhanVien.Hoten.Contains(search) ||
+                    tk.LoaiTK.Contains(search) ||
+                    search.Equals("Quản trị viên", StringComparison.OrdinalIgnoreCase) && tk.LoaiTK.Equals("AD", StringComparison.OrdinalIgnoreCase) ||
+                    search.Equals("Nhân viên", StringComparison.OrdinalIgnoreCase) && tk.LoaiTK.Equals("NV", StringComparison.OrdinalIgnoreCase) ||
+                    search.Equals("Thủ thư", StringComparison.OrdinalIgnoreCase) && tk.LoaiTK.Equals("TT", StringComparison.OrdinalIgnoreCase));
             }
 
             taikhoan = taikhoan.OrderBy(id => id.Username);

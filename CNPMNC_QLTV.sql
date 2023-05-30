@@ -101,7 +101,7 @@ GO
 
 CREATE TABLE TaiKhoan(
 	MaNV [int] check (MaNV like '[0-9][0-9][0-9][0-9][0-9]') NOT NULL,
-	Username [char] (20) UNIQUE,
+	Username [char] (20) NOT NULL UNIQUE,
 	Password [char] (20),
 	LoaiTK [nvarchar] (10)
 ) ON [PRIMARY]

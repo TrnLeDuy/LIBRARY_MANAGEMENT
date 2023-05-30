@@ -195,17 +195,33 @@
                         </li>
                         @if (Session["Role"] != null && Session["Role"].ToString() == "AD")
                         {
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-chart-bar" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/TaiKhoans/Index">Quản lí tài khoản</a>
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="zmdi zmdi-accounts-list"></i>Nhân viên Thư viện
+                                </a>
+                                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                    <li class="d-flex align-content-center ">
+                                        <a class="w-100 ml-3" href="/NhanViens/Index">Quản lí nhân viên</a>
+                                    </li>
+                                    <li class="d-flex align-content-center ">
+                                        <a class="w-100 ml-3" href="/TaiKhoans/Index">Quản lí tài khoản</a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-chart-bar" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="/NhanViens/Index">Quản lí nhân viên</a>
-                            </li>
-                            <li class="d-flex align-content-center ">
-                                <i class="fas fa-id-card" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="#">Quản lí Thẻ thư viện</a>
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-user"></i>Quản lí Độc giả
+                                </a>
+                                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                    <li class="d-flex align-content-center ">
+                                        <i class="fas fa-id-card" style="padding: 20px 0"></i>
+                                        <a class="w-100 ml-3" href="/TheThuViens/Index">Quản lí Thẻ thư viện</a>
+                                    </li>
+                                    <li class="d-flex align-content-center ">
+                                        <i class="fas fa-user-circle" style="padding: 20px 0"></i>
+                                        <a class="w-100 ml-3" href="/SinhViens/Index">Quản lí Sinh viên</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="has-sub">
                                 <a class="js-arrow" href="#">
@@ -213,13 +229,13 @@
                                 </a>
                                 <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                     <li>
-                                        <a href="/DauSaches/Index">Đầu sách</a>
+                                        <a class="w-100 ml-3" href="/DauSaches/Index">Đầu sách</a>
                                     </li>
                                     <li>
-                                        <a href="/LoaiSaches/Index">Loại sách</a>
+                                        <a class="w-100 ml-3" href="/LoaiSaches/Index">Loại sách</a>
                                     </li>
                                     <li>
-                                        <a href="/CuonSaches/Index">Cuốn sách</a>
+                                        <a class="w-100 ml-3" href="/CuonSaches/Index">Cuốn sách</a>
                                     </li>
                                 </ul>
                             </li>
@@ -241,7 +257,7 @@
                             </li>
                             <li class="d-flex align-content-center ">
                                 <i class="fas fa-id-card" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="#">Quản lí Thẻ thư viện</a>
+                                <a class="w-100 ml-3" href="/TheThuViens/Index">Quản lí Thẻ thư viện</a>
                             </li>
                             <li class="has-sub">
                                 <a class="js-arrow" href="#">
@@ -273,7 +289,7 @@
                         {
                             <li class="d-flex align-content-center ">
                                 <i class="fas fa-id-card" style="padding: 20px 0"></i>
-                                <a class="w-100 ml-3" href="#">Quản lí Thẻ thư viện</a>
+                                <a class="w-100 ml-3" href="/TheThuViens/Index">Quản lí Thẻ thư viện</a>
                             </li>
                             <li class="has-sub">
                                 <a class="js-arrow" href="#">

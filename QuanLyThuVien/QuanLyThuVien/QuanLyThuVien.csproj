@@ -140,7 +140,9 @@
     <Compile Include="Controllers\LoaiSachesController.cs" />
     <Compile Include="Controllers\MuonTrasController.cs" />
     <Compile Include="Controllers\NhanViensController.cs" />
+    <Compile Include="Controllers\SinhViensController.cs" />
     <Compile Include="Controllers\TaiKhoansController.cs" />
+    <Compile Include="Controllers\TheThuViensController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -193,6 +195,7 @@
     <Compile Include="Models\TheThuVien.cs">
       <DependentUpon>QLTV.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\map\ThuVienHS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -502,12 +505,23 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\avatar.png" />
+    <Content Include="Images\background-form.png" />
+    <Content Include="Images\background-form2.png" />
+    <Content Include="Images\background-form3.png" />
+    <Content Include="Images\background-form4.png" />
+    <Content Include="Images\background-form5.png" />
+    <Content Include="Images\background-form6.png" />
+    <Content Include="Images\background-form7.png" />
+    <Content Include="Images\card-delete.png" />
     <Content Include="Images\delete.jpg" />
+    <Content Include="Images\detail-icon.png" />
+    <Content Include="Images\Faenza-edit-delete-symbolic.png" />
+    <Content Include="Image_sach\harrypotter.jpg" />
     <Content Include="Images\home-background.jpg" />
-    <Content Include="Images\library-background-form.jpg" />
     <Content Include="Images\library-logo.png" />
     <Content Include="Images\background.png" />
     <Content Include="Images\orangehrm-logo.png" />
+    <Content Include="Image_sach\Python-Programming-for-Beginners-cover.jpg" />
     <Content Include="Models\QLTV.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>QLTV.edmx</DependentUpon>
@@ -726,6 +740,8 @@
     <Content Include="Models\QLTV.edmx.diagram">
       <DependentUpon>QLTV.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-chosen.less" />
+    <Content Include="Content\bootstrap-chosen.scss" />
     <None Include="Scripts\jquery-3.6.4.intellisense.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
@@ -905,6 +921,16 @@
     <Content Include="Views\ChiTietMuonTras\Details.cshtml" />
     <Content Include="Views\ChiTietMuonTras\Edit.cshtml" />
     <Content Include="Views\ChiTietMuonTras\Index.cshtml" />
+    <Content Include="Views\TheThuViens\Create.cshtml" />
+    <Content Include="Views\TheThuViens\Delete.cshtml" />
+    <Content Include="Views\TheThuViens\Edit.cshtml" />
+    <Content Include="Views\TheThuViens\Index.cshtml" />
+    <Content Include="Views\TheThuViens\Details.cshtml" />
+    <Content Include="Views\SinhViens\Create.cshtml" />
+    <Content Include="Views\SinhViens\Delete.cshtml" />
+    <Content Include="Views\SinhViens\Details.cshtml" />
+    <Content Include="Views\SinhViens\Edit.cshtml" />
+    <Content Include="Views\SinhViens\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

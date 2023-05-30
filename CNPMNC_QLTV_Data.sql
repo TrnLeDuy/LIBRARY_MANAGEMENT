@@ -2912,16 +2912,10 @@ INSERT INTO DauSach VALUES (1,N'Ngoại ngữ', null,N'Còn sách'),
 (3,N'Khoa học tự nhiên', null,N'Còn sách')
 
 
-insert into TheThuVien
-values('00DH299405', 'test', '2002/02/02', 'U')
-
-
-select * from DauSach
-
 --------Trigger----------
 GO
 
-CREATE TRIGGER trg_SoluongDausach on CuonSach
+CREATE OR ALTER TRIGGER trg_SoluongDausach on CuonSach
 FOR UPDATE, INSERT
 AS
 BEGIN
@@ -2944,4 +2938,5 @@ END
 GO
 
 select * from DauSach
+
 
