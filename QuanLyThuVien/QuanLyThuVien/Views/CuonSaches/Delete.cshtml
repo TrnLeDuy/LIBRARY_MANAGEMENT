@@ -1,7 +1,7 @@
 ﻿@model QuanLyThuVien.Models.CuonSach
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Xóa Cuốn sách " + Model.ma_cuonsach;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -27,7 +27,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <div class="profile-card-ctr">
-                        <input type="submit" value="Delete" class="btn profile-card__button button--orange" />
+                        <input type="submit" value="Xóa" class="btn profile-card__button button--orange" />
                         <a class="profile-card__button button--blue" href="~/CuonSaches/Index">Trở về</a>
                     </div>
                 }

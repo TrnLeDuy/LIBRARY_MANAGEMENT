@@ -18,6 +18,9 @@ namespace QuanLyThuVien.Controllers
         // GET: LoaiSaches
         public ActionResult Index(string currentFilter, string s, int? page)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             int pageSize = 7;
             int pageNum = (page ?? 1);
 
@@ -47,6 +50,9 @@ namespace QuanLyThuVien.Controllers
         // GET: LoaiSaches/Details/5
         public ActionResult Details(string id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,6 +68,9 @@ namespace QuanLyThuVien.Controllers
         // GET: LoaiSaches/Create
         public ActionResult Create()
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             return View();
         }
 
@@ -85,6 +94,9 @@ namespace QuanLyThuVien.Controllers
         // GET: LoaiSaches/Edit/5
         public ActionResult Edit(string id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -116,6 +128,9 @@ namespace QuanLyThuVien.Controllers
         // GET: LoaiSaches/Delete/5
         public ActionResult Delete(string id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

@@ -1,11 +1,11 @@
 ﻿@model QuanLyThuVien.Models.CuonSach
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Thêm Cuốn sách";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container" style="background-image: url('../../Images/background-form2.png');">
+<div class="container" style="background-image: url('../../Images/background-form8.png');">
     <div class="inner">
 
         @using (Html.BeginForm("Create", "CuonSaches", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -13,43 +13,45 @@
             @Html.AntiForgeryToken()
             <h3>Thêm Cuốn Sách mới</h3>
             <div class="form-wrapper">
-                Đầu sách:
-                @Html.DropDownList("isbn", null, htmlAttributes: new { @class = "form-control" })
+                <div class="col-md-5">Đầu sách:</div>
+                @Html.DropDownList("isbn", null, htmlAttributes: new { @class = "form-control1" })
                 @Html.ValidationMessageFor(model => model.isbn, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-wrapper">
-                Thể loại:
-                @Html.DropDownList("ma_loaisach", null, htmlAttributes: new { @class = "form-control" })
+                <div class="col-md-5">Thể loại:</div>
+                @Html.DropDownList("ma_loaisach", null, htmlAttributes: new { @class = "form-control1" })
                 @Html.ValidationMessageFor(model => model.ma_loaisach, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
-                Tên cuốn sách:
-                @Html.EditorFor(model => model.ten_cuonsach, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-5">
+                    Tên cuốn sách:
+                </div>
+                @Html.EditorFor(model => model.ten_cuonsach, new { htmlAttributes = new { @class = "form-control1" } })
                 @Html.ValidationMessageFor(model => model.ten_cuonsach, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
-                Tác giả:
-                @Html.EditorFor(model => model.tacgia, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-5">Tác giả:</div>
+                @Html.EditorFor(model => model.tacgia, new { htmlAttributes = new { @class = "form-control1" } })
                 @Html.ValidationMessageFor(model => model.tacgia, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
-                Năm xuất bản:
-                @Html.EditorFor(model => model.namxuatban, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                <div class="col-md-5">Năm xuất bản:</div>
+                @Html.EditorFor(model => model.namxuatban, new { htmlAttributes = new { @class = "form-control1", type = "date" } })
                 @Html.ValidationMessageFor(model => model.namxuatban, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
-                Nhà xuất bản:
-                @Html.EditorFor(model => model.nhaxuatban, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-5">Nhà xuất bản:</div>
+                @Html.EditorFor(model => model.nhaxuatban, new { htmlAttributes = new { @class = "form-control1" } })
                 @Html.ValidationMessageFor(model => model.nhaxuatban, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
-                Mô tả:
-                @Html.EditorFor(model => model.Mota, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-5">Mô tả:</div>
+                @Html.EditorFor(model => model.Mota, new { htmlAttributes = new { @class = "form-control1" } })
                 @Html.ValidationMessageFor(model => model.Mota, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
-                Ảnh bìa:
+                <div class="col-md-5">Ảnh bìa:</div>
                 <input type="file" name="Hinhmota" />
                 @Html.ValidationMessageFor(model => model.Hinhmota, "", new { @class = "text-danger" })
             </div>

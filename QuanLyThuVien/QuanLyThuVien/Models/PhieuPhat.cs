@@ -25,7 +25,7 @@ namespace QuanLyThuVien.Models
         public Nullable<decimal> Tongtien { get; set; }
         public Nullable<decimal> Sotienthu { get; set; }
         public Nullable<decimal> Conlai { get; set; }
-    
+
         public virtual MuonTra MuonTra { get; set; }
         public virtual NhanVien NhanVien { get; set; }
         public virtual TheThuVien TheThuVien { get; set; }

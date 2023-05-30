@@ -20,7 +20,7 @@ namespace QuanLyThuVien.Models
         public string dienthoai { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime han_sd { get; set; }
-    
+
         public virtual TheThuVien TheThuVien { get; set; }
     }
 }

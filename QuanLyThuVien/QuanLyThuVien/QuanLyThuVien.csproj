@@ -138,6 +138,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoaiSachesController.cs" />
     <Compile Include="Controllers\NhanViensController.cs" />
+    <Compile Include="Controllers\SinhViensController.cs" />
     <Compile Include="Controllers\TaiKhoansController.cs" />
     <Compile Include="Controllers\TheThuViensController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -500,12 +501,22 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\avatar.png" />
     <Content Include="Images\background-form.png" />
+    <Content Include="Images\background-form2.png" />
+    <Content Include="Images\background-form3.png" />
+    <Content Include="Images\background-form4.png" />
+    <Content Include="Images\background-form5.png" />
+    <Content Include="Images\background-form6.png" />
+    <Content Include="Images\background-form7.png" />
+    <Content Include="Images\card-delete.png" />
     <Content Include="Images\delete.jpg" />
+    <Content Include="Images\detail-icon.png" />
     <Content Include="Images\Faenza-edit-delete-symbolic.png" />
+    <Content Include="Image_sach\harrypotter.jpg" />
     <Content Include="Images\home-background.jpg" />
     <Content Include="Images\library-logo.png" />
     <Content Include="Images\background.png" />
     <Content Include="Images\orangehrm-logo.png" />
+    <Content Include="Image_sach\Python-Programming-for-Beginners-cover.jpg" />
     <Content Include="Models\QLTV.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>QLTV.edmx</DependentUpon>
@@ -898,6 +909,11 @@
     <Content Include="Views\TheThuViens\Edit.cshtml" />
     <Content Include="Views\TheThuViens\Index.cshtml" />
     <Content Include="Views\TheThuViens\Details.cshtml" />
+    <Content Include="Views\SinhViens\Create.cshtml" />
+    <Content Include="Views\SinhViens\Delete.cshtml" />
+    <Content Include="Views\SinhViens\Details.cshtml" />
+    <Content Include="Views\SinhViens\Edit.cshtml" />
+    <Content Include="Views\SinhViens\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

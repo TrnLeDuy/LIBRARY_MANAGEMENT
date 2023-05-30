@@ -2911,18 +2911,31 @@ INSERT INTO DauSach VALUES (1,N'Ngoại ngữ', null,N'Còn sách'),
 (2,N'Văn học Việt Nam', null,N'Còn sách'),
 (3,N'Khoa học tự nhiên', null,N'Còn sách')
 
---------------CuonSach---------------
-INSERT INTO CuonSach VALUES (1,'NB10000001',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-01 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.', 'img.jpg'),
-	(1,'NB10000002',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-02 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.', 'img.jpg'),
-	(1,'NB10000003',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-03 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.', 'img.jpg'),
-	(1,'NB10000004',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-04 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.', 'img.jpg'),
-	(1,'NB10000005',N'1800 Câu Đàm Thoại Tiếng Nhật Thông Dụng',N'Trần Nguyễn Bảo Vy','2020-02-05 00:00:00',N'NXB Trẻ','NB',N'Còn',N'Sách gồm 1800 câu thoại chia làm 19 chương, bao quát hầu hết mọi tình huống mà một người đến Nhật Bản có thể gặp phải, từ việc gặp gỡ người khác, đi mua sắm, tham quan đến tìm nhà ở, tìm việc và sinh con. Mười chương đầu tập trung về những điều bạn cần biết khi kết bạn và giao tiếp trong tiếng Nhật, và chín chương sau sẽ đi vào chi tiết hơn hướng đến mục đích xây dựng cuộc sống tại Nhật Bản.', 'img.jpg');
+--------Trigger----------
+GO
 
-insert into TheThuVien
-values('00DH299405', 'test', '2002/02/02', 'U')
+CREATE OR ALTER TRIGGER trg_SoluongDausach on CuonSach
+FOR UPDATE, INSERT
+AS
+BEGIN
+	update DauSach
+	SET soluong = (select count(*) from CuonSach where isbn = DauSach.isbn)
+	FROM DauSach
+	join inserted on DauSach.isbn = inserted.isbn
+END
+GO
 
-insert into MuonTra(ma_sinhvien, MaNV, ngayGio_muon, ngay_hethan)
-values('00DH299405', 10000, '2022/05/19', '2022/05/25')
+CREATE OR ALTER TRIGGER trg_SoluongDauSach_XoaSach on CuonSach
+FOR DELETE
+AS
+BEGIN
+	update DauSach
+	SET soluong = (select count(*) from CuonSach where CuonSach.isbn = DauSach.isbn)
+	from DauSach
+	join deleted on DauSach.isbn = deleted.isbn;
+END
+GO
 
+select * from DauSach
 
 select * from SinhVien

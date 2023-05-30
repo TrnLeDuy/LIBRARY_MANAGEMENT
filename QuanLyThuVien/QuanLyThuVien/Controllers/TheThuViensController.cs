@@ -17,6 +17,9 @@ namespace QuanLyThuVien.Controllers
         // GET: TheThuViens
         public ActionResult Index(string currentFilter, string s, int? page )
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             int pageSize = 7;
             int pageNum = (page ?? 1);
 
@@ -35,7 +38,8 @@ namespace QuanLyThuVien.Controllers
                           select l;
             if (!String.IsNullOrEmpty(s))
             {
-                theThuVien = theThuVien.Where(mcs => mcs.ma_sinhvien.Contains(s));
+                theThuVien = theThuVien.Where(mcs => mcs.ma_sinhvien.Contains(s) ||
+                mcs.Hoten.Contains(s));
             }
 
             theThuVien = theThuVien.OrderBy(id => id.ma_sinhvien);
@@ -44,6 +48,9 @@ namespace QuanLyThuVien.Controllers
         }
         public ActionResult Details(string id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -99,6 +106,9 @@ namespace QuanLyThuVien.Controllers
         }
         public ActionResult Edit(string id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -113,28 +123,31 @@ namespace QuanLyThuVien.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ma_sinhvien,Hoten")] TheThuVien theThuVien)
+        public ActionResult Edit([Bind(Include = "ma_sinhvien,Hoten, NgaySinh, Tinhtrangthe")] TheThuVien theThuVien)
         {
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    db.Entry(theThuVien).State = EntityState.Modified;
-                    db.SaveChanges();
-                    TempData["ThongBaoSuccess"] = "Cập nhật thành công thẻ thư viện " + theThuVien.ma_sinhvien;
-                    return RedirectToAction("Index");
+                    try
+                    {
+                        db.Entry(theThuVien).State = EntityState.Modified;
+                        db.SaveChanges();
+                        TempData["ThongBaoSuccess"] = "Cập nhật thành công thẻ thư viện " + theThuVien.ma_sinhvien;
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["ThongBaoFailed"] = "Thất bại khi cập nhật thẻ thư viện " + theThuVien.ma_sinhvien;
+                        return RedirectToAction("Edit", new { id = theThuVien.ma_sinhvien });
+                    }
                 }
-                catch (Exception ex)
-                {
-                    TempData["ThongBaoFailed"] = "Thất bại khi cập nhật thẻ thư viện " + theThuVien.ma_sinhvien;
-                    return RedirectToAction("Edit", new { id = theThuVien.ma_sinhvien });
-                }
-            }
-            ViewBag.ma_sinhhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "Hoten", theThuVien.ma_sinhvien);
-            return View(theThuVien);
+                ViewBag.ma_sinhhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "Hoten", theThuVien.ma_sinhvien);
+                return View("Index");
         }
         public ActionResult Delete(string id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

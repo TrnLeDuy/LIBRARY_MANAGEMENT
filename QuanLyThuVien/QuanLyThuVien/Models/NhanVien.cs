@@ -21,7 +21,7 @@ namespace QuanLyThuVien.Models
             this.MuonTras = new HashSet<MuonTra>();
             this.PhieuPhats = new HashSet<PhieuPhat>();
         }
-    
+
         public int MaNV { get; set; }
         public string Hoten { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
@@ -30,7 +30,7 @@ namespace QuanLyThuVien.Models
         public string Email { get; set; }
         public string SDT { get; set; }
         public string Diachi { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MuonTra> MuonTras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -2,11 +2,9 @@
 @using PagedList.Mvc;
 @model PagedList.PagedList<TheThuVien>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách Thẻ thư viện";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Thẻ thư viện </h2>
 
 <style>
 
@@ -80,7 +78,20 @@
                 </td>
                 <td>
                     <a style="text-decoration: none; color: black;" href="~/TheThuViens/Details?id=@item.ma_sinhvien">
-                        @Html.DisplayFor(modelItem => item.Tinhtrangthe)
+                        @{ 
+                            if(item.Tinhtrangthe == "Y")
+                                {
+                                    <p>Còn hiệu lực</p>
+                                }
+                            else if(item.Tinhtrangthe == "N")
+                                {
+                                    <p>Hết hiệu lực</p>
+                                }
+                            else
+                                {
+                                    <p>Bị mất</p>
+                                }
+                        }
                     </a>
                 </td>
                 @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))

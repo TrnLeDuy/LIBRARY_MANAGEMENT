@@ -1,7 +1,7 @@
 ﻿@model QuanLyThuVien.Models.CuonSach
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Cập nhật Cuốn sách " + Model.ma_cuonsach;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,11 +11,11 @@
         {
             @Html.AntiForgeryToken()
             <h3>Cập nhập thông tin Cuốn Sách</h3>
+            <hr />
             <div class="form-group">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.isbn)
                 @Html.HiddenFor(model => model.ma_cuonsach)
-
             </div>
             <div class="form-wrapper">
                 Tên cuốn sách:
@@ -47,7 +47,13 @@
             </div>
             <div class="form-wrapper">
                 Tình trạng:
-                @Html.EditorFor(model => model.TinhTrang, new { htmlAttributes = new { @class = "form-control" } })
+                <select class="form-control" name="TinhTrang">
+                    <option value="Còn sách">Còn sách</option>
+                    <option value="Đang mượn">Đang mượn</option>
+                    <option value="Bị hư">Bị hư</option>
+                    <option value="Bị mất">Bị mất</option>
+                </select>
+                @*@Html.EditorFor(model => model.TinhTrang, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.TinhTrang, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">

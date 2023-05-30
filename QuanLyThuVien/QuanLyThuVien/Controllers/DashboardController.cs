@@ -13,9 +13,12 @@ namespace QuanLyThuVien.Controllers
         // GET: Dashboard
         public ActionResult Dashboard()
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             ViewBag.countLibCard = db.TheThuViens.Count();
             ViewBag.countBook = db.CuonSaches.Count();
-            ViewBag.countEmployee = db.TaiKhoans.Count(s => s.LoaiTK != "AD");
+            ViewBag.countISBN = db.DauSaches.Count();
             ViewBag.countBookRent = db.MuonTras.Count();
             return View();
         }
