@@ -1,57 +1,125 @@
 ﻿@model QuanLyThuVien.Models.SinhVien
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Xóa Sinh viên " + Model.ma_sinhvien;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+@*<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>SinhVien</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.diachi)
-        </dt>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>SinhVien</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.diachi)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.diachi)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.diachi)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.dienthoai)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.dienthoai)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.dienthoai)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.dienthoai)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.han_sd)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.han_sd)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.han_sd)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.han_sd)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TheThuVien.Hoten)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.TheThuVien.Hoten)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TheThuVien.Hoten)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.TheThuVien.Hoten)
+            </dd>
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>*@
+
+<div class="wrapper">
+    <div class="profile-card js-profile-card">
+        <div class="profile-card__img">
+            <img src="~/Images/delete.jpg" alt="profile card">
         </div>
-    }
+
+        <div class="profile-card__cnt js-profile-cnt">
+            <h3>XÁC NHẬN XÓA SINH VIÊN NÀY?</h3>
+            <div class="profile-card__name">@Html.DisplayFor(model => model.TheThuVien.Hoten)</div>
+            <div class="profile-card__txt">Mã Sinh viên: <strong>@Html.DisplayFor(model => model.ma_sinhvien)</strong> </div>
+            <div class="profile-card-ctr">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="profile-card-ctr">
+                        <input type="submit" value="Xóa" class="btn profile-card__button button--orange" />
+                        <a class="profile-card__button button--blue" href="~/SinhViens/Index">Trở về</a>
+                    </div>
+                }
+
+            </div>
+
+            <div class="profile-card-message js-message">
+                <form class="profile-card-form">
+                    <div class="profile-card-form__container">
+                        <textarea placeholder="Say something..."></textarea>
+                    </div>
+
+                    <div class="profile-card-form__bottom">
+                        <button class="profile-card__button button--blue js-message-close">
+                        </button>
+
+                        <button class="profile-card__button button--gray js-message-close">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+
+                <div class="profile-card__overlay js-message-close"></div>
+            </div>
+
+        </div>
+
+    </div>
 </div>
+
+
+
+<script>
+    var messageBox = document.querySelector('.js-message');
+    var btn = document.querySelector('.js-message-btn');
+    var card = document.querySelector('.js-profile-card');
+    var closeBtn = document.querySelectorAll('.js-message-close');
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        card.classList.add('active');
+    });
+
+    closeBtn.forEach(function (element, index) {
+        console.log(element);
+        element.addEventListener('click', function (e) {
+            e.preventDefault();
+            card.classList.remove('active');
+        });
+    });
+</script>

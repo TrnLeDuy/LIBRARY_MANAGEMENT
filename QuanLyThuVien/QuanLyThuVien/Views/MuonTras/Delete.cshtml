@@ -1,7 +1,7 @@
 ﻿@model QuanLyThuVien.Models.MuonTra
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Xóa Phiếu Mượn";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -68,6 +68,7 @@
         card.classList.add('active');
     });
 
+
     closeBtn.forEach(function (element, index) {
         console.log(element);
         element.addEventListener('click', function (e) {
@@ -76,3 +77,4 @@
         });
     });
 </script>
+

@@ -77,7 +77,7 @@
                 @Html.HiddenFor(model => model.ma_sinhvien)
                 <div class="form-wrapper">
                     <div class="col-md-5">Họ và tên Độc giả</div>
-                    @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control1" } })
+                    @Html.EditorFor(model => model.Hoten, new { htmlAttributes = new { @class = "form-control1", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.Hoten, "", new { @class = "text-danger" })
                     @*<input type="text" class="form-control1">*@
                 </div>

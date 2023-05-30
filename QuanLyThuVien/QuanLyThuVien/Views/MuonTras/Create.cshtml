@@ -1,7 +1,7 @@
 ﻿@model QuanLyThuVien.Models.MuonTra
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Tạo Phiếu Mượn";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -23,21 +23,21 @@
                 </div>
             </div>
 
-            @*<div class="form-wrapper">
-                @Html.LabelFor(model => model.MaNV, "Nhân viên phụ trách", htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="form-wrapper">
+                <div class="col-md-5">Nhân viên</div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.MaNV, new { htmlAttributes = new { @class = "form-control1" } })
-                    @Html.ValidationMessageFor(model => model.MaNV, "", new { @class = "text-danger" })
+                        @Html.DropDownList("MaNV", null, htmlAttributes: new { @class = "form-control1", @id = "nvienDropdown", required = "required" })
+                        @Html.ValidationMessageFor(model => model.MaNV, "", new { @class = "text-danger" })
                 </div>
-            </div>*@
+            </div>
 
-            @*<div class="form-wrapper">
+            <div class="form-wrapper">
                 @Html.LabelFor(model => model.ngayGio_muon, "Ngày giờ mượn", htmlAttributes: new { @class = "control-label col-md-5" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.ngayGio_muon, new { htmlAttributes = new { @class = "form-control1", type = "date" } })
                     @Html.ValidationMessageFor(model => model.ngayGio_muon, "", new { @class = "text-danger" })
                 </div>
-            </div>*@
+            </div>
 
             <div class="form-wrapper">
                 @Html.LabelFor(model => model.ngay_hethan, "Ngày giờ trả", htmlAttributes: new { @class = "control-label col-md-5" })
@@ -54,10 +54,11 @@
             @Html.ActionLink("Quay lại", "Index")
         </div>
     </div>
-</div>
+
 
 <script type="text/javascript">
     $(function () {
         $("#svienDropdown").chosen();
+        $("#nvienDropdown").chosen();
     });
 </script>

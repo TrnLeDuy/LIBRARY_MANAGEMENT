@@ -929,7 +929,6 @@
     <Content Include="Views\TheThuViens\Details.cshtml" />
     <Content Include="Views\SinhViens\Create.cshtml" />
     <Content Include="Views\SinhViens\Delete.cshtml" />
-    <Content Include="Views\SinhViens\Details.cshtml" />
     <Content Include="Views\SinhViens\Edit.cshtml" />
     <Content Include="Views\SinhViens\Index.cshtml" />
     <Content Include="Views\PhieuPhats\Create.cshtml" />
