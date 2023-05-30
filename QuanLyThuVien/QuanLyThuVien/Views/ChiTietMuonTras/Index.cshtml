@@ -1,0 +1,64 @@
+﻿@model IEnumerable<QuanLyThuVien.Models.ChiTietMuonTra>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ma_sinhvien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngayGio_tra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.soluong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ghichu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CuonSach.ten_cuonsach)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MuonTra.ma_sinhvien)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ma_sinhvien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngayGio_tra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.soluong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ghichu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CuonSach.ten_cuonsach)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MuonTra.ma_sinhvien)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ma_phieumuontra })
+        </td>
+    </tr>
+}
+
+</table>

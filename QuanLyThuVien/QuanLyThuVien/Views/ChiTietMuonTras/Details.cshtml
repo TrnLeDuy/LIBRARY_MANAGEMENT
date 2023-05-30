@@ -1,0 +1,67 @@
+﻿@model QuanLyThuVien.Models.ChiTietMuonTra
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ChiTietMuonTra</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ma_sinhvien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ma_sinhvien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngayGio_tra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngayGio_tra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soluong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soluong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ghichu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ghichu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CuonSach.ten_cuonsach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CuonSach.ten_cuonsach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MuonTra.ma_sinhvien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MuonTra.ma_sinhvien)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
