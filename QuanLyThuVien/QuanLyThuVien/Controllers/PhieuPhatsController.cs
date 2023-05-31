@@ -108,7 +108,7 @@ namespace QuanLyThuVien.Controllers
         }
 
         // GET: PhieuPhats/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
             if (Session["Role"] == null)
                 return RedirectToAction("Login", "Users");
@@ -133,7 +133,7 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ma_phieumuontra,MaNV,ma_sinhvien,ngay_lapphieu,nguyen_nhan,Songay_quahan,Tongtien,Sotienthu,Conlai")] PhieuPhat phieuPhat)
+        public ActionResult Edit([Bind(Include = "ma_phieumuontra,MaNV,ma_sinhvien,nguyen_nhan,Songay_quahan,Tongtien,Sotienthu,Conlai")] PhieuPhat phieuPhat)
         {
             if (ModelState.IsValid)
             {
@@ -141,13 +141,13 @@ namespace QuanLyThuVien.Controllers
                 {
                     db.Entry(phieuPhat).State = EntityState.Modified;
                     db.SaveChanges();
-                    TempData["ThongBaoSuccess"] = "Cập nhật thành công phiếu phạt " + phieuPhat.ma_phieumuontra.ToString();
-                    return RedirectToAction("Index");
+                    TempData["ThongBaoSuccess"] = "Cập nhật phiếu phạt thành công!";
+                    return RedirectToAction("Edit", new { id = phieuPhat.ma_phieumuontra });
                 }
                 catch (Exception ex)
                 {
-                    TempData["ThongBaoFailed"] = "Thất bại khi cập nhật tài khoản " + phieuPhat.ma_phieumuontra.ToString();
-                    return RedirectToAction("Edit", new { id = phieuPhat.ma_phieumuontra.ToString()});
+                    TempData["ThongBaoFailed"] = "Thất bại khi cập nhật phiếu phạt ";
+                    return RedirectToAction("Edit", new { id = phieuPhat.ma_phieumuontra});
                 }
 
             }
