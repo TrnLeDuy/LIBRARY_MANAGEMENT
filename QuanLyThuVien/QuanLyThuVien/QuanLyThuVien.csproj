@@ -936,6 +936,9 @@
     <Content Include="Views\PhieuPhats\Details.cshtml" />
     <Content Include="Views\PhieuPhats\Edit.cshtml" />
     <Content Include="Views\PhieuPhats\Index.cshtml" />
+    <Content Include="Views\Home\Dangnhap.cshtml" />
+    <Content Include="Views\Home\XemSach.cshtml" />
+    <Content Include="Views\Home\Xemchitiet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
