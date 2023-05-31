@@ -15,9 +15,24 @@
                 <img src="~/Images/library-logo.png" alt="">
             </a>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <form class="d-flex">
-                    <a href="/Users/Login" style="text-decoration:none;">Đăng nhập</a>
-                </form>
+                @{
+                    if (Session["MSV"] == null)
+                    {
+                        <form class="d-flex-1">
+                            <a href="/Home/Dangnhap" style="text-decoration:none;">Đăng nhập</a>
+                        </form>
+                    }
+
+                    else
+                    {
+                        <form class="d-flex">
+                            <a class="js-acc-btn" href="#">@Session["HT"]</a>
+                            <a href="/Home/Dangxuat">
+                                <i class="zmdi zmdi-power"></i>Đăng xuất
+                            </a>
+                        </form>
+                    }
+                }
             </div>
         </div>
     </nav>
@@ -43,3 +58,17 @@
     </div>
 </body>
 </html>
+<style>
+    .zmdi zmdi-power {
+        margin-right: 50px;
+        text-decoration: none;
+    }
+
+    .js-acc-btn {
+        color: orange;
+        margin-right: 30px;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 20px;
+    }
+</style>
