@@ -88,13 +88,13 @@
 
 </div>
 
-<script>
+<script type="text/javascript">
     $(document).ready(function () {
         var tongtien = parseInt($("#tongtien").val());
         var conlai = parseInt($("#conlai").val());
         $("#sotienthu").on("input", function () {
-            var oldSotienthu = parseFloat($(this).attr("oldvalue"));
-            var newSotienthu = parseFloat($(this).val());
+            var oldSotienthu = parseInt($(this).attr("oldvalue"));
+            var newSotienthu = parseInt($(this).val());
             if (isNaN(oldSotienthu)) oldSotienthu = 0;
             if (isNaN(newSotienthu)) newSotienthu = 0;
             var sotienthu = oldSotienthu + newSotienthu;
