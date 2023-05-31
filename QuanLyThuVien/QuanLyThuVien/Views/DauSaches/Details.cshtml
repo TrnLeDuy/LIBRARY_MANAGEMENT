@@ -1,14 +1,14 @@
 ﻿@model QuanLyThuVien.Models.DauSach
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết Đầu sách";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="wrapper">
     <div class="profile-card js-profile-card">
         <div class="profile-card__img">
-            <img src="~/images/avatar.png" alt="profile card">
+            <img src="~/Images/detail-icon.png" alt="profile card">
         </div>
 
         <div class="profile-card__cnt js-profile-cnt">
@@ -17,9 +17,9 @@
             <div class="profile-card__txt">Số lượng: <strong>@Html.DisplayFor(model => model.soluong)</strong> </div>
  
 
-            <div class="profile-card-inf__item">
-                @Html.DisplayFor(model => model.trangthai)
-            </div>
+            <span class="profile-card__txt">
+                <strong>@Html.DisplayFor(model => model.trangthai)</strong>
+            </span>
 
 
 

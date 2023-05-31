@@ -1,11 +1,9 @@
 ﻿@model QuanLyThuVien.Models.TheThuVien
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Thông tin chi tiết Độc giả";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
 
 <div class="wrapper">
     <div class="profile-card js-profile-card">
@@ -13,13 +11,26 @@
             <img src="~/images/avatar.png" alt="profile card">
         </div>
         <div class="profile-card__cnt js-profile-cnt">
-            <div class="profile-card__name">@Html.DisplayFor(model => model.ma_sinhvien)</div>
-            <div class="profile-card__txt">Mã sinh vien: <strong>@Html.DisplayFor(model => model.ma_sinhvien)</strong> </div>
-            <div class="profile-card__txt">Số lượng: <strong>@Html.DisplayFor(model => model.NgaySinh)</strong> </div>
+            <div class="profile-card__name">@Html.DisplayFor(model => model.Hoten)</div>
+            <div class="profile-card__txt">Mã sinh viên: <strong>@Html.DisplayFor(model => model.ma_sinhvien)</strong> </div>
+            <div class="profile-card__txt">Ngày sinh: <strong>@Html.DisplayFor(model => model.NgaySinh)</strong> </div>
 
-            <div class="profile-card-inf__item">
-                @Html.DisplayFor(model => model.Tinhtrangthe)
-            </div>
+            <span class="profile-card__txt">
+                @{
+                    if (Model.Tinhtrangthe == "Y")
+                    {
+                        <strong>Còn hiệu lực</strong>
+                    }
+                    else if (Model.Tinhtrangthe == "N")
+                    {
+                        <strong>Hết hiệu lực</strong>
+                    }
+                    else
+                    {
+                        <strong>Bị mất</strong>
+                    }
+                }
+            </span>
 
             <div class="profile-card-ctr">
                 @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))

@@ -3,7 +3,7 @@
 @model PagedList.PagedList<CuonSach>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách Cuốn sách";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -59,10 +59,7 @@
             <th>
                 Tình trạng
             </th>
-            @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
-            {
-                <th></th>
-            }
+            <th></th>
         </tr>
 
         @foreach (var item in Model)
@@ -94,16 +91,25 @@
                     </a>
                 </td>
                     @*@Html.ActionLink("Edit", "Edit", new { id = item.ma_cuonsach }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ma_cuonsach }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ma_cuonsach })*@
-                    @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+                    @Html.ActionLink("Details", "Details", new { id = item.ma_cuonsach }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ma_cuonsach })*@
+                    @*@if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
                     {
                     <td>
                         <a class="edit-button fa fa-pencil" href="~/CuonSaches/Edit?id=@item.ma_cuonsach"></a>
                         <a class="delete-button fa fa-trash" href="~/CuonSaches/Delete?id=@item.ma_cuonsach"></a>
                     </td>
+                    }*@
+            <td>
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+                {
+                    <a class="edit-button fa fa-pencil" href="~/CuonSaches/Edit?id=@item.ma_cuonsach"></a>
                 }
-                    
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD"))
+                {
+                    <a class="delete-button fa fa-trash" href="~/CuonSaches/Delete?id=@item.ma_cuonsach"></a>
+                }
+            </td>
             </tr>
         }
 

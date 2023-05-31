@@ -1,0 +1,107 @@
+﻿@model IEnumerable<QuanLyThuVien.Models.PhieuPhat>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .delete-button {
+        background-color: red;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
+
+    .edit-button {
+        background-color: green;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        text-decoration: none;
+    }
+</style>
+
+<div class="row mt-4">
+    <div class="col-6">
+        @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+        {
+            @Html.ActionLink("Thêm phiếu phạt", "Create", null, new { @class = "btn btn-primary" })
+        }
+    </div>
+    <div class="col-6">
+        <form style="width: 100%; padding-left: 250px;" action="/PhieuPhats/Index" method="get">
+            <div class="form-group">
+                <input class="form-control" id="search" type="text" name="s" placeholder="Tìm kiếm phiếu phạt" value="" />
+            </div>
+        </form>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Mã phiếu phạt
+            </th>
+            <th>
+                Sinh viên
+            </th>
+            <th>
+                Nhân viên lập phiếu
+            </th>
+            <th>
+                Ngày lập phiếu
+            </th>
+            <th>
+                Nguyên nhân
+            </th>
+            @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+            {
+                <th></th>
+            }
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/PhieuPhats/Details?id=@item.ma_phieumuontra">
+                        @Html.DisplayFor(modelItem => item.ma_phieumuontra)
+                        </a>
+                    </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/PhieuPhats/Details?id=@item.ma_phieumuontra">
+                        @Html.DisplayFor(modelItem => item.TheThuVien.Hoten)
+                        </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/PhieuPhats/Details?id=@item.ma_phieumuontra">
+                        @Html.DisplayFor(modelItem => item.NhanVien.Hoten)
+                        </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/PhieuPhats/Details?id=@item.ma_phieumuontra">
+                        @Html.DisplayFor(modelItem => item.ngay_lapphieu)
+                        </a>
+                </td>
+                <td>
+                    <a style="text-decoration: none; color: black;" href="~/PhieuPhats/Details?id=@item.ma_phieumuontra">
+                        @Html.DisplayFor(modelItem => item.nguyen_nhan)
+                        </a>
+                </td>
+
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+                {
+                    <td>
+                        <a class="edit-button fa fa-pencil" href="~/PhieuPhats/Edit?id=@item.ma_phieumuontra"></a>
+                        <a class="delete-button fa fa-trash" href="~/PhieuPhats/Delete?id=@item.ma_phieumuontra"></a>
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+</div>
+

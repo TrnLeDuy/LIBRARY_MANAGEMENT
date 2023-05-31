@@ -18,6 +18,9 @@ namespace QuanLyThuVien.Controllers
         // GET: TaiKhoans
         public ActionResult Index(string currentFilter, string search, int? page)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             int pageSize = 10;
             int pageNum = (page ?? 1);
 
@@ -36,7 +39,13 @@ namespace QuanLyThuVien.Controllers
                            select l;
             if (!String.IsNullOrEmpty(search))
             {
-                taikhoan = taikhoan.Where(tk => tk.Username.Contains(search));
+                taikhoan = taikhoan.Where(
+                    tk => tk.Username.Contains(search) ||
+                    tk.NhanVien.Hoten.Contains(search) ||
+                    tk.LoaiTK.Contains(search) ||
+                    search.Equals("Quản trị viên", StringComparison.OrdinalIgnoreCase) && tk.LoaiTK.Equals("AD", StringComparison.OrdinalIgnoreCase) ||
+                    search.Equals("Nhân viên", StringComparison.OrdinalIgnoreCase) && tk.LoaiTK.Equals("NV", StringComparison.OrdinalIgnoreCase) ||
+                    search.Equals("Thủ thư", StringComparison.OrdinalIgnoreCase) && tk.LoaiTK.Equals("TT", StringComparison.OrdinalIgnoreCase));
             }
 
             taikhoan = taikhoan.OrderBy(id => id.Username);
@@ -47,6 +56,9 @@ namespace QuanLyThuVien.Controllers
         // GET: TaiKhoans/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,6 +74,9 @@ namespace QuanLyThuVien.Controllers
         // GET: TaiKhoans/Create
         public ActionResult Create()
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             ViewBag.MaNV = new SelectList(db.NhanViens.Where(e => !db.TaiKhoans.Any(u => u.MaNV == e.MaNV)), "MaNV", "Hoten");
             return View();
         }
@@ -75,9 +90,23 @@ namespace QuanLyThuVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TaiKhoans.Add(taiKhoan);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if(db.TaiKhoans.Any(a => a.Username == taiKhoan.Username))
+                {
+                    TempData["ThongBaoFailed"] = "Đã tồn tại tên người dùng " + taiKhoan.Username;
+                    return RedirectToAction("Create");
+                }
+                try
+                {
+                    db.TaiKhoans.Add(taiKhoan);
+                    db.SaveChanges();
+                    TempData["ThongBaoSuccess"] = "Thêm thành công tài khoản " + taiKhoan.Username;
+                    return RedirectToAction("Create");
+                }
+                catch(Exception ex)
+                {
+                    TempData["ThongBaoFailed"] = "Thất bại khi thêm tài khoản!";
+                    return RedirectToAction("Create");
+                }
             }
 
             ViewBag.MaNV = new SelectList(db.NhanViens, "MaNV", "Hoten", taiKhoan.MaNV);
@@ -87,6 +116,9 @@ namespace QuanLyThuVien.Controllers
         // GET: TaiKhoans/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,9 +141,19 @@ namespace QuanLyThuVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(taiKhoan).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(taiKhoan).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["ThongBaoSuccess"] = "Cập nhật thành công tài khoản " + taiKhoan.Username;
+                    return RedirectToAction("Edit", new {id = taiKhoan.MaNV});
+                }
+                catch(Exception ex)
+                {
+                    TempData["ThongBaoFailed"] = "Thất bại khi cập nhật tài khoản " + taiKhoan.Username;
+                    return RedirectToAction("Edit", new { id = taiKhoan.MaNV });
+                }
+                
             }
             ViewBag.MaNV = new SelectList(db.NhanViens, "MaNV", "Hoten", taiKhoan.MaNV);
             return View(taiKhoan);
@@ -120,6 +162,9 @@ namespace QuanLyThuVien.Controllers
         // GET: TaiKhoans/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -138,9 +183,19 @@ namespace QuanLyThuVien.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
-            db.TaiKhoans.Remove(taiKhoan);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.TaiKhoans.Remove(taiKhoan);
+                db.SaveChanges();
+                TempData["ThongBaoSuccess"] = "Xóa thành công tài khoản " + taiKhoan.Username;
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                TempData["ThongBaoFailed"] = "Thất bại khi xóa tài khoản " + taiKhoan.Username;
+                return RedirectToAction("Index");
+            }
+            
         }
 
         protected override void Dispose(bool disposing)

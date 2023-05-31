@@ -20,7 +20,7 @@ namespace QuanLyThuVien.Controllers
         {
             return View();
         }
-        
+
         public ActionResult XemLichSu(string currentFilter, string s, int? page)
         {
             int pageSize = 7;
@@ -34,18 +34,20 @@ namespace QuanLyThuVien.Controllers
             {
                 s = currentFilter;
             }
+            var maSinhVien = Session["MSV"];
 
             ViewBag.CurrentFilter = s;
 
             var dsLichsu = from l in db.MuonTras
+                           where l.ma_sinhvien == maSinhVien
                            select l;
 
             if (!String.IsNullOrEmpty(s))
             {
-                dsLichsu = dsLichsu.Where(ls => ls.ma_sinhvien.ToString().Contains(s) ||
-                ls.TheThuVien.Hoten.Contains(s) ||
-                ls.ngayGio_muon.ToString().Contains(s) ||
-                ls.ngay_hethan.ToString().Contains(s));
+                dsLichsu = dsLichsu.Where(ls =>
+                                            ls.TheThuVien.Hoten.Contains(s) ||
+                                            ls.ngayGio_muon.ToString().Contains(s) ||
+                                            ls.ngay_hethan.ToString().Contains(s));
             }
 
             dsLichsu = dsLichsu.OrderBy(id => s);
@@ -68,16 +70,78 @@ namespace QuanLyThuVien.Controllers
 
             ViewBag.CurrentFilter = s;
 
-            var danhSach = from l in db.CuonSaches
-                           select l;
+            var list = from l in db.CuonSaches
+                       select l;
             if (!String.IsNullOrEmpty(s))
             {
-                danhSach = danhSach.Where(mcs => mcs.ten_cuonsach.Contains(s) || mcs.tacgia.Contains(s) || mcs.nhaxuatban.Contains(s) || mcs.TinhTrang.Contains(s) || mcs.Mota.Contains(s) || mcs.Hinhmota.Contains(s));
+                list = list.Where(k => k.ten_cuonsach.Contains(s));
             }
 
-            danhSach = danhSach.OrderBy(id => id.ma_cuonsach);
+            list = list.OrderBy(id => id.ma_cuonsach);
 
-            return View(danhSach.ToPagedList(pageNum, pageSize));
+            return View(list.ToPagedList(pageNum, pageSize));
+        }
+
+        public ActionResult Xemchitiet(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CuonSach cuonSach = db.CuonSaches.First(mcs => mcs.ma_cuonsach == id);
+            if (cuonSach == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cuonSach);
+        }
+
+
+        [HttpGet]
+        public ActionResult Dangnhap()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Dangnhap([Bind(Include = "ma_sinhvien")] TheThuVien tks)
+        {
+            if (ModelState.IsValid)
+            {
+                if (string.IsNullOrEmpty(tks.ma_sinhvien))
+                    ModelState.AddModelError(string.Empty, "Vui lòng nhập mã sinh viên");
+
+                if (ModelState.IsValid)
+                {
+                    //Tìm người dùng có tên đăng nhập và password hợp lệ trong CSDL
+                    var tk = db.TheThuViens.FirstOrDefault(k => k.ma_sinhvien == tks.ma_sinhvien);
+                    if (tk != null)
+                    {
+                        //Lưu thông vào session
+
+                        Session["MSV"] = tk.ma_sinhvien;
+                        Session["HT"] = tk.Hoten;
+                        Session["NS"] = tk.NgaySinh;
+                        Session["TT"] = tk.Tinhtrangthe;
+                        return Redirect("XemLichSu");
+                    }
+                    else
+                        ViewBag.ThongBao = "Mã sinh viên không đúng!";
+                }
+            }
+            return View();
+        }
+        public ActionResult Dangxuat()
+        {
+            //Perform any necessary cleanup or logging out of the user
+            //Remove any authentication cookies or session state information
+            //Redirect the user to the login page
+            Session["MSV"] = null;
+            Session["HT"] = null;
+            Session["NS"] = null;
+            Session["TT"] = null;
+            Session.Abandon();
+            return RedirectToAction("Index");
         }
     }
 }

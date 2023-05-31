@@ -19,6 +19,10 @@ namespace QuanLyThuVien.Controllers
         // GET: CuonSaches
         public ActionResult Index(string currentFilter, string s, int? page)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
+
             int pageSize = 7;
             int pageNum = (page ?? 1);
 
@@ -48,6 +52,9 @@ namespace QuanLyThuVien.Controllers
         // GET: CuonSaches/Details/5
         public ActionResult Details(string id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -63,20 +70,14 @@ namespace QuanLyThuVien.Controllers
         // GET: CuonSaches/Create
         public ActionResult Create()
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             ViewBag.isbn = new SelectList(db.DauSaches, "isbn", "ten_dausach");
             ViewBag.ma_loaisach = new SelectList(db.LoaiSaches, "ma_loaisach", "ten_loaisach");
             return View();
         }
 
-        public string GetNextBookID()
-        {
-            int id = 1;
-            if (db.NhanViens.Any(nv => nv.MaNV == id))
-            {
-                id = db.NhanViens.Max(nv => nv.MaNV) + 1;
-            }
-            return "NB" + id;
-        }
 
         // POST: CuonSaches/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -85,39 +86,69 @@ namespace QuanLyThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "isbn,ten_cuonsach,tacgia,namxuatban,nhaxuatban,ma_loaisach,Mota")] CuonSach cuonSach, HttpPostedFileBase Hinhmota)
         {
-            if(Hinhmota == null)
+            if (Hinhmota == null)
             {
-                ViewBag.ThongBao = "Vui lòng chọn ảnh bìa";
-                return View();
+                TempData["ThongBaoFailed"] = "Vui lòng chọn ảnh bìa!";
+                return View("Create");
             }
+
             if (ModelState.IsValid)
             {
-                //Lấy tên file của hình được up
-                var fileName = Path.GetFileName(Hinhmota.FileName);
-
-                //Tạo đường dẫn > file
-                var path = Path.Combine(Server.MapPath("~/Images"), fileName);
-
-                //Kiểm tra hình đã tồn tại trong hệ thống chưa
-                if (System.IO.File.Exists(path))
+                try
                 {
-                    ViewBag.ThongBao = "Ảnh đã tồn tại";
+                    if(db.CuonSaches.Any(s => s.ten_cuonsach == cuonSach.ten_cuonsach))
+                    {
+                        TempData["ThongBaoFailed"] = "Đã tồn tại cuốn sách " + cuonSach.ten_cuonsach;
+                        return RedirectToAction("Create");
+                    }
+                    //Lấy tên file của hình được up
+                    var fileName = Path.GetFileName(Hinhmota.FileName);
+
+                    //Tạo đường dẫn > file
+                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+
+                    //Kiểm tra hình đã tồn tại trong hệ thống chưa
+                    if (System.IO.File.Exists(path))
+                    {
+                        ViewBag.ThongBao = "Ảnh đã tồn tại";
+                    }
+                    else
+                    {
+                        Hinhmota.SaveAs(path);
+                    }
+                    //Lưu tên sách vào trường Hinhmota
+                    cuonSach.Hinhmota = fileName;
+
+                    //Tự động tạo mã cuốn sách
+                    //string nextID = GetNextBookID();
+                    //cuonSach.ma_cuonsach = nextID;
+
+                    var lastCuonsach = db.CuonSaches.OrderByDescending(s => s.ma_cuonsach).FirstOrDefault();
+                    string id;
+                    if (lastCuonsach == null)
+                    {
+                        id = "CS" + cuonSach.isbn + "_001";
+                        cuonSach.ma_cuonsach = id;
+                    }
+                    else
+                    {
+                        string newLast = lastCuonsach.ma_cuonsach.Split('_')[1];
+                        cuonSach.ma_cuonsach = "CS" + cuonSach.isbn.ToString() + "_" + (int.Parse(newLast) + 1).ToString().PadLeft(3, '0');
+                    }
+
+                    cuonSach.TinhTrang = "Còn sách";
+
+
+                    db.CuonSaches.Add(cuonSach);
+                    db.SaveChanges();
+                    TempData["ThongBaoSuccess"] = "Đã thêm cuốn sách " + cuonSach.ten_cuonsach;
+                    return RedirectToAction("Create");
                 }
-                else
+                catch(Exception ex)
                 {
-                    Hinhmota.SaveAs(path);
+                    TempData["ThongBaoFailed"] = "Thất bại khi thêm mới cuốn sách!";
+                    return RedirectToAction("Create");
                 }
-                //Lưu tên sách vào trường Hinhmota
-                cuonSach.Hinhmota = fileName;
-
-                //Tự động tạo mã cuốn sách
-                string nextID = GetNextBookID();
-                cuonSach.ma_cuonsach = nextID;
-
-                cuonSach.TinhTrang = "Còn sách";
-                db.CuonSaches.Add(cuonSach);
-                db.SaveChanges();
-                return RedirectToAction("Index");
             }
 
             ViewBag.isbn = new SelectList(db.DauSaches, "isbn", "ten_dausach", cuonSach.isbn);
@@ -128,6 +159,9 @@ namespace QuanLyThuVien.Controllers
         // GET: CuonSaches/Edit/5
         public ActionResult Edit(string id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -151,22 +185,32 @@ namespace QuanLyThuVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(Hinhmota != null)
+                try
                 {
-                    //Lấy tên file của hình được up
-                    var fileName = Path.GetFileName(Hinhmota.FileName);
+                    if (Hinhmota != null)
+                    {
+                        //Lấy tên file của hình được up
+                        var fileName = Path.GetFileName(Hinhmota.FileName);
 
-                    //Tạo đường dẫn > file
-                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+                        //Tạo đường dẫn > file
+                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
 
-                    //Lưu tên
-                    cuonSach.Hinhmota = fileName;
-                    Hinhmota.SaveAs(path);
+                        //Lưu tên
+                        cuonSach.Hinhmota = fileName;
+                        Hinhmota.SaveAs(path);
+                    }
+
+                    db.Entry(cuonSach).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["ThongBaoSuccess"] = "Cập nhật thành công sách " + cuonSach.ten_cuonsach;
+                    var queryString = "?id=" + cuonSach.ten_cuonsach;
+                    return RedirectToAction("Index");
                 }
-
-                db.Entry(cuonSach).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                catch (Exception ex)
+                {
+                    TempData["ThongBaoFailed"] = "Thất bại khi cập nhật sách " + cuonSach.ten_cuonsach;
+                    return RedirectToAction("Index");
+                }
             }
             ViewBag.isbn = new SelectList(db.DauSaches, "isbn", "ten_dausach", cuonSach.isbn);
             ViewBag.ma_loaisach = new SelectList(db.LoaiSaches, "ma_loaisach", "ten_loaisach", cuonSach.ma_loaisach);
@@ -176,6 +220,9 @@ namespace QuanLyThuVien.Controllers
         // GET: CuonSaches/Delete/5
         public ActionResult Delete(string id)
         {
+            if (Session["Role"] == null)
+                return RedirectToAction("Login", "Users");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -193,10 +240,21 @@ namespace QuanLyThuVien.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+
             CuonSach cuonSach = db.CuonSaches.First(mcs => mcs.ma_cuonsach == id);
-            db.CuonSaches.Remove(cuonSach);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.CuonSaches.Remove(cuonSach);
+                db.SaveChanges();
+                TempData["ThongBaoSuccess"] = "Xóa thành công sách " + cuonSach.ten_cuonsach;
+                return RedirectToAction("Index");
+            }
+            catch(Exception ex)
+            {
+                TempData["ThongBaoFailed"] = "Thất bại khi xóa cuốn sách " + cuonSach.ten_cuonsach;
+                return RedirectToAction("Index");
+            }
+            
         }
 
         protected override void Dispose(bool disposing)
@@ -207,5 +265,7 @@ namespace QuanLyThuVien.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
     }
 }

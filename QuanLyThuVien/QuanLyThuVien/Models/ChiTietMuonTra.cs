@@ -11,13 +11,15 @@ namespace QuanLyThuVien.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ChiTietMuonTra
     {
         public int isbn { get; set; }
         public int ma_phieumuontra { get; set; }
         public string ma_cuonsach { get; set; }
         public string ma_sinhvien { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public Nullable<System.DateTime> ngayGio_tra { get; set; }
         public Nullable<int> soluong { get; set; }
         public string ghichu { get; set; }

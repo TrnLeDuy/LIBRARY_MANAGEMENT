@@ -1,0 +1,78 @@
+﻿@model QuanLyThuVien.Models.PhieuPhat
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper">
+    <div class="profile-card js-profile-card">
+        <div class="profile-card__img">
+            <img src="~/Images/detail-icon.png" alt="profile card">
+        </div>
+
+        <div class="profile-card__cnt js-profile-cnt">
+            <div class="profile-card__name">@Html.DisplayFor(model => model.ma_phieumuontra)</div>
+            <div class="profile-card__txt">Sinh viên nộp phạt: <strong>@Html.DisplayFor(model => model.TheThuVien.Hoten)</strong> </div>
+            <div class="profile-card__txt">Nhân viên phụ trách: <strong>@Html.DisplayFor(model => model.NhanVien.Hoten)</strong> </div>
+            <div class="profile-card__txt">Ngày lập phiếu: <strong>@Html.DisplayFor(model => model.ngay_lapphieu)</strong> </div>
+            <div class="profile-card__txt">Lý do: <strong>@Html.DisplayFor(model => model.nguyen_nhan)</strong> </div>
+            <div class="profile-card__txt">Số ngày quá hạn: <strong>@Html.DisplayFor(model => model.Songay_quahan)</strong> </div>
+            <div class="profile-card__txt">Tổng tiền phải thu: <strong>@Html.DisplayFor(model => model.Tongtien)</strong> </div>
+            <div class="profile-card__txt">Đã thu: <strong>@Html.DisplayFor(model => model.Sotienthu)</strong> </div>
+            <div class="profile-card__txt">Còn lại: <strong>@Html.DisplayFor(model => model.Conlai)</strong> </div>
+            <div class="profile-card-ctr">
+                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+                {
+                    <a class="profile-card__button button--orange" href="~/PhieuPhats/Edit?id=@Model.ma_phieumuontra">Chỉnh sửa</a>
+                }
+                <a class="profile-card__button button--blue" href="~/PhieuPhats/Index">Trở về</a>
+            </div>
+
+        </div>
+
+        <div class="profile-card-message js-message">
+            <form class="profile-card-form">
+                <div class="profile-card-form__container">
+                    <textarea placeholder="Say something..."></textarea>
+                </div>
+
+                <div class="profile-card-form__bottom">
+                    <button class="profile-card__button button--blue js-message-close">
+                    </button>
+
+                    <button class="profile-card__button button--gray js-message-close">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+
+            <div class="profile-card__overlay js-message-close"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<script>
+    var messageBox = document.querySelector('.js-message');
+    var btn = document.querySelector('.js-message-btn');
+    var card = document.querySelector('.js-profile-card');
+    var closeBtn = document.querySelectorAll('.js-message-close');
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        card.classList.add('active');
+    });
+
+    closeBtn.forEach(function (element, index) {
+        console.log(element);
+        element.addEventListener('click', function (e) {
+            e.preventDefault();
+            card.classList.remove('active');
+        });
+    });
+</script>

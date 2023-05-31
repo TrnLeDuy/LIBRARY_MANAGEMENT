@@ -1,0 +1,54 @@
+﻿@model QuanLyThuVien.Models.MuonTra
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="background-color: white;">
+    <div class="inner">
+        @using (Html.BeginForm("Edit", "MuonTras", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <h3>Cập nhập thông tin phiếu mượn trả</h3>
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ma_phieumuontra)
+            @Html.HiddenFor(model => model.ngayGio_muon)
+            @Html.HiddenFor(model => model.MaNV)
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Mã sinh viên:</div>
+                @Html.EditorFor(model => model.ma_sinhvien, new { htmlAttributes = new { @class = "form-control1", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.ma_sinhvien, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Nhân viên phụ trách:</div>
+                @Html.EditorFor(model => model.NhanVien.Hoten, new { htmlAttributes = new { @class = "form-control1", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.NhanVien.Hoten, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-wrapper">
+                <div class="col-md-5">Ngày trả:</div>
+                @Html.EditorFor(model => model.ngay_hethan, new { htmlAttributes = new { @class = "form-control1", type = "date" }})
+                @Html.ValidationMessageFor(model => model.ngay_hethan, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input style="margin-left:-15px;background-color:Green" type="submit" value="Lưu" class="button1" />
+    </div>
+    <div style="color:#ccc">
+        <a style="margin-left: -65px;" class="button1" href="~/MuonTras/Index">Trở về Danh sách</a>
+    </div>
+</div>
+        }
+
+        
+    </div>
+
+</div>

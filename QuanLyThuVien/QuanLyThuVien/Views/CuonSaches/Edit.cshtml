@@ -1,21 +1,22 @@
 ﻿@model QuanLyThuVien.Models.CuonSach
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Cập nhật Cuốn sách " + Model.ma_cuonsach;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
 
-<div class="container" style="background-image: url('../../Images/library-background-form.jpg');">
+<div class="container" style="background-image: url('../../Images/background-form2.png');">
     <div class="inner">
         @using (Html.BeginForm("Edit", "CuonSaches", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             <h3>Cập nhập thông tin Cuốn Sách</h3>
+            <hr />
             <div class="form-group">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.isbn)
                 @Html.HiddenFor(model => model.ma_cuonsach)
-
             </div>
             <div class="form-wrapper">
                 Tên cuốn sách:
@@ -42,12 +43,18 @@
             </div>
             <div class="form-wrapper">
                 Thể loại:
-                @Html.DropDownList("ma_loaisach", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ma_loaisach", null, htmlAttributes: new { @class = "form-control", @id = "cateDropdown" })
                 @Html.ValidationMessageFor(model => model.ma_loaisach, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
                 Tình trạng:
-                @Html.EditorFor(model => model.TinhTrang, new { htmlAttributes = new { @class = "form-control" } })
+                <select class="form-control" name="TinhTrang">
+                    <option value="Còn sách">Còn sách</option>
+                    <option value="Đang mượn">Đang mượn</option>
+                    <option value="Bị hư">Bị hư</option>
+                    <option value="Bị mất">Bị mất</option>
+                </select>
+                @*@Html.EditorFor(model => model.TinhTrang, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.TinhTrang, "", new { @class = "text-danger" })
             </div>
             <div class="form-wrapper">
@@ -60,6 +67,7 @@
                 <div class="col-md-10">
                     CHỌN ẢNH MỚI
                     <input type="file" name="Hinhmota" style="paddingbottom: 20px;" />
+                    <hr />
                     <img src="~/Images/@Model.Hinhmota" /> (Ảnh hiện tại)
                     @Html.ValidationMessageFor(model => model.Hinhmota, "", new { @class = "text-danger" })
                 </div>
@@ -78,3 +86,9 @@
 
 </div>
 
+<script type="text/javascript">
+    $(function () {
+        $("#isbnDropdown").chosen();
+        $("#cateDropdown").chosen();
+    });
+</script>

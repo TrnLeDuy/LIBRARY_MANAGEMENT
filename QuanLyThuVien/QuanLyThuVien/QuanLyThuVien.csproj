@@ -132,13 +132,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ChiTietMuonTrasController.cs" />
     <Compile Include="Controllers\CuonSachesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DauSachesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoaiSachesController.cs" />
+    <Compile Include="Controllers\MuonTrasController.cs" />
     <Compile Include="Controllers\NhanViensController.cs" />
+    <Compile Include="Controllers\PhieuPhatsController.cs" />
+    <Compile Include="Controllers\SinhViensController.cs" />
     <Compile Include="Controllers\TaiKhoansController.cs" />
+    <Compile Include="Controllers\TheThuViensController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -182,12 +187,16 @@
     <Compile Include="Models\SinhVien.cs">
       <DependentUpon>QLTV.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>QLTV.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TaiKhoan.cs">
       <DependentUpon>QLTV.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TheThuVien.cs">
       <DependentUpon>QLTV.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\map\ThuVienHS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +246,7 @@
     <Content Include="Assets\Login\vendor\select2\select2.min.js" />
     <Content Include="Assets\Login\vendor\tilt\tilt.jquery.min.js" />
     <Content Include="Assets\Profile\datail.css" />
+    <Content Include="Content\bootstrap-chosen.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -253,6 +263,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\general.css" />
@@ -494,12 +506,23 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\avatar.png" />
+    <Content Include="Images\background-form.png" />
+    <Content Include="Images\background-form2.png" />
+    <Content Include="Images\background-form3.png" />
+    <Content Include="Images\background-form4.png" />
+    <Content Include="Images\background-form5.png" />
+    <Content Include="Images\background-form6.png" />
+    <Content Include="Images\background-form7.png" />
+    <Content Include="Images\card-delete.png" />
     <Content Include="Images\delete.jpg" />
+    <Content Include="Images\detail-icon.png" />
+    <Content Include="Images\Faenza-edit-delete-symbolic.png" />
+    <Content Include="Image_sach\harrypotter.jpg" />
     <Content Include="Images\home-background.jpg" />
-    <Content Include="Images\library-background-form.jpg" />
     <Content Include="Images\library-logo.png" />
     <Content Include="Images\background.png" />
     <Content Include="Images\orangehrm-logo.png" />
+    <Content Include="Image_sach\Python-Programming-for-Beginners-cover.jpg" />
     <Content Include="Models\QLTV.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>QLTV.edmx</DependentUpon>
@@ -709,6 +732,8 @@
     <Content Include="Assets\Login\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
     <Content Include="Assets\Login\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="Assets\Login\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap-chosen.scss" />
+    <Content Include="Content\bootstrap-chosen.less" />
     <EntityDeploy Include="Models\QLTV.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>QLTV.Designer.cs</LastGenOutput>
@@ -716,7 +741,11 @@
     <Content Include="Models\QLTV.edmx.diagram">
       <DependentUpon>QLTV.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-chosen.less" />
+    <Content Include="Content\bootstrap-chosen.scss" />
     <None Include="Scripts\jquery-3.6.4.intellisense.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-3.6.4.js" />
     <Content Include="Scripts\jquery-3.6.4.min.js" />
     <Content Include="Scripts\jquery-3.6.4.slim.js" />
@@ -855,7 +884,6 @@
     <Content Include="table\scss\style.scss" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
-    <Content Include="Views\NhanViens\Create.cshtml" />
     <Content Include="Views\NhanViens\Delete.cshtml" />
     <Content Include="Views\NhanViens\Details.cshtml" />
     <Content Include="Views\NhanViens\Edit.cshtml" />
@@ -883,6 +911,34 @@
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\XemLichSu.cshtml" />
+    <Content Include="Views\NhanViens\Create.cshtml" />
+    <Content Include="Views\MuonTras\Create.cshtml" />
+    <Content Include="Views\MuonTras\Delete.cshtml" />
+    <Content Include="Views\MuonTras\Details.cshtml" />
+    <Content Include="Views\MuonTras\Edit.cshtml" />
+    <Content Include="Views\MuonTras\Index.cshtml" />
+    <Content Include="Views\ChiTietMuonTras\Create.cshtml" />
+    <Content Include="Views\ChiTietMuonTras\Delete.cshtml" />
+    <Content Include="Views\ChiTietMuonTras\Details.cshtml" />
+    <Content Include="Views\ChiTietMuonTras\Edit.cshtml" />
+    <Content Include="Views\ChiTietMuonTras\Index.cshtml" />
+    <Content Include="Views\TheThuViens\Create.cshtml" />
+    <Content Include="Views\TheThuViens\Delete.cshtml" />
+    <Content Include="Views\TheThuViens\Edit.cshtml" />
+    <Content Include="Views\TheThuViens\Index.cshtml" />
+    <Content Include="Views\TheThuViens\Details.cshtml" />
+    <Content Include="Views\SinhViens\Create.cshtml" />
+    <Content Include="Views\SinhViens\Delete.cshtml" />
+    <Content Include="Views\SinhViens\Edit.cshtml" />
+    <Content Include="Views\SinhViens\Index.cshtml" />
+    <Content Include="Views\PhieuPhats\Create.cshtml" />
+    <Content Include="Views\PhieuPhats\Delete.cshtml" />
+    <Content Include="Views\PhieuPhats\Details.cshtml" />
+    <Content Include="Views\PhieuPhats\Edit.cshtml" />
+    <Content Include="Views\PhieuPhats\Index.cshtml" />
+    <Content Include="Views\Home\Dangnhap.cshtml" />
+    <Content Include="Views\Home\XemSach.cshtml" />
+    <Content Include="Views\Home\Xemchitiet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

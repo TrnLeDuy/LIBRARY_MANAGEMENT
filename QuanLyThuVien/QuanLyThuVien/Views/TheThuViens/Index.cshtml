@@ -2,11 +2,9 @@
 @using PagedList.Mvc;
 @model PagedList.PagedList<TheThuVien>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách Thẻ thư viện";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Thẻ thư viện </h2>
 
 <style>
 
@@ -31,10 +29,7 @@
 
 <div class="row mt-4">
     <div class="col-6">
-        @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
-        {
             @Html.ActionLink("Thêm thẻ thư viện ", "Create", null, new { @class = "btn btn-primary" })
-        }
     </div>
     <div class="col-6">
         <form style="width: 100%; padding-left: 250px;" action="/TheThuViens/Index" method="get">
@@ -64,33 +59,48 @@
         {
             <tr>
                 <td>
-                    <a style="text-decoration: none; color: black;" href="~/DauSaches/Details?id=@item.ma_sinhvien">
+                    <a style="text-decoration: none; color: black;" href="~/TheThuViens/Details?id=@item.ma_sinhvien">
                         @Html.DisplayFor(modelItem => item.ma_sinhvien)
                     </a>
                 <td>
-                    <a style="text-decoration: none; color: black;" href="~/DauSaches/Details?id=@item.ma_sinhvien">
+                    <a style="text-decoration: none; color: black;" href="~/TheThuViens/Details?id=@item.ma_sinhvien">
                         @Html.DisplayFor(modelItem => item.Hoten)
                     </a>
 
                 </td>
                 <td>
-                    <a style="text-decoration: none; color: black;" href="~/DauSaches/Details?id=@item.ma_sinhvien">
+                    <a style="text-decoration: none; color: black;" href="~/TheThuViens/Details?id=@item.ma_sinhvien">
                         @Html.DisplayFor(modelItem => item.NgaySinh)
                     </a>
                 </td>
                 <td>
-                    <a style="text-decoration: none; color: black;" href="~/DauSaches/Details?id=@item.ma_sinhvien">
-                        @Html.DisplayFor(modelItem => item.Tinhtrangthe)
+                    <a style="text-decoration: none; color: black;" href="~/TheThuViens/Details?id=@item.ma_sinhvien">
+                        @{ 
+                            if(item.Tinhtrangthe == "Y")
+                                {
+                                    <p>Còn hiệu lực</p>
+                                }
+                            else if(item.Tinhtrangthe == "N")
+                                {
+                                    <p>Hết hiệu lực</p>
+                                }
+                            else
+                                {
+                                    <p>Bị mất</p>
+                                }
+                        }
                     </a>
                 </td>
-                @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
-                {
-                    <td>
+                <td>
+                    @if (Session["Role"] != null && (Session["Role"].ToString() == "AD" || Session["Role"].ToString() == "TT"))
+                    {
                         <a class="edit-button fa fa-pencil" href="~/TheThuViens/Edit?id=@item.ma_sinhvien"></a>
+                    }
+                    @if (Session["Role"] != null && (Session["Role"].ToString() == "AD"))
+                    {
                         <a class="delete-button fa fa-trash" href="~/TheThuViens/Delete?id=@item.ma_sinhvien"></a>
-                    </td>
-                }
-
+                    }
+                </td>
             </tr>
         }
     </table>

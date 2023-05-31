@@ -3,7 +3,7 @@
 @model PagedList.PagedList<TaiKhoan>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách Tài khoản Nhân viên";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -27,6 +27,8 @@
         text-decoration: none;
     }
 </style>
+
+
 
 <div class="row mt-4">
     <div class="col-6">
@@ -74,7 +76,23 @@
                 </td>
                 <td>
                     <a style="text-decoration: none; color: black;" href="~/TaiKhoans/Details?id=@item.MaNV">
-                        @Html.DisplayFor(modelItem => item.LoaiTK)
+                        @{
+                            if (item.LoaiTK == "AD")
+                            {
+                                <p>Quản trị viên</p>
+
+                            }
+                            else if (item.LoaiTK == "TT")
+                            {
+                                <p>Thủ thư</p>
+                            }
+                            else
+                            {
+                                <p>Nhân viên Thư viện</p>
+                            }
+
+                        }
+                        @*@Html.DisplayFor(modelItem => item.LoaiTK)*@
                     </a>
                 </td>
                 @if (Session["Role"] != null && Session["Role"].ToString() == "AD")

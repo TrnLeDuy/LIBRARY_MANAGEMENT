@@ -1,0 +1,78 @@
+﻿@model QuanLyThuVien.Models.ChiTietMuonTra
+
+@{
+    ViewBag.Title = "Xóa Sách ra khỏi Phiếu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper">
+    <div class="profile-card js-profile-card">
+        <div class="profile-card__img">
+            <img src="~/Images/Faenza-edit-delete-symbolic.png" alt="profile card">
+        </div>
+
+        <div class="profile-card__cnt js-profile-cnt">
+            <h3>XÁC NHẬN HỦY SÁCH ĐANG MƯỢN?</h3>
+            <div class="profile-card__name">@Html.DisplayFor(model => model.CuonSach.ten_cuonsach)</div>
+            <div class="profile-card__txt">Mã cuốn sách: <strong>@Html.DisplayFor(model => model.ma_cuonsach)</strong> </div>
+            <div class="profile-card__txt">Đầu sách: <strong>@Html.DisplayFor(model => model.CuonSach.DauSach.ten_dausach)</strong> </div>
+            <div class="profile-card__txt">Ngày giờ trả: <strong>@Html.DisplayFor(model => model.ngayGio_tra)</strong> </div>
+            <div class="profile-card__txt">Ghi chú: <strong>@Html.DisplayFor(model => model.ghichu)</strong> </div>
+
+            <div class="profile-card-ctr">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="profile-card-ctr">
+                        <input type="submit" value="Xóa" class="btn profile-card__button button--orange" />
+                        <a class="profile-card__button button--blue" href="~/MuonTras/Details?id=@Model.ma_phieumuontra">Trở về</a>
+                    </div>
+                }
+
+            </div>
+
+            <div class="profile-card-message js-message">
+                <form class="profile-card-form">
+                    <div class="profile-card-form__container">
+                        <textarea placeholder="Say something..."></textarea>
+                    </div>
+
+                    <div class="profile-card-form__bottom">
+                        <button class="profile-card__button button--blue js-message-close">
+                        </button>
+
+                        <button class="profile-card__button button--gray js-message-close">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+
+                <div class="profile-card__overlay js-message-close"></div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<script>
+    var messageBox = document.querySelector('.js-message');
+    var btn = document.querySelector('.js-message-btn');
+    var card = document.querySelector('.js-profile-card');
+    var closeBtn = document.querySelectorAll('.js-message-close');
+
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        card.classList.add('active');
+    });
+
+    closeBtn.forEach(function (element, index) {
+        console.log(element);
+        element.addEventListener('click', function (e) {
+            e.preventDefault();
+            card.classList.remove('active');
+        });
+    });
+</script>
