@@ -20,7 +20,13 @@
                 @Html.HiddenFor(model => model.ngay_lapphieu)
             </div>
 
-            
+            <div class="form-wrapper">
+                <div class="col-md-5">Ngày lập phiếu</div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ngay_lapphieu, new { htmlAttributes = new { @class = "form-control1", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.ngay_lapphieu, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
             <div class="form-wrapper">
                 <div class="col-md-5">Lý do</div>
@@ -82,29 +88,45 @@
 
 </div>
 
-<script type="text/javascript">
-    $(function () {
-        $("#mphieuDropdown").chosen();
-    });
-
+<script>
     $(document).ready(function () {
-        $('#songay_quahan, #sotienthu, #lydo').on('change', function () {
-            var songayQuaHan = parseInt($('#songay_quahan').val());
-            var sotienthu = parseInt($('#sotienthu').val());
-            var nguyenNhan = $('#lydo').val();
-            if (isNaN(songayQuaHan)) songayQuaHan = 0;
-            if (isNaN(sotienthu)) sotienthu = 0;
-
-            var tongtien = songayQuaHan * 3000;
-            if (nguyenNhan === "Hỏng sách") {
-                tongtien += 100000;
-            } else if (nguyenNhan === "Mất sách") {
-                tongtien += 120000;
+        var tongtien = parseInt($("#tongtien").val());
+        var conlai = parseInt($("#conlai").val());
+        $("#sotienthu").on("input", function () {
+            var oldSotienthu = parseFloat($(this).attr("oldvalue"));
+            var newSotienthu = parseFloat($(this).val());
+            if (isNaN(oldSotienthu)) oldSotienthu = 0;
+            if (isNaN(newSotienthu)) newSotienthu = 0;
+            var sotienthu = oldSotienthu + newSotienthu;
+            $(this).attr("oldvalue", sotienthu);
+            conlai = tongtien - sotienthu;
+            if (conlai < 0) {
+                conlai = 0;
+                sotienthu = tongtien;
+                $(this).val(sotienthu);
             }
-
-            var conlai = tongtien - sotienthu;
-            $('#tongtien').val(tongtien);
-            $('#conlai').val(conlai);
+            $("#conlai").val(conlai);
+        });
+        $("#lydo").change(function () {
+            var selectedValue = $(this).val();
+            var songay_quahan = parseInt($("#songay_quahan").val());
+            if (selectedValue === "Trễ hạn") {
+                tongtien = songay_quahan * 3000;
+            }
+            else if (selectedValue === "Mất sách") {
+                tongtien = (songay_quahan * 3000) + 50000;
+            }
+            else if (selectedValue === "Hỏng sách") {
+                tongtien = (songay_quahan * 3000) + 20000;
+            }
+            else {
+                tongtien = songay_quahan * 3000;
+            }
+            $("#tongtien").val(tongtien);
+            $("#sotienthu").attr("oldvalue", 0);
+            $("#sotienthu").val(0);
+            $("#conlai").val(tongtien);
         });
     });
+
 </script>
