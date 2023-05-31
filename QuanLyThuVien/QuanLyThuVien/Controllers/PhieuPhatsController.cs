@@ -133,7 +133,7 @@ namespace QuanLyThuVien.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ma_phieumuontra,MaNV,ma_sinhvien,nguyen_nhan,Songay_quahan,Tongtien,Sotienthu,Conlai")] PhieuPhat phieuPhat)
+        public ActionResult Edit([Bind(Include = "ma_phieumuontra,MaNV,ma_sinhvien,nguyen_nhan,ngay_lapphieu,Songay_quahan,Tongtien,Sotienthu,Conlai")] PhieuPhat phieuPhat)
         {
             if (ModelState.IsValid)
             {
