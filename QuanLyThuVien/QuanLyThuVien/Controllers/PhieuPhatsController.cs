@@ -73,7 +73,7 @@ namespace QuanLyThuVien.Controllers
         // GET: PhieuPhats/Create
         public ActionResult Create()
         {
-            ViewBag.ma_phieumuontra = new SelectList(db.MuonTras, "ma_phieumuontra", "ma_phieumuontra");
+            ViewBag.ma_phieumuontra = new SelectList(db.MuonTras.Where(e => !db.PhieuPhats.Any(u => u.ma_phieumuontra == e.ma_phieumuontra)), "ma_phieumuontra", "ma_phieumuontra");
             ViewBag.MaNV = new SelectList(db.NhanViens, "MaNV", "Hoten");
             ViewBag.ma_sinhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "Hoten");
             return View();
@@ -122,7 +122,7 @@ namespace QuanLyThuVien.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ma_phieumuontra = new SelectList(db.MuonTras, "ma_phieumuontra", "ma_sinhvien", phieuPhat.ma_phieumuontra);
+            ViewBag.ma_phieumuontra = new SelectList(db.MuonTras, "ma_phieumuontra", "ma_phieumuontra", phieuPhat.ma_phieumuontra);
             ViewBag.MaNV = new SelectList(db.NhanViens, "MaNV", "Hoten", phieuPhat.MaNV);
             ViewBag.ma_sinhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "Hoten", phieuPhat.ma_sinhvien);
             return View(phieuPhat);
@@ -137,11 +137,21 @@ namespace QuanLyThuVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(phieuPhat).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(phieuPhat).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["ThongBaoSuccess"] = "Cập nhật thành công phiếu phạt " + phieuPhat.ma_phieumuontra.ToString();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    TempData["ThongBaoFailed"] = "Thất bại khi cập nhật tài khoản " + phieuPhat.ma_phieumuontra.ToString();
+                    return RedirectToAction("Edit", new { id = phieuPhat.ma_phieumuontra.ToString()});
+                }
+
             }
-            ViewBag.ma_phieumuontra = new SelectList(db.MuonTras, "ma_phieumuontra", "ma_sinhvien", phieuPhat.ma_phieumuontra);
+            ViewBag.ma_phieumuontra = new SelectList(db.MuonTras, "ma_phieumuontra", "ma_phieumuontra", phieuPhat.ma_phieumuontra);
             ViewBag.MaNV = new SelectList(db.NhanViens, "MaNV", "Hoten", phieuPhat.MaNV);
             ViewBag.ma_sinhvien = new SelectList(db.TheThuViens, "ma_sinhvien", "Hoten", phieuPhat.ma_sinhvien);
             return View(phieuPhat);
